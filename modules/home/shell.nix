@@ -31,7 +31,7 @@
       nixopt = "sudo nix-store --optimise";
 
       # quick nix shell
-      ns = "nix shell nixpkgs#";
+      ns = "nix shell -p";
 
       # docker helpers
       start-docker = "sudo systemctl start docker";
