@@ -117,6 +117,16 @@
   services.gnome.gnome-keyring.enable = true;
   programs.firefox.enable = true;
 
+  # --- Automatic Updates ---
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.dates = "weekly";
 
+  # --- Automatic Garbage Collection ---
+  nix.gc.automatic = true;
+  nix.gc.dates = "daily";
+  nix.gc.options = "--delete-older-than 7d";
+  nix.settings.auto-optimise-store = true;
+
+  # --- System Version ---
   system.stateVersion = "25.11"; 
 }
