@@ -5,6 +5,7 @@
     ./modules/home/starship.nix
     ./modules/home/shell.nix
     ./modules/home/git.nix
+    ./modules/home/fastfetch.nix
   ];
 
   home.username = "vijeth";
