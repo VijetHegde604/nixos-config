@@ -111,6 +111,7 @@ $character
   # --- Git Configuration ---
 programs.git = {
     enable = true;
+    package = pkgs.gitFull;
     
     # All Git configurations now live in 'settings'
     settings = {
