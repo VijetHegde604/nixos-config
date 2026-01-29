@@ -104,6 +104,10 @@ $character
     '';
   };
 
+  home.sessionVariables = {
+    TERM = "xterm-256color";
+  };
+
   # --- Git Configuration ---
 programs.git = {
     enable = true;
@@ -145,6 +149,8 @@ programs.git = {
       credential.helper = "libsecret";
     };
   };
+
+  programs.zoxide.enable = true;
 
   programs.home-manager.enable = true;
 }
