@@ -19,6 +19,7 @@
       ll = "lsd -l";
       lt = "lsd --tree";
       lg = "lazygit";
+      nrs = "sudo nixos-rebuild switch";
       start-docker = "sudo systemctl start docker";
       stop-docker  = "sudo systemctl stop docker && sudo systemctl stop docker.socket";
       
