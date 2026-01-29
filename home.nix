@@ -8,13 +8,17 @@
   # --- Starship Prompt ---
   programs.starship = {
     enable = true;
-    # We use 'lib.importTOML' if you keep it in a separate file, 
-    # but here is the inline version of your custom config:
     settings = {
       add_newline = true;
       palette = "material_vijet";
-      format = "[\\$username@\\$hostname ](fg:muted)[\\$directory](fg:dir) \\$python\\$nodejs\\$rust\\$golang\\$package\\$git_branch\\$git_status\\$cmd_duration\n\\$character";
-      right_format = "\\$time\\$battery";
+
+      # Multi-line format using Nix double single-quotes
+      format = ''
+[$username@$hostname ](fg:muted)[$directory](fg:dir) $python$nodejs$rust$golang$package$git_branch$git_status$cmd_duration
+$character
+'';
+
+      right_format = "$time$battery";
 
       palettes.material_vijet = {
         muted = "#78828c";
@@ -28,6 +32,7 @@
 
       username = { show_always = true; format = "[$user]($style)"; style_user = "fg:muted"; };
       hostname = { ssh_only = false; format = "[$hostname]($style)"; style = "fg:muted"; };
+      
       directory = { 
         truncation_length = 3; 
         style = "fg:dir"; 
@@ -36,20 +41,37 @@
       };
       
       git_branch = { symbol = " "; format = " [$symbol$branch]($style)"; style = "fg:accent"; };
+      
       git_status = {
         format = "[( $all_status$ahead_behind)]($style)";
         style = "fg:accent";
-        ahead = "↑\${count}";
-        behind = "↓\${count}";
-        diverged = "↑\${ahead_count}↓\${behind_count}";
+        # We use ''${count} to escape the dollar sign in Nix multi-line strings
+        ahead = "↑ $count";
+        behind = "↓ $count";
+        diverged = "↑ $ahead_count↓$behind_count";
+      };
+
+      cmd_duration = {
+        min_time = 500;
+        format = " [⏱ $duration]($style)";
+        style = "fg:accent_dim";
       };
 
       python = { symbol = " "; format = " [$symbol$virtualenv]($style)"; style = "fg:accent_dim"; };
+      nodejs = { symbol = " "; format = " [$symbol]($style)"; style = "fg:accent_dim"; };
+      rust = { symbol = " "; format = " [$symbol]($style)"; style = "fg:accent_dim"; };
+      golang = { symbol = " "; format = " [$symbol]($style)"; style = "fg:accent_dim"; };
+
       battery.display = [
         { threshold = 20; style = "fg:danger"; }
         { threshold = 100; style = "fg:subtle"; }
       ];
-      # Note: Add other language modules here as needed based on your TOML
+
+      time = {
+        disabled = false;
+        format = "[$time]($style) ";
+        style = "fg:subtle";
+      };
     };
   };
 
@@ -83,26 +105,43 @@
   };
 
   # --- Git Configuration ---
-  programs.git = {
+programs.git = {
     enable = true;
-    userName = "VijetHegde604";
-    userEmail = "vijethegde604@gmail.com";
-    aliases = {
-      co = "checkout";
-      br = "branch";
-      ci = "commit";
-      st = "status";
-    };
-    extraConfig = {
+    
+    # All Git configurations now live in 'settings'
+    settings = {
+      user = {
+        name = "VijetHegde604";
+        email = "vijethegde604@gmail.com";
+      };
+
+      alias = {
+        co = "checkout";
+        br = "branch";
+        ci = "commit";
+        st = "status";
+      };
+
       init.defaultBranch = "main";
       pull.rebase = true;
       push.autoSetupRemote = true;
-      diff = { algorithm = "histogram"; colorMoved = "plain"; mnemonicPrefix = true; };
+      
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "plain";
+        mnemonicPrefix = true;
+      };
+
       commit.verbose = true;
       column.ui = "auto";
       branch.sort = "-committerdate";
       tag.sort = "-version:refname";
-      rerere = { enabled = true; autoupdate = true; };
+      
+      rerere = {
+        enabled = true;
+        autoupdate = true;
+      };
+
       credential.helper = "libsecret";
     };
   };
