@@ -9,13 +9,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-boot = {
-      url = "github:Melkor333/nixos-boot";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nixos-boot, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations.nix-btw =
       nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -23,8 +19,6 @@
         specialArgs = { inherit inputs; };
 
         modules = [
-          nixos-boot.nixosModules.default
-
           ./configuration.nix
 
           home-manager.nixosModules.home-manager
