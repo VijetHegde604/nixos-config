@@ -1,34 +1,55 @@
 { config, pkgs, ... }:
 
 {
-  home.sessionVariables = {
-    TERM = "xterm-256color";
-  };
-
   programs.bash = {
     enable = true;
     enableCompletion = true;
 
-    sessionVariables = {
-      TERM = "xterm-256color";
-    };
-
     shellAliases = {
+      # navigation / ls replacements
       cd = "z";
       ls = "lsd";
       ll = "lsd -l";
       lt = "lsd --tree";
+
+      # tools
       lg = "lazygit";
-      nrs = "sudo nixos-rebuild switch";
+
+      # nixos rebuild shortcuts (flake-based)
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw";
+      nrb = "sudo nixos-rebuild boot --flake ~/nixos-config#nix-btw";
+      nrt = "sudo nixos-rebuild test --flake ~/nixos-config#nix-btw";
+
+      # update flake inputs then rebuild
+      nfu = "nix flake update ~/nixos-config && sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw";
+
+      # home-manager only rebuild (through nixos module)
+      hms = "home-manager switch --flake ~/nixos-config";
+
+      # nix store cleanup helpers
+      nixgc = "sudo nix-collect-garbage -d";
+      nixopt = "sudo nix-store --optimise";
+
+      # quick nix shell
+      ns = "nix shell nixpkgs#";
+
+      # docker helpers
       start-docker = "sudo systemctl start docker";
       stop-docker  = "sudo systemctl stop docker && sudo systemctl stop docker.socket";
-      
     };
 
     initExtra = ''
+      # If we are inside an SSH session, downgrade TERM to something
+      # universally supported on remote machines
+      if [ -n "$SSH_CONNECTION" ]; then
+        export TERM=xterm-256color
+      fi
+
+      # activate mise and zoxide
       eval "$(${pkgs.mise}/bin/mise activate bash)"
       eval "$(${pkgs.zoxide}/bin/zoxide init bash)"
 
+      # source optional local bash snippets
       if [ -d ~/.bashrc.d ]; then
         for rc in ~/.bashrc.d/*; do
           [ -f "$rc" ] && . "$rc"
