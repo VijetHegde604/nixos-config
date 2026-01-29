@@ -1,7 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ 
+              ./hardware-configuration.nix
+              inputs.home-manager.nixosModules.home-manager
+            ];
 
   # --- Bootloader & Kernel ---
   boot.loader.systemd-boot.enable = true;
@@ -24,6 +27,7 @@
   
   programs.niri.enable = true;
   programs.dms-shell.enable = true; # Dank Material Shell
+  programs.seahorse.enable = true;
 
   # XDG Portals Configuration
   xdg.portal = {
@@ -73,6 +77,14 @@
     packages = with pkgs; [ tree ];
   };  
 
+  # -- Home Manager --
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "vijeth" = import ./home.nix;
+    };
+  };
+
   # --- System Packages ---
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -81,7 +93,7 @@
     # Terminal & CLI Tools
     vim nano fastfetch ghostty btop mise starship 
     zoxide lsd git wtype bash-completion lazygit
-    libsecret ripgrep fd bat 
+    libsecret ripgrep fd bat gnome-keyring
     
     # GUI Apps
     brave nautilus 
