@@ -7,8 +7,9 @@
       add_newline = true;
       palette = "material_vijet";
 
+      # show nix shell status right after the directory
       format = ''
-[$username@$hostname ](fg:muted)[$directory](fg:dir) $python$nodejs$rust$golang$package$git_branch$git_status$cmd_duration
+[$username@$hostname ](fg:muted)[$directory](fg:dir)$nix_shell $python$nodejs$rust$golang$package$git_branch$git_status$cmd_duration
 $character
 '';
 
@@ -41,6 +42,14 @@ $character
         style = "fg:dir";
         read_only = " ";
         format = "[$path]($style)[$read_only]($style)";
+      };
+
+      # Nix shell indicator
+      nix_shell = {
+        disabled = false;
+        symbol = " ";
+        format = "[$symbol$state]($style)";
+        style = "fg:accent_dim";
       };
 
       git_branch = {
