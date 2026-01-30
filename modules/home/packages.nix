@@ -13,6 +13,7 @@
     ripgrep
     fd
     bat
+    duf
 
     # terminal and apps for this user
     ghostty

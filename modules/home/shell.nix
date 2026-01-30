@@ -11,6 +11,7 @@
       ls = "lsd";
       ll = "lsd -l";
       lt = "lsd --tree";
+      cat = "bat";
 
       # tools
       lg = "lazygit";
@@ -55,6 +56,8 @@
           [ -f "$rc" ] && . "$rc"
         done
       fi
+
+      export TERMINAL=ghostty
     '';
   };
 
