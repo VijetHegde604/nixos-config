@@ -14,6 +14,7 @@
     fd
     bat
     duf
+    jellyfin-desktop
 
     # terminal and apps for this user
     ghostty
