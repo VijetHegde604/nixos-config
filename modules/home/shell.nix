@@ -22,7 +22,7 @@
       nrt = "sudo nixos-rebuild test --flake ~/nixos-config#nix-btw";
 
       # update flake inputs then rebuild
-      nfu = "nix flake update ~/nixos-config && sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw";
+      nfu = "nix flake update --flake ~/nixos-config && sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw";
 
       # home-manager only rebuild (through nixos module)
       hms = "home-manager switch --flake ~/nixos-config";
