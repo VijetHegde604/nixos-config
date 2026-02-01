@@ -1,29 +1,30 @@
-{ config, inputs, pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
-    inputs.niri.homeModules.niri
     inputs.dms.homeModules.dank-material-shell
-    inputs.dms.homeModules.niri   # this activates the niri submodule
+    inputs.dms.homeModules.niri
+    inputs.niri.homeModules.niri
+
+    # Required by DMS HM module:
+    # It unconditionally reads this path during eval
+    ./user/niri-compat.nix
   ];
 
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri;  # must be latest nixpkgs version (~25.11+)
-
-    # Define settings early + explicitly to avoid null during eval
-    settings = {
-      layout = {
-        border = {
-          enable = false;  # ← key: disables the crashing condition
-        };
-      };
+    programs.niri = {
+      enable = true;
+      package = pkgs.niri;
     };
-  };
 
   programs.dank-material-shell = {
     enable = true;
+
     enableSystemMonitoring = true;
+    enableVPN = true;
+    enableDynamicTheming = true;
+    enableAudioWavelength = true;
+    enableCalendarEvents = false;
+    enableClipboardPaste = true;
 
     systemd = {
       enable = true;
@@ -31,13 +32,11 @@
     };
 
     niri = {
-      # Do NOT set enableKeybinds = true; (conflicts with includes)
-      # Do NOT set enableSpawn = true; (conflicts with systemd)
-
       includes = {
         enable = true;
         override = true;
         originalFileName = "hm";
+
         filesToInclude = [
           "alttab"
           "binds"
@@ -45,16 +44,13 @@
           "layout"
           "wpblur"
           "cursor"
-          "user"
-          # "windowrules"
-          # Skip "outputs" — DMS doesn't generate it for niri (known open issue)
+          "outputs"
+
+          # user overrides (explicit files!)
+          "user/overrides"
+          "user/binds"
         ];
       };
-    };
-
-    settings = {
-      theme = "dark";
-      dynamicTheming = true;
     };
   };
 }
