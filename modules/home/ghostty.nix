@@ -40,7 +40,7 @@
       gtk-single-instance = true;
 
       # ───────── Theme (from dms / matugen) ─────────
-      theme = "dms";
+      theme = "dankcolors";
 
       # ───────── KEYBINDS (IMPORTANT) ─────────
       keybind = [
