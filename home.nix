@@ -8,6 +8,7 @@
     ./modules/home/fastfetch.nix
     ./modules/home/packages.nix
     ./modules/home/dms.nix
+    ./modules/home/ghostty.nix
   ];
 
   home.username = "vijeth";
