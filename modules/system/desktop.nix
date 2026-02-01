@@ -4,12 +4,9 @@
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
 
-  programs.niri.enable = true;
-
-  programs.dms-shell = {
+  programs.niri = {
     enable = true;
-    quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-    enableCalendarEvents = false;
+    package = pkgs.niri;
   };
   
   programs.seahorse.enable = true;

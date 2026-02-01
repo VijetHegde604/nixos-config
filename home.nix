@@ -7,6 +7,7 @@
     ./modules/home/git.nix
     ./modules/home/fastfetch.nix
     ./modules/home/packages.nix
+    ./modules/home/dms.nix
   ];
 
   home.username = "vijeth";
