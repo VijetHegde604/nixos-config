@@ -15,17 +15,16 @@
     fd
     bat
     duf
-    jellyfin-desktop
-    evince
 
-    # terminal and apps for this user
+    # apps for this user
     ghostty
     brave
     zed-editor
     vscode
     wtype
-
-    # your API tool
+    onlyoffice-desktopeditors
+    jellyfin-desktop
+    evince
     bruno
   ];
 }
