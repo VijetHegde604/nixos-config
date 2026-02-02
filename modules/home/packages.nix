@@ -15,6 +15,7 @@
     bat
     duf
     jellyfin-desktop
+    evince
 
     # terminal and apps for this user
     ghostty
