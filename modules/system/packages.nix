@@ -14,6 +14,7 @@ environment.systemPackages = with pkgs; [
   papirus-icon-theme
   adwaita-icon-theme
   xdg-user-dirs
+  helix
 
   # Development Tools
   gcc
