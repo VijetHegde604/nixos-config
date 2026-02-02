@@ -6,6 +6,7 @@
     fastfetch
     btop
     mise
+    uv
     starship
     zoxide
     lsd

@@ -41,4 +41,5 @@ environment.systemPackages = with pkgs; [
   ];
 
   programs.firefox.enable = true;
+  programs.nix-ld.enable = true;   
 }
