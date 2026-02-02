@@ -9,6 +9,8 @@
     ./modules/home/packages.nix
     ./modules/home/dms.nix
     ./modules/home/ghostty.nix
+    ./modules/home/user/webapps.nix # This should be imported before pwa.nix
+    ./modules/home/pwa.nix
   ];
 
   home.username = "vijeth";

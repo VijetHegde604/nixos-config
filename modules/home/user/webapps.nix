@@ -3,11 +3,26 @@
 let
   cfg = config.my.webapps;
 
+  # Fetch homarr-labs dashboard-icons ONCE
+  dashboardIcons = pkgs.fetchFromGitHub {
+    owner = "homarr-labs";
+    repo = "dashboard-icons";
+
+    # pinned commit (from your prefetch output)
+    rev = "94573aeb16fbce590ac1b7a4aa9a9501c1f99296";
+
+    # correct hash (base64 form)
+    hash = "sha256-Jw4OcWyEzhewxB8q+4zWDVqz09mZpGY/u3xkKzWCpqM=";
+  };
+
   mkWebApp = slug: app:
     let
-      appName = app.name or lib.strings.capitalize slug;
+      appName =
+        if app.name != null
+        then app.name
+        else lib.strings.capitalize slug;
+
       wmClass = "webapp-${slug}";
-      iconPath = ".local/share/icons/${slug}.png";
 
       exec = lib.concatStringsSep " " (
         [
@@ -15,7 +30,7 @@ let
           "--app=${app.url}"
           "--class=${wmClass}"
         ]
-        ++ (app.extraFlags or [])
+        ++ app.extraFlags
       );
     in {
       name = appName;
@@ -23,9 +38,14 @@ let
       exec = exec;
       icon = slug;
       terminal = false;
-      categories = app.categories or [ "Network" "WebBrowser" ];
-      startupWMClass = wmClass;
+      categories = app.categories;
+
+      # current Home Manager desktop-entry API
+      settings = {
+        StartupWMClass = wmClass;
+      };
     };
+
 in {
   options.my.webapps = lib.mkOption {
     type = lib.types.attrsOf (lib.types.submodule {
@@ -38,12 +58,14 @@ in {
         name = lib.mkOption {
           type = lib.types.nullOr lib.types.str;
           default = null;
+          description = "Display name (defaults to capitalized key)";
         };
 
-        iconUrl = lib.mkOption {
+        # icon name from homarr-labs/dashboard-icons/png (no .png)
+        icon = lib.mkOption {
           type = lib.types.nullOr lib.types.str;
           default = null;
-          description = "Remote PNG/SVG icon URL";
+          description = "Icon name from homarr-labs/dashboard-icons";
         };
 
         categories = lib.mkOption {
@@ -54,10 +76,10 @@ in {
         extraFlags = lib.mkOption {
           type = lib.types.listOf lib.types.str;
           default = [];
-          description = "Extra Brave flags";
         };
       };
     });
+
     default = {};
   };
 
@@ -65,20 +87,20 @@ in {
 
     programs.brave.enable = true;
 
-    # Desktop entries (script → .desktop file)
-    xdg.desktopEntries = lib.mapAttrs mkWebApp cfg;
+    # generate .desktop files
+    xdg.desktopEntries =
+      lib.mapAttrs mkWebApp cfg;
 
-    # Icons (script → curl + ~/.local/share/icons)
-    home.file = lib.mapAttrs'
-      (slug: app:
-        lib.optionalAttrs (app.iconUrl != null) {
-          name = ".local/share/icons/${slug}.png";
-          value.source = pkgs.fetchurl {
-            url = app.iconUrl;
-            sha256 = lib.fakeSha256;
-          };
-        }
-      )
-      cfg;
+    # install icons from the fetched repo
+    home.file =
+      lib.mapAttrs'
+        (slug: app:
+          lib.optionalAttrs (app.icon != null) {
+            name = ".local/share/icons/${slug}.png";
+            value.source =
+              "${dashboardIcons}/png/${app.icon}.png";
+          }
+        )
+        cfg;
   };
 }
