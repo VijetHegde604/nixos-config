@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   home.packages = with pkgs; [
     # CLI tools
@@ -26,5 +25,6 @@
     jellyfin-desktop
     evince
     bruno
+    localsend
   ];
 }
