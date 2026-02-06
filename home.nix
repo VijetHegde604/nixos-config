@@ -11,6 +11,7 @@
     ./modules/home/ghostty.nix
     ./modules/home/user/webapps.nix # This should be imported before pwa.nix
     ./modules/home/pwa.nix
+    ./modules/home/xdg-user-dirs.nix
   ];
 
   home.username = "vijeth";
