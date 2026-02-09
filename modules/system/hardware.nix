@@ -16,7 +16,6 @@
   services.power-profiles-daemon.enable = true;
   services.acpid.enable = true;
   services.thermald.enable = true;
-  powerManagement.powertop.enable = true;
 
   systemd.services.battery-threshold = {
     description = "Set battery charge threshold";
