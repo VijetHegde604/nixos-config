@@ -5,16 +5,21 @@
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
     inputs.niri.homeModules.niri
+    inputs.danksearch.homeModules.dsearch
 
     # Required by DMS HM module:
     # It unconditionally reads this path during eval
     ./user/niri-compat.nix
   ];
 
-    programs.niri = {
-      enable = true;
-      package = pkgs.niri;
-    };
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri;
+  };
+
+  programs.dsearch = {
+    enable = true;
+  };
 
   programs.dank-material-shell = {
     enable = true;

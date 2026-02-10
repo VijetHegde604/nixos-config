@@ -16,6 +16,7 @@
     duf
     nil
     nixd
+    yt-dlp
 
     # apps for this user
     ghostty
@@ -27,5 +28,6 @@
     evince
     bruno
     localsend
+    mpv
   ];
 }
