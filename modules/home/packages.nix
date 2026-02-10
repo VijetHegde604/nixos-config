@@ -19,7 +19,6 @@
     ghostty
     brave
     zed-editor
-    vscode
     wtype
     onlyoffice-desktopeditors
     jellyfin-desktop
