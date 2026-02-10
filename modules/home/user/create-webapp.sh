@@ -5,7 +5,7 @@
 
 echo "--- Web App Creator ---"
 
-CHOSEN_BROWSER="brave"
+CHOSEN_BROWSER="helium"
 
 # 1. Collect User Input
 read -r -p "Enter App Name (e.g., ChatGPT): " APP_NAME
