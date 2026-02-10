@@ -14,6 +14,8 @@
     fd
     bat
     duf
+    nil
+    nixd
 
     # apps for this user
     ghostty
