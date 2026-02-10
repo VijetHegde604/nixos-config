@@ -16,6 +16,7 @@
     duf
     nil
     nixd
+    neovim
     yt-dlp
 
     # apps for this user
