@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.packages = with pkgs; [
     # CLI tools
@@ -18,6 +18,7 @@
     # apps for this user
     ghostty
     brave
+    inputs.helium-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
     zed-editor
     wtype
     onlyoffice-desktopeditors
