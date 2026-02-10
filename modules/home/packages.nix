@@ -19,7 +19,6 @@
 
     # apps for this user
     ghostty
-    brave
     inputs.helium-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
     zed-editor
     wtype
