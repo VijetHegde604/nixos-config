@@ -6,7 +6,7 @@
 
 set -e
 
-echo "--- Web App Creator (Wayland-safe) ---"
+echo "--- Web App Creator ---"
 
 CHOSEN_BROWSER="helium"
 
