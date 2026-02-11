@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.bash = {
@@ -33,7 +33,7 @@
 
       # docker helpers
       start-docker = "sudo systemctl start docker";
-      stop-docker  = "sudo systemctl stop docker && sudo systemctl stop docker.socket";
+      stop-docker = "sudo systemctl stop docker && sudo systemctl stop docker.socket";
     };
 
     initExtra = ''
