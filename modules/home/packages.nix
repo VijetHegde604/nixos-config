@@ -4,8 +4,6 @@
     # CLI tools
     fastfetch
     btop
-    mise
-    uv
     starship
     zoxide
     lsd
@@ -17,11 +15,9 @@
     nil
     nixd
     neovim
-    yt-dlp
-
     # apps for this user
     ghostty
-    inputs.helium-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.helium-nix.packages.${pkgs.stdenv.hostPlatform.system}.default # Helium Browser from flakes
     zed-editor
     wtype
     onlyoffice-desktopeditors
