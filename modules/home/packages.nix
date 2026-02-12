@@ -15,6 +15,7 @@
     nil
     nixd
     neovim
+    code-cursor
     # apps for this user
     ghostty
     inputs.helium-nix.packages.${pkgs.stdenv.hostPlatform.system}.default # Helium Browser from flakes
