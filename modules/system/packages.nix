@@ -1,39 +1,38 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
 
-environment.systemPackages = with pkgs; [
-  vim
-  nano
-  git
-  bash-completion
-  libsecret
-  gnome-keyring
-  nautilus
-  papirus-icon-theme
-  adwaita-icon-theme
-  xdg-user-dirs
-  helix
-  xwayland-satellite
+  environment.systemPackages = with pkgs; [
+    vim
+    nano
+    git
+    bash-completion
+    libsecret
+    gnome-keyring
+    nautilus
+    papirus-icon-theme
+    adwaita-icon-theme
+    xdg-user-dirs
+    helix
+    xwayland-satellite
 
-  # Development Tools
-  gcc
-  gnumake
-  binutils
-  pkg-config
-  python3
-  python3Packages.pip
-  python3Packages.virtualenv
+    # Development Tools
+    gcc
+    gnumake
+    binutils
+    pkg-config
+    python3
+    python3Packages.pip
+    python3Packages.virtualenv
 
-  # common runtime deps mise builds need
-  openssl
-  zlib
-  libffi
-  readline
-  xz
-  cacert
-];
+    # common runtime deps mise builds need
+    openssl
+    zlib
+    libffi
+    readline
+    xz
+    cacert
+  ];
 
   fonts.packages = with pkgs; [
     noto-fonts
@@ -43,5 +42,5 @@ environment.systemPackages = with pkgs; [
   ];
 
   programs.firefox.enable = true;
-  programs.nix-ld.enable = true;   
+  programs.nix-ld.enable = true;
 }
