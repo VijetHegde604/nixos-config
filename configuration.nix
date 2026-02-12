@@ -28,6 +28,8 @@
     packages = with pkgs; [ tree ];
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users."vijeth" = import ./home.nix;
