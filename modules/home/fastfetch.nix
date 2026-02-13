@@ -42,6 +42,11 @@
                 "keyColor": "green"
             },
             {
+                "type": "swap",
+                "key": "│ ├󰓡",
+                "keyColor": "green"
+            },
+            {
                 "type": "disk",
                 "key": "└ └",
                 "keyColor": "green"
