@@ -16,6 +16,7 @@
     ./modules/system/hardware.nix
     ./modules/system/packages.nix
     ./modules/system/services.nix
+    # ./modules/system/virtualization.nix
   ];
 
   users.users.vijeth = {
