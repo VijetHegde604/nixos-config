@@ -27,5 +27,6 @@
     bruno
     localsend
     mpv
+    telegram-desktop
   ];
 }
