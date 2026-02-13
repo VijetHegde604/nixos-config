@@ -44,7 +44,6 @@
       fi
 
       # activate mise and zoxide
-      eval "$(${pkgs.mise}/bin/mise activate bash)"
       eval "$(${pkgs.zoxide}/bin/zoxide init bash)"
 
       # source optional local bash snippets
