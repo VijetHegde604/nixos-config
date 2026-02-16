@@ -29,5 +29,6 @@
     localsend
     mpv
     telegram-desktop
+    syncthing
   ];
 }
