@@ -51,6 +51,7 @@
       export TERMINAL=ghostty
     '';
   };
+
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/bin"
