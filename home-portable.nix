@@ -2,7 +2,6 @@
 {
   imports = [
     ./modules-common/home/git.nix
-    ./modules-common/home/shell.nix
     ./modules-common/home/fastfetch.nix
     ./modules-common/home/starship.nix
     ./modules-common/home/xdg-user-dirs.nix
