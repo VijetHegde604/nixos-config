@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.git = {
@@ -7,7 +7,7 @@
 
     settings = {
       user = {
-        name  = "VijetHegde604";
+        name = "VijetHegde604";
         email = "vijethegde604@gmail.com";
       };
 

@@ -1,5 +1,5 @@
 {
-  description = "Vijet's NixOS config";
+  description = "Vijet's unified NixOS + Home Manager config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -9,6 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Desktop-related inputs (kept, but NOT auto-enabled)
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,15 +34,23 @@
       url = "github:AlvaroParker/helium-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs =
     inputs@{ nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
     {
+      # -------------------------
+      # NixOS configuration
+      # -------------------------
       nixosConfigurations.nix-btw = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
+        inherit system;
         specialArgs = { inherit inputs; };
 
         modules = [
@@ -54,6 +63,23 @@
             home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];
+      };
+
+      # ---------------------------------
+      # Home Manager (works on any OS)
+      # ---------------------------------
+      homeConfigurations = {
+        vijeth-nixos = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home-nixos.nix ];
+        };
+
+        vijeth-portable = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home-portable.nix ];
+        };
       };
     };
 }

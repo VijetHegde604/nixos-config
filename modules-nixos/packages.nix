@@ -15,13 +15,12 @@
     nil
     nixd
     neovim
-    code-cursor
+    wtype
 
     # apps for this user
     ghostty
     inputs.helium-nix.packages.${pkgs.stdenv.hostPlatform.system}.default # Helium Browser from flakes
     zed-editor
-    wtype
     onlyoffice-desktopeditors
     jellyfin-desktop
     evince
@@ -30,5 +29,6 @@
     mpv
     telegram-desktop
     syncthing
+    code-cursor
   ];
 }
