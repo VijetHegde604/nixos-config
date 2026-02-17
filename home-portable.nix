@@ -10,6 +10,7 @@
     ./modules-portable/packages.nix
     ./modules-portable/ghostty.nix
     ./modules-portable/shell.nix
+    ./modules/portable/zed-config.nix
   ];
 
   home.username = "vijeth";
