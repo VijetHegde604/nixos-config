@@ -2,7 +2,7 @@
 
 {
   programs.ghostty = {
-    #enable = true;
+    enable = true;
 
     settings = {
       # ───────── Font ─────────
