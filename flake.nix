@@ -40,10 +40,18 @@
     inputs@{ nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
+
+      mkPkgs = system: import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
+
+      mkHome = module: system:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = mkPkgs system;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ module ];
+        };
     in
     {
       # -------------------------
@@ -69,17 +77,8 @@
       # Home Manager (works on any OS)
       # ---------------------------------
       homeConfigurations = {
-        vijeth-nixos = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-nixos.nix ];
-        };
-
-        vijeth-portable = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-portable.nix ];
-        };
+        vijeth-nixos = mkHome ./home-nixos.nix system;
+        vijeth-portable = mkHome ./home-portable.nix system;
       };
     };
 }
