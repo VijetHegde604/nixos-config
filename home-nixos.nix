@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -11,6 +11,7 @@
     ./modules-common/home/ghostty.nix
     ./modules-common/home/xdg-user-dirs.nix
     ./modules-common/home/create-webapp.nix
+    ./modules-common/home/zed.nix
   ];
 
   home.username = "vijeth";
