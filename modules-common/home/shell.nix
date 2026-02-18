@@ -43,6 +43,8 @@
         export TERM=xterm-256color
       fi
 
+      export TERM=xterm-256color
+
       # activate mise and zoxide
       eval "$(${pkgs.zoxide}/bin/zoxide init bash)"
 
