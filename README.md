@@ -171,3 +171,11 @@ nix gc
 | Apply NixOS system | `sudo nixos-rebuild switch --flake .#nix-btw`   |
 
 ---
+
+## Conventions (for future maintenance)
+
+- Keep **NixOS concerns** in `modules-common/system/*` and **Home Manager concerns** in `modules-common/home/*`.
+- Keep modules **single-purpose** (`networking.nix`, `desktop.nix`, `nix.nix`, etc.).
+- Prefer typed HM/NixOS options over raw text files when a module exists (for validation and safer refactors).
+- Put host- or hardware-specific behavior behind conditions (for example, `ConditionPathExists` for sysfs battery thresholds).
+- Keep flake outputs constructed via helper functions (`mkPkgs`, `mkHome`) to avoid drift between profiles.
