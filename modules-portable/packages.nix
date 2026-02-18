@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     # CLI tools
@@ -16,6 +16,5 @@
     nixd
     neovim
     wtype
-    bruno
   ];
 }
