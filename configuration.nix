@@ -9,13 +9,13 @@
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
 
-    ./modules/system/boot.nix
-    ./modules/system/networking.nix
-    ./modules/system/locale.nix
-    ./modules/system/desktop.nix
-    ./modules/system/hardware.nix
-    ./modules/system/packages.nix
-    ./modules/system/services.nix
+    ./modules-common/system/boot.nix
+    ./modules-common/system/networking.nix
+    ./modules-common/system/locale.nix
+    ./modules-common/system/desktop.nix
+    ./modules-common/system/hardware.nix
+    ./modules-common/system/packages.nix
+    ./modules-common/system/services.nix
     # ./modules/system/virtualization.nix
   ];
 
@@ -33,7 +33,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users."vijeth" = import ./home.nix;
+    users."vijeth" = import ./home-nixos.nix;
   };
 
   nix.settings.experimental-features = [
