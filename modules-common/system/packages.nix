@@ -13,7 +13,6 @@
     papirus-icon-theme
     adwaita-icon-theme
     xdg-user-dirs
-    helix
     xwayland-satellite
 
     # Development Tools
