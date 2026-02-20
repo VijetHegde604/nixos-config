@@ -17,8 +17,8 @@ This repository manages:
 ```
 
 .
-├── flake.nix                     # Flake entrypoint supporting NixOS + Portable HM
-├── flake.lock                    # Locked inputs for reproducibility
+├── flake.nix                    # Flake entrypoint supporting NixOS + Portable HM
+├── flake.lock                   # Locked inputs for reproducibility
 ├── configuration.nix            # NixOS system config
 ├── hardware-configuration.nix   # Hardware config from NixOS install
 ├── home-nixos.nix               # Home Manager modules for NixOS
