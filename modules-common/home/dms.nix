@@ -50,6 +50,7 @@
           "wpblur"
           "cursor"
           "outputs"
+          "windowrules"
 
           # user overrides (explicit files!)
           "user/overrides"
