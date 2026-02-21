@@ -41,12 +41,15 @@
     let
       system = "x86_64-linux";
 
-      mkPkgs = system: import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
+      mkPkgs =
+        system:
+        import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
 
-      mkHome = module: system:
+      mkHome =
+        module: system:
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs system;
           extraSpecialArgs = { inherit inputs; };
