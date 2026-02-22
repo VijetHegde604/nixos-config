@@ -6,6 +6,7 @@
     inputs.dms.homeModules.niri
     inputs.niri.homeModules.niri
     inputs.danksearch.homeModules.dsearch
+    inputs.dms-plugin-registry.modules.default
 
     # Required by DMS HM module:
     # It unconditionally reads this path during eval
@@ -57,6 +58,10 @@
           "user/binds"
         ];
       };
+    };
+
+    plugins = {
+      dankPomodoroTimer.enable = true;
     };
   };
 }
