@@ -9,36 +9,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Desktop-related inputs (kept, but NOT auto-enabled)
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
 
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    quickshell.url = "git+https://git.outfoxxed.me/quickshell/quickshell";
+    quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    dms.url = "github:AvengeMedia/DankMaterialShell/stable";
+    dms.inputs.nixpkgs.follows = "nixpkgs";
 
-    danksearch = {
-      url = "github:AvengeMedia/danksearch";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    danksearch.url = "github:AvengeMedia/danksearch";
+    danksearch.inputs.nixpkgs.follows = "nixpkgs";
 
-    dms-plugin-registry = {
-      url = "github:AvengeMedia/dms-plugin-registry";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    dms-plugin-registry.url = "github:AvengeMedia/dms-plugin-registry";
+    dms-plugin-registry.inputs.nixpkgs.follows = "nixpkgs";
 
-    helium-nix = {
-      url = "github:AlvaroParker/helium-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    helium-nix.url = "github:AlvaroParker/helium-nix";
+    helium-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -46,11 +33,23 @@
     let
       system = "x86_64-linux";
 
+      # GLOBAL OVERLAY FIX
+      overlay = final: prev: {
+        pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+          (python-final: python-prev: {
+            picosvg = python-prev.picosvg.overridePythonAttrs (_: {
+              doCheck = false;
+            });
+          })
+        ];
+      };
+
       mkPkgs =
         system:
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          overlays = [ overlay ];
         };
 
       mkHome =
@@ -60,6 +59,7 @@
           extraSpecialArgs = { inherit inputs; };
           modules = [ module ];
         };
+
     in
     {
       # -------------------------
@@ -67,9 +67,17 @@
       # -------------------------
       nixosConfigurations.nix-btw = nixpkgs.lib.nixosSystem {
         inherit system;
+
         specialArgs = { inherit inputs; };
 
         modules = [
+          (
+            { ... }:
+            {
+              nixpkgs.overlays = [ overlay ];
+            }
+          )
+
           ./configuration.nix
 
           home-manager.nixosModules.home-manager
@@ -82,7 +90,7 @@
       };
 
       # ---------------------------------
-      # Home Manager (works on any OS)
+      # Home Manager
       # ---------------------------------
       homeConfigurations = {
         vijeth-nixos = mkHome ./home-nixos.nix system;
