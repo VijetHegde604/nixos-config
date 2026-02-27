@@ -58,6 +58,4 @@
       export TERMINAL=ghostty
     '';
   };
-
-  programs.zoxide.enable = true;
 }

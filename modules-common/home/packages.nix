@@ -15,6 +15,9 @@
     nixd
     neovim
     wtype
+    fzf
+    wget
+    ouch
 
     # apps for this user
     ghostty
