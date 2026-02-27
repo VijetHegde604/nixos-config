@@ -26,8 +26,6 @@
     bruno
     localsend
     mpv
-    telegram-desktop
-    syncthing
     code-cursor
   ];
 }
