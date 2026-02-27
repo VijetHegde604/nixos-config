@@ -15,6 +15,7 @@
     ./modules-common/system/packages.nix
     ./modules-common/system/services.nix
     ./modules-common/system/nix.nix
+    ./modules-common/system/syncthing.nix
     # ./modules/system/virtualization.nix
   ];
 
