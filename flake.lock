@@ -49,11 +49,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772068819,
-        "narHash": "sha256-sLkPdHdb0G0CorHqGD9xMmfloSYYDEvoTFWEwYFLKKQ=",
+        "lastModified": 1772154742,
+        "narHash": "sha256-CCMdL0IFJ5Vxqq9uit0vSeJnV5tRaKigd2idZzVd2f4=",
         "owner": "AvengeMedia",
         "repo": "dms-plugin-registry",
-        "rev": "6a44df27c99af5fa579e0fc6706dc0c0212a9b0f",
+        "rev": "46ed44669dd3c9f2e42f25d2cd5d544dd8071bff",
         "type": "github"
       },
       "original": {
@@ -125,11 +125,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772060133,
-        "narHash": "sha256-VuyRptb8v1lVGMlLp4/1vRX3Efwec0CN0S6mKmDPzLg=",
+        "lastModified": 1772160297,
+        "narHash": "sha256-x8ZSoznWCjJsPMaVERTCnExZWMVqBefVqGPNAeHCcOc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ce9b6e52500a0ea0ec48f0bbf6d7a3e431d9dfa4",
+        "rev": "4c4fd4ed6beaf7ecd3ffbda0779413b116411072",
         "type": "github"
       },
       "original": {
