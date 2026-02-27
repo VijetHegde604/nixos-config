@@ -14,6 +14,7 @@
     adwaita-icon-theme
     xdg-user-dirs
     xwayland-satellite
+    cups-pk-helper
 
     # Development Tools
     gcc
