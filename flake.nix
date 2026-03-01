@@ -33,23 +33,11 @@
     let
       system = "x86_64-linux";
 
-      # GLOBAL OVERLAY FIX
-      overlay = final: prev: {
-        pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-          (python-final: python-prev: {
-            picosvg = python-prev.picosvg.overridePythonAttrs (_: {
-              doCheck = false;
-            });
-          })
-        ];
-      };
-
       mkPkgs =
         system:
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [ overlay ];
         };
 
       mkHome =
@@ -71,12 +59,6 @@
         specialArgs = { inherit inputs; };
 
         modules = [
-          (
-            { ... }:
-            {
-              nixpkgs.overlays = [ overlay ];
-            }
-          )
 
           ./configuration.nix
 
