@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   services.xserver.enable = true;
@@ -8,7 +8,7 @@
     enable = true;
     package = pkgs.niri;
   };
-  
+
   programs.seahorse.enable = true;
 
   xdg.portal = {
