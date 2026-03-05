@@ -6,7 +6,6 @@
       name = "create-webapp";
 
       runtimeInputs = [
-        pkgs.brave
         pkgs.curl
         pkgs.imagemagick
         pkgs.coreutils
