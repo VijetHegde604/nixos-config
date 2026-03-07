@@ -8,6 +8,7 @@
       PROJECTS = "$HOME/Projects";
       WORK = "$HOME/Work";
       WALLPAPERS = "$HOME/Wallpapers";
+      LEARNING = "$HOME/Learning";
     };
   };
 }
