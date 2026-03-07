@@ -4,7 +4,7 @@
   imports = [
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
-    inputs.niri.homeModules.niri
+    inputs.niri-flake.homeModules.niri
     inputs.danksearch.homeModules.dsearch
     inputs.dms-plugin-registry.modules.default
 
