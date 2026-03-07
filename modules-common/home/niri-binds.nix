@@ -207,6 +207,32 @@
       allow-when-locked = true;
     };
 
+    # === Brightness Controls ===
+    "XF86MonBrightnessUp" = {
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "brightness"
+        "increment"
+        "5"
+        ""
+      ];
+      allow-when-locked = true;
+    };
+    "XF86MonBrightnessDown" = {
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "brightness"
+        "decrement"
+        "5"
+        ""
+      ];
+      allow-when-locked = true;
+    };
+
     # === Window Management ===
     "Mod+W" = {
       action.close-window = [ ];
