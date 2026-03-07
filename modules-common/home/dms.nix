@@ -45,7 +45,6 @@
 
         filesToInclude = [
           "alttab"
-          "binds"
           "colors"
           "layout"
           "wpblur"
@@ -55,7 +54,6 @@
 
           # user overrides (explicit files!)
           "user/overrides"
-          "user/binds"
         ];
       };
     };

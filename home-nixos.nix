@@ -8,6 +8,7 @@
     ./modules-common/home/fastfetch.nix
     ./modules-common/home/packages.nix
     ./modules-common/home/dms.nix
+    ./modules-common/home/niri-binds.nix
     ./modules-common/home/ghostty.nix
     ./modules-common/home/xdg-user-dirs.nix
     ./modules-common/home/create-webapp.nix
