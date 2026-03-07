@@ -51,7 +51,8 @@
           "cursor"
           "outputs"
           "windowrules"
-
+          "binds"
+          
           # user overrides (explicit files!)
           "user/overrides"
         ];
