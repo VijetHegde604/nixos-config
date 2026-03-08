@@ -295,5 +295,13 @@
       "-c"
       "wtype -M shift -k Insert -m shift"
     ];
+
+    # === Screenshots ===
+    "XF86Launch1".action.screenshot = [ ];
+    "Ctrl+XF86Launch1".action.screenshot-screen = [ ];
+    "Alt+XF86Launch1".action.screenshot-window = [ ];
+    "Print".action.screenshot = [ ];
+    "Ctrl+Print".action.screenshot-screen = [ ];
+    "Alt+Print".action.screenshot-window = [ ];
   };
 }
