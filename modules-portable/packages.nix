@@ -15,5 +15,6 @@
     nixd
     neovim
     wtype
+    zellij
   ];
 }
