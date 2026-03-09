@@ -23,7 +23,7 @@
       ns = "nix shell nixpkgs#"; # modern replacement for nix-shell -p
 
       # user-level nix cleanup (portable-safe)
-      nixgc = "nix gc";
+      nixgc = "nix-garbage-collect -d";
       nixopt = "nix-store --optimise";
 
       # ───────── Docker helpers (portable) ─────────
