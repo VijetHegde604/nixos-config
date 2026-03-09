@@ -18,6 +18,7 @@
     fzf
     wget
     ouch
+    zellij
 
     # apps for this user
     ghostty
