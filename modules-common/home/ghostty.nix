@@ -45,7 +45,7 @@
       # ───────── KEYBINDS (IMPORTANT) ─────────
       keybind = [
         "ctrl+shift+n=new_window"
-        "ctrl+t=new_tab"
+        "ctrl+t=unbind"
         "ctrl+plus=increase_font_size:1"
         "ctrl+minus=decrease_font_size:1"
         "ctrl+zero=reset_font_size"
