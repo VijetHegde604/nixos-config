@@ -60,7 +60,7 @@
 
         modules = [
 
-          ./configuration.nix
+          ./hosts/nix-btw/configuration.nix
 
           home-manager.nixosModules.home-manager
           {
@@ -70,13 +70,26 @@
           }
         ];
       };
+      
+      # ---------------------------------
+      # Nix Server Configuration
+      # ---------------------------------
+      nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        specialArgs = { inherit inputs; };
+
+        modules = [
+          ./hosts/nix-server/configuration.nix
+        ];
+      };
 
       # ---------------------------------
       # Home Manager
       # ---------------------------------
       homeConfigurations = {
-        vijeth-nixos = mkHome ./home-nixos.nix system;
-        vijeth-portable = mkHome ./home-portable.nix system;
+        vijeth-nixos = mkHome ./hosts/nix-btw/home-nixos.nix system;
+        vijeth-portable = mkHome ./hosts/nix-btw/home-portable.nix system;
       };
     };
 }
