@@ -41,6 +41,9 @@ in
         "enp2s0"
         "tailscale0"
       ];
+      trustedSubnets = [
+        "172.16.0.0/12"
+      ];
     };
   };
 
