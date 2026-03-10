@@ -36,15 +36,4 @@ in
     enable = true;
     package = unstable.tailscale;
   };
-
-  services.cockpit = {
-    enable = true;
-    port = 9090;
-    # openFirewall = true;
-    settings = {
-      WebService = {
-        AllowUnencrypted = true;
-      };
-    };
-  };
 }
