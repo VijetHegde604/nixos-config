@@ -10,4 +10,17 @@
     algorithm = "zstd";
     memoryPercent = 50;
   };
+  hardware.graphics = {
+    enable = true;
+
+    extraPackages = with pkgs; [
+      intel-media-driver
+      libva
+      libva-utils
+    ];
+  };
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  };
 }
