@@ -49,6 +49,7 @@
       "wheel"
       "networkmanager"
       "docker"
+      "video"
     ];
     packages = with pkgs; [
       git
