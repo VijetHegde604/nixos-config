@@ -5,7 +5,7 @@
     enable = true;
     package = pkgs.gitFull;
 
-    settings = {
+    config = {
       user = {
         name = "VijetHegde604";
         email = "vijethegde604@gmail.com";
@@ -19,6 +19,7 @@
       };
 
       init.defaultBranch = "main";
+
       pull.rebase = true;
       push.autoSetupRemote = true;
 
@@ -29,6 +30,7 @@
       };
 
       commit.verbose = true;
+
       column.ui = "auto";
       branch.sort = "-committerdate";
       tag.sort = "-version:refname";
