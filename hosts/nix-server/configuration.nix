@@ -19,6 +19,7 @@
     ./modules/docker.nix
     ./modules/packages.nix
     ./modules/nix.nix
+    ./modules/storage.nix
   ];
 
   system.stateVersion = "25.11";
