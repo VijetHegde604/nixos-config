@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   services.acpid.enable = true;
   services.thermald.enable = true;
