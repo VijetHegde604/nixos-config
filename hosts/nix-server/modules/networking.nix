@@ -1,4 +1,10 @@
-{ inputs, ... }:
+{ pkgs, inputs, ... }:
+
+let
+  unstable = import inputs.nixpkgs {
+    system = pkgs.system;
+  };
+in
 {
   networking = {
     hostName = "nix-server";
@@ -20,18 +26,19 @@
       "192.168.1.69"
       "1.1.1.1"
     ];
+
     firewall = {
       enable = true;
       allowedTCPPorts = [
-        22 # SSH
-        80 # HTTP
-        443 # HTTPS
+        22
+        80
+        443
       ];
     };
   };
 
   services.tailscale = {
     enable = true;
-    package = inputs.nixpkgs.tailscale;
+    package = unstable.tailscale;
   };
 }
