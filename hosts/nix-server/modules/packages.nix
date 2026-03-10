@@ -12,6 +12,7 @@
     lsd
     lazygit
     bat
+    fastfetch
 
     # Development Tools
     gcc
