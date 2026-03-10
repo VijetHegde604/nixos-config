@@ -34,6 +34,11 @@ in
         80
         443
       ];
+      # trust LAN + tailscale
+      trustedInterfaces = [
+        "enp2s0"
+        "tailscale0"
+      ];
     };
   };
 
