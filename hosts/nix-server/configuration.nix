@@ -15,6 +15,7 @@
     ./modules/packages.nix
     ./modules/nix.nix
     ./modules/storage.nix
+    ./modules/hardware.nix
   ];
 
   system.stateVersion = "25.11";
