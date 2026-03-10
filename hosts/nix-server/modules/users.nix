@@ -11,4 +11,10 @@
     ];
   };
   security.sudo.wheelNeedsPassword = true;
+
+  services.logind = {
+    lidSwitch = "ignore";
+    lidSwitchExternalPower = "ignore";
+    lidSwitchDocked = "ignore";
+  };
 }
