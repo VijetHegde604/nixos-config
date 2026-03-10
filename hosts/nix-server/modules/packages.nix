@@ -8,6 +8,10 @@
     git
     bash-completion
     libsecret
+    zoxide
+    lsd
+    lazygit
+    bat
 
     # Development Tools
     gcc
