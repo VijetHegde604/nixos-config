@@ -32,25 +32,24 @@
     # docker helpers
     start-docker = "sudo systemctl start docker";
     stop-docker = "sudo systemctl stop docker && sudo systemctl stop docker.socket";
-
-    environment.shellInit = ''
-      # If we are inside an SSH session, downgrade TERM
-      if [ -n "$SSH_CONNECTION" ]; then
-        export TERM=xterm-256color
-      fi
-
-      export TERM=xterm-256color
-
-      # activate zoxide
-      eval "$(${pkgs.zoxide}/bin/zoxide init bash)"
-
-      # source optional local bash snippets
-      if [ -d ~/.bashrc.d ]; then
-        for rc in ~/.bashrc.d/*; do
-          [ -f "$rc" ] && . "$rc"
-        done
-      fi
-    '';
   };
 
+  environment.shellInit = ''
+    # If we are inside an SSH session, downgrade TERM
+    if [ -n "$SSH_CONNECTION" ]; then
+      export TERM=xterm-256color
+    fi
+
+    export TERM=xterm-256color
+
+    # activate zoxide
+    eval "$(${pkgs.zoxide}/bin/zoxide init bash)"
+
+    # source optional local bash snippets
+    if [ -d ~/.bashrc.d ]; then
+      for rc in ~/.bashrc.d/*; do
+        [ -f "$rc" ] && . "$rc"
+      done
+    fi
+  '';
 }
