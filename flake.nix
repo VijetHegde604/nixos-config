@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -70,11 +71,11 @@
           }
         ];
       };
-      
+
       # ---------------------------------
       # Nix Server Configuration
       # ---------------------------------
-      nixosConfigurations.nix-server = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nix-server = inputs.nixpkgs-stable.lib.nixosSystem {
         inherit system;
 
         specialArgs = { inherit inputs; };
