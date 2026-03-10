@@ -32,6 +32,6 @@
 
   services.tailscale = {
     enable = true;
-    package = inputs.nixpkgs.packages.tailscale;
+    package = inputs.nixpkgs.tailscale;
   };
 }
