@@ -33,16 +33,12 @@ in
         22
         80
         443
-        8085
-        9696
       ];
       # trust LAN + tailscale
       trustedInterfaces = [
         "enp2s0"
         "tailscale0"
-      ];
-      trustedSubnets = [
-        "172.16.0.0/12"
+        "docker0"
       ];
     };
   };
