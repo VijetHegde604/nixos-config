@@ -13,6 +13,7 @@
     lazygit
     bat
     fastfetch
+    cockpit
 
     # Development Tools
     gcc
