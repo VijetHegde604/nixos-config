@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  programs.bash.enableCompletion = true;
+  programs.bash.completion.enable = true;
 
   environment.shellAliases = {
     # navigation / ls replacements
