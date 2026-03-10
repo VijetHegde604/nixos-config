@@ -30,7 +30,7 @@
       User = "vijeth";
       WorkingDirectory = "/home/vijeth/system-monitor-api";
 
-      ExecStart = "/home/vijeth/system-monitor-api/.venv/bin/python /home/vijeth/system-monitor-api/system-monitor.py";
+      ExecStart = "/home/vijeth/system-monitor-api/.venv/bin/python3 /home/vijeth/system-monitor-api/system-monitor.py";
 
       Restart = "always";
       RestartSec = 5;
@@ -38,7 +38,6 @@
       NoNewPrivileges = true;
       PrivateTmp = true;
     };
-  };
   };
 
 }
