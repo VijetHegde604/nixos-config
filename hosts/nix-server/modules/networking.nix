@@ -27,20 +27,9 @@ in
       "1.1.1.1"
     ];
 
-    # firewall = {
-    #   enable = true;
-    #   allowedTCPPorts = [
-    #     22
-    #     80
-    #     443
-    #   ];
-    #   # trust LAN + tailscale
-    #   trustedInterfaces = [
-    #     "enp2s0"
-    #     "tailscale0"
-    #     "docker0"
-    #   ];
-    # };
+    firewall = {
+      enable = false;
+    };
   };
 
   services.tailscale = {
