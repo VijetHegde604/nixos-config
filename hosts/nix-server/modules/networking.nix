@@ -33,6 +33,8 @@ in
         22
         80
         443
+        8085
+        9696
       ];
       # trust LAN + tailscale
       trustedInterfaces = [
