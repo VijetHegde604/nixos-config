@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   networking = {
     hostName = "nix-server";
@@ -30,5 +30,8 @@
     };
   };
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    package = inputs.nixpkgs.packages.tailscale;
+  };
 }

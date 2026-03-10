@@ -20,7 +20,7 @@
     nrt = "sudo nixos-rebuild test --flake ~/nixos-config#nix-server";
 
     # update flake inputs then rebuild
-    nfu = "nix flake update --flake ~/nixos-config && sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw";
+    nfu = "nix flake lock --update-input nixpkgs-stable --flake ~/nixos-config && sudo nixos-rebuild boot --flake ~/nixos-config#nix-server";
 
     # nix store cleanup
     nixgc = "sudo nix-collect-garbage -d";
