@@ -14,6 +14,9 @@
     bat
     fastfetch
     cockpit
+    btop
+    intel-gpu-tools
+
 
     # Development Tools
     gcc
@@ -32,4 +35,14 @@
     xz
     cacert
   ];
+
+  services.cockpit = {
+    enable = true;
+    port = 9090;
+    settings = {
+      WebService = {
+        AllowUnencrypted = true;
+      };
+    };
+  };
 }
