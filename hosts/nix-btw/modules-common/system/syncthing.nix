@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   services.syncthing = {
@@ -13,7 +13,7 @@
 
     settings = {
       devices = {
-        "dellServer" = {
+        "Nix-Server" = {
           id = "KNMCRVS-4FVELJS-WYJHZYN-33RA4ZE-BHKBQ4H-TJWOHB3-ZIUHD2P-MDOSNQ3";
         };
       };
