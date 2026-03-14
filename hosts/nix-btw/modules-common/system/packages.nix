@@ -15,6 +15,7 @@
     xdg-user-dirs
     xwayland-satellite
     cups-pk-helper
+    btrfs-assistant
 
     # Development Tools
     gcc
