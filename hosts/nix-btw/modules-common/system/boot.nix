@@ -5,7 +5,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.plymouth.enable = true;
+  boot.plymouth = {
+    enable = true;
+    theme = "lone";
+    themePackages = with pkgs; [
+      (adi1090x-plymouth-themes.override {
+        selected_themes = [ "lone" ];
+      })
+    ];
+  };
 
   # Silent boot
   boot.consoleLogLevel = 3;
