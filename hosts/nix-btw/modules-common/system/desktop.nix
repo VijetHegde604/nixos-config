@@ -1,14 +1,6 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
-  services.displayManager.dms-greeter = {
-    enable = true;
-    compositor.name = "niri";
-
-    configHome = "/home/vijeth";
-    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  };
-
   programs.niri = {
     enable = true;
     package = pkgs.niri;
