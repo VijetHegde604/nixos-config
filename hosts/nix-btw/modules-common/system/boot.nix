@@ -5,23 +5,39 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Enable systemd in initrd
+  boot.initrd.systemd.enable = true;
+
+  # Force Graphics Drivers into initrd
+  boot.initrd.kernelModules = [ "i915" ];
+
   boot.plymouth = {
     enable = true;
-    theme = "lone";
+    theme = "hexagon_dots";
     themePackages = with pkgs; [
       (adi1090x-plymouth-themes.override {
-        selected_themes = [ "lone" ];
+        selected_themes = [ "hexagon_dots" ];
       })
     ];
   };
 
-  # Silent boot
-  boot.consoleLogLevel = 3;
+  # Enhanced Silent Boot & Logistics
+  boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
 
   boot.kernelParams = [
     "quiet"
-    "udev.log_level=3"
-    "systemd.show_status=auto"
+    "splash"
+    "boot.shell_on_fail"
+    "loglevel=3"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=3"
+    "udev.log_priority=3"
   ];
+
+  # 4. Ensure the display is initialized early
+  boot.initrd.systemd.extraBin = {
+    # Helpful for debugging, but not strictly required
+    # ls = "${pkgs.coreutils}/bin/ls";
+  };
 }
