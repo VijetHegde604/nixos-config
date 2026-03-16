@@ -12,6 +12,8 @@
       "python"
       "yaml"
       "json"
+      "git-firefly"
+      "rumdl"
     ];
 
     userSettings = {
