@@ -14,29 +14,35 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/mapper/main";
+    { device = "/dev/mapper/root";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
-  boot.initrd.luks.devices."main".device = "/dev/disk/by-uuid/78b67739-1555-42fc-823f-bb7a64ac7d5c";
-
-  fileSystems."/home" =
-    { device = "/dev/mapper/main";
-      fsType = "btrfs";
-      options = [ "subvol=@home" ];
-    };
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/278af703-a9ba-4776-9cc0-65f9f22c5f32";
 
   fileSystems."/nix" =
-    { device = "/dev/mapper/main";
+    { device = "/dev/mapper/root";
       fsType = "btrfs";
       options = [ "subvol=@nix" ];
     };
 
   fileSystems."/var/log" =
-    { device = "/dev/mapper/main";
+    { device = "/dev/mapper/root";
       fsType = "btrfs";
       options = [ "subvol=@log" ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/mapper/root";
+      fsType = "btrfs";
+      options = [ "subvol=@home" ];
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/08BA-E07A";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices = [ ];
