@@ -13,9 +13,35 @@
 
   services.libinput.enable = true;
   services.upower.enable = true;
-  services.power-profiles-daemon.enable = true;
   services.acpid.enable = true;
+
   services.thermald.enable = true;
+  services.throttled.enable = true;
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+      PLATFORM_PROFILE_ON_AC = "performance";
+      PLATFORM_PROFILE_ON_BAT = "low-power";
+
+      INTEL_GPU_MIN_FREQ_ON_AC = 300;
+      INTEL_GPU_MAX_FREQ_ON_AC = 1300; # 12500H Max iGPU clock
+      INTEL_GPU_MIN_FREQ_ON_BAT = 300;
+      INTEL_GPU_MAX_FREQ_ON_BAT = 800;
+    };
+  };
+
+  services.ananicy = {
+    enable = true;
+    package = pkgs.ananicy-cpp;
+    rulesProvider = pkgs.ananicy-rules-cachyos;
+  };
 
   # Keep battery wear lower on supported laptops.
   systemd.services.battery-threshold = {
