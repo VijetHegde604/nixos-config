@@ -16,6 +16,8 @@
     xwayland-satellite
     cups-pk-helper
     btrfs-assistant
+    sbctl
+    efibootmgr
 
     # Development Tools
     gcc
@@ -41,6 +43,7 @@
     noto-fonts-color-emoji
     jetbrains-mono
     cantarell-fonts
+    inter
   ];
 
   programs.firefox.enable = true;
