@@ -1,7 +1,7 @@
-{ ... }:
+{ settings, ... }:
 
 {
-  networking.hostName = "nix-btw";
+  networking.hostName = settings.hostname;
   networking.networkmanager.enable = true;
 
   networking.nameservers = [ "100.95.4.126" ];

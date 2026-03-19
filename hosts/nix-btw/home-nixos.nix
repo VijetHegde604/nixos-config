@@ -1,4 +1,4 @@
-{ ... }:
+{ settings, ... }:
 
 {
   imports = [
@@ -15,8 +15,8 @@
     ./modules-common/home/zed.nix
   ];
 
-  home.username = "vijeth";
-  home.homeDirectory = "/home/vijeth";
+  home.username = settings.username;
+  home.homeDirectory = "/home/${settings.username}";
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;

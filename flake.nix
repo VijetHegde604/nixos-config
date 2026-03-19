@@ -59,7 +59,8 @@
 
         specialArgs = {
           inherit inputs;
-          skipSB = false;     # Set this to true to disable secure boot during installation
+          settings = import ./hosts/nix-btw/settings.nix;
+          skipSB = false; # Set this to true to disable secure boot during installation
         };
 
         modules = [
@@ -70,7 +71,10 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              settings = import ./hosts/nix-btw/settings.nix;
+            };
           }
         ];
       };
@@ -81,7 +85,10 @@
       nixosConfigurations.nix-server = inputs.nixpkgs-stable.lib.nixosSystem {
         inherit system;
 
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          settings = import ./hosts/nix-server/settings.nix;
+        };
 
         modules = [
           ./hosts/nix-server/configuration.nix

@@ -1,6 +1,6 @@
-{ ... }:
+{ settings, ... }:
 
 {
-  time.timeZone = "Asia/Kolkata";
-  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = settings.timezone;
+  i18n.defaultLocale = settings.locale;
 }
