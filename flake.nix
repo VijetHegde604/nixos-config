@@ -57,7 +57,10 @@
       nixosConfigurations.nix-btw = nixpkgs.lib.nixosSystem {
         inherit system;
 
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          skipSB = false;     # Set this to true to disable secure boot during installation
+        };
 
         modules = [
 

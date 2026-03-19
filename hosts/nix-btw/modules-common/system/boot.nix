@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, skipSB, ... }:
 
 {
   boot.loader = {
     limine.enable = true;
-    limine.secureBoot.enable = true;
+    limine.secureBoot.enable = if skipSB then false else true;
     efi.canTouchEfiVariables = true;
   };
 
