@@ -31,5 +31,6 @@
     localsend
     mpv
     code-cursor
+    freerdp
   ];
 }
