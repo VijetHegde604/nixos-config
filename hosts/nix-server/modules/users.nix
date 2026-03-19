@@ -1,6 +1,6 @@
-{ ... }:
+{ settings, ... }:
 {
-  users.users.vijeth = {
+  users.users.${settings.username} = {
     isNormalUser = true;
     description = "Vijet Hegde";
     extraGroups = [
@@ -27,10 +27,10 @@
 
     serviceConfig = {
       Type = "simple";
-      User = "vijeth";
-      WorkingDirectory = "/home/vijeth/system-monitor-api";
-
-      ExecStart = "/home/vijeth/system-monitor-api/.venv/bin/python3 /home/vijeth/system-monitor-api/system-monitor.py";
+      User = "${settings.username}";
+      WorkingDirectory = "/home/${settings.username}/system-monitor-api";
+      
+      ExecStart = "/home/${settings.username}/system-monitor-api/.venv/bin/python3 /home/${settings.username}/system-monitor-api/system-monitor.py";
 
       Restart = "always";
       RestartSec = 5;
