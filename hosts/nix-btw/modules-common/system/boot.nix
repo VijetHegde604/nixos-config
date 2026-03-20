@@ -1,9 +1,9 @@
-{ pkgs, skipSB, ... }:
+{ pkgs, settings, ... }:
 
 {
   boot.loader = {
     limine.enable = true;
-    limine.secureBoot.enable = if skipSB then false else true;
+    limine.secureBoot.enable = if settings.secureBoot then true else false;
     efi.canTouchEfiVariables = true;
   };
 
@@ -17,10 +17,10 @@
 
   boot.plymouth = {
     enable = true;
-    theme = "hexagon_dots";
+    theme = settings.plymouthTheme;
     themePackages = with pkgs; [
       (adi1090x-plymouth-themes.override {
-        selected_themes = [ "hexagon_dots" ];
+        selected_themes = [ settings.plymouthTheme ];
       })
     ];
   };

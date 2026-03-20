@@ -1,9 +1,9 @@
-{ ... }:
+{ settings, ... }:
 
 {
   services.syncthing = {
     enable = true;
-    user = "vijeth";
+    user = settings.username;
     dataDir = "/home/vijeth/Documents";
     configDir = "/home/vijeth/.config/syncthing";
 

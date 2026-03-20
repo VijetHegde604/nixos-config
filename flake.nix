@@ -60,7 +60,6 @@
         specialArgs = {
           inherit inputs;
           settings = import ./hosts/nix-btw/settings.nix;
-          skipSB = false; # Set this to true to disable secure boot during installation
         };
 
         modules = [
