@@ -9,7 +9,7 @@
 
   # Boot and Styling
   secureBoot = true; # Set to false to disable during installation
-  plymouthTheme = "hexagon-dots";
+  plymouthTheme = "hexagon_dots";
 
   # Git Configuration
   gitUser = "VijetHegde604";
