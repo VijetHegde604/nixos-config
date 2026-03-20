@@ -1,181 +1,182 @@
-# Vijet’s NixOS + Home Manager Config
+# Vijet's NixOS Configuration
 
-Declarative and reproducible configuration for **NixOS** and **Home Manager** (portable across any Linux distro) using **Nix flakes**.
+This repository contains the Nix flakes and host modules used to manage two machines:
 
-This repository manages:
+- `nix-btw`: a desktop NixOS system with Home Manager, Niri, and Dank Material Shell.
+- `nix-server`: a separate NixOS server profile.
 
-- **NixOS system configuration** (services, packages, kernels, hardware settings)
-- **Home Manager user environments** (dotfiles, shells, prompts, dev tools)
-- A split architecture supporting:
-  - `vijeth-nixos` — Full NixOS + Home Manager config
-  - `vijeth-portable` — Standalone Home Manager for non-NixOS distros (e.g., CachyOS, Arch)
+It also exposes a portable Home Manager configuration for reusing the user environment outside NixOS.
 
----
+## Flake outputs
 
-## Repository Structure
-
-```
-
-.
-├── flake.nix                    # Flake entrypoint supporting NixOS + Portable HM
-├── flake.lock                   # Locked inputs for reproducibility
-├── configuration.nix            # NixOS system config
-├── hardware-configuration.nix   # Hardware config from NixOS install
-├── home-nixos.nix               # Home Manager modules for NixOS
-├── home-portable.nix            # Home Manager modules for non-NixOS
-├── modules-common/              # Shared reusable modules
-├── modules-nixos/               # NixOS-specific modules
-└── modules-portable/            # Portable modules for non-NixOS use
-
-````
-
----
-
-## Features
-
-- Full **flaketized** approach — pin your inputs and configs
-- **Modular and reusable** structure
-- Seamless integration with **Home Manager**
-- Supports hybrid workflows (NixOS + portable Linux)
-- User tools and dotfiles managed declaratively
-
----
-
-## How It Works
-
-### Supported Flake Outputs
-
-Your flake exposes:
+The current flake exports these entry points:
 
 ```text
 nixosConfigurations.nix-btw
+nixosConfigurations.nix-server
 homeConfigurations.vijeth-nixos
 homeConfigurations.vijeth-portable
-````
-
-* `nixosConfigurations.nix-btw`: Full NixOS configuration
-* `homeConfigurations.vijeth-nixos`: Home Manager config on NixOS
-* `homeConfigurations.vijeth-portable`: Home Manager config for any Linux distro
-
----
-
-## 🧪 Usage
-
-### On NixOS
-
-Make sure **flakes** are enabled in `/etc/nix/nix.conf`:
-
-```
-experimental-features = nix-command flakes
 ```
 
-Then:
+## Repository layout
+
+```text
+.
+├── flake.nix
+├── flake.lock
+├── DMS/                              # Checked-in DMS and Niri override files
+├── hosts/
+│   ├── nix-btw/                      # Desktop host
+│   │   ├── configuration.nix
+│   │   ├── hardware-configuration.nix
+│   │   ├── home-nixos.nix
+│   │   ├── home-portable.nix
+│   │   ├── modules-common/
+│   │   ├── modules-portable/
+│   │   ├── post-install.sh
+│   │   └── settings.nix
+│   └── nix-server/                   # Server host
+│       ├── configuration.nix
+│       ├── hardware-configuration.nix
+│       ├── modules/
+│       └── settings.nix
+└── README.md
+```
+
+## What each profile does
+
+### `nixosConfigurations.nix-btw`
+
+Builds the full desktop system, including:
+
+- system services and boot configuration
+- Niri and desktop-related system settings
+- Home Manager integration for the `vijeth` user
+- Dank Material Shell and related user tooling
+
+### `nixosConfigurations.nix-server`
+
+Builds the server-specific NixOS system with its own module set.
+
+### `homeConfigurations.vijeth-nixos`
+
+Applies the Home Manager profile used on the desktop host.
+
+### `homeConfigurations.vijeth-portable`
+
+Applies the portable Home Manager profile for non-NixOS Linux systems.
+
+## Requirements
+
+Before using the flake, make sure:
+
+1. Nix is installed.
+2. Flakes are enabled in `/etc/nix/nix.conf`:
+
+   ```conf
+   experimental-features = nix-command flakes
+   ```
+
+3. On non-NixOS systems, Home Manager is installed and available in `PATH`.
+
+## Desktop host setup (`nix-btw`)
+
+### Fresh install workflow
+
+After a fresh NixOS installation, clone this repository into `/etc/nixos/nixos-config` and apply the desktop configuration:
 
 ```bash
-git clone https://github.com/VijetHegde604/nixos-config.git
-cd nixos-config
-
+git clone https://github.com/VijetHegde604/nixos-config.git /etc/nixos/nixos-config
+cd /etc/nixos/nixos-config
 sudo nixos-rebuild switch --flake .#nix-btw
 ```
 
-This will build and activate your full system configuration.
-
-To apply Home Manager on NixOS:
+If you want the repository to live in the user's home directory after installation, run the post-install script:
 
 ```bash
-home-manager switch --flake .#vijeth-nixos
+cd /etc/nixos/nixos-config
+sudo ./hosts/nix-btw/post-install.sh
 ```
 
----
+The script currently does the following:
 
-### On a Non-NixOS Distro (e.g., CachyOS, Arch)
+- resolves the target user's home directory
+- moves `/etc/nixos/nixos-config` to `/home/vijeth/nixos-config` if the home copy does not already exist
+- creates the DMS and Niri user config directories if needed
+- syncs the tracked DMS JSON and KDL files into the user's config directories
+- fixes ownership under the repository and `.config`
 
-1. Install Nix with flakes enabled.
-2. Clone this repository:
+The script is idempotent:
+
+- if the repository is already in `/home/vijeth/nixos-config`, it will not move it again
+- if destination files already match, they are left unchanged
+- running it multiple times is safe and only re-applies ownership and changed config files
+
+### Applying later changes on `nix-btw`
+
+If the repository already lives in `~/nixos-config`, rebuild from there:
 
 ```bash
-git clone https://github.com/VijetHegde604/nixos-config.git
-cd nixos-config
+cd ~/nixos-config
+sudo nixos-rebuild switch --flake .#nix-btw
 ```
 
-3. Apply Home Manager for your portable configuration:
+To apply only the Home Manager profile on the desktop host:
 
 ```bash
+home-manager switch --flake ~/nixos-config#vijeth-nixos
+```
+
+## Server host setup (`nix-server`)
+
+To build or switch the server profile:
+
+```bash
+sudo nixos-rebuild switch --flake .#nix-server
+```
+
+## Portable Home Manager setup
+
+On a non-NixOS Linux system:
+
+```bash
+git clone https://github.com/VijetHegde604/nixos-config.git ~/nixos-config
+cd ~/nixos-config
 home-manager switch --flake .#vijeth-portable
 ```
 
----
+The portable profile is intended for user-level tooling and avoids NixOS-only system services.
 
-## About Home Manager Split
+## DMS-managed files in this repository
 
-The portable config uses only:
+The repository keeps these user-managed files under `DMS/`:
 
-* portable + common modules
-* no system services
-* no GPU / compositor enablement
+- `settings.json`
+- `clsettings.json`
+- `overrides.kdl`
+- `binds.kdl`
+- `windowrules.kdl`
 
-This ensures your **dotfiles and user tools** work on any Linux distro without NixOS system components.
+The post-install script currently syncs:
 
-NixOS config includes:
+- `settings.json`
+- `clsettings.json`
+- `overrides.kdl`
+- `windowrules.kdl`
 
-* system services
-* bootloader
-* package configuration
-* system-wide modules
+## Useful commands
 
----
-
-## 🛠 Example Modules
-
-In `modules-common/` you’ll find shared things like:
-
-* shell configuration
-* git config
-* starship prompt
-* xdg dirs
-
-In `modules-portable/`:
-
-* Ghostty config (config-only, binary installed via distro)
-* shell-configuration with home-manager tailored aliases
-* other portable modules
-
----
-
-## Cleanup and GC (Non-NixOS)
-
-To purge old generations from Home Manager and free space:
-
-```bash
-home-manager expire-generations 0
-nix gc
-```
-
----
+| Task | Command |
+| --- | --- |
+| Rebuild desktop host | `sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw` |
+| Rebuild server host | `sudo nixos-rebuild switch --flake ~/nixos-config#nix-server` |
+| Apply desktop Home Manager | `home-manager switch --flake ~/nixos-config#vijeth-nixos` |
+| Apply portable Home Manager | `home-manager switch --flake ~/nixos-config#vijeth-portable` |
+| Update flake inputs | `nix flake update --flake ~/nixos-config` |
+| Run the post-install sync | `sudo ~/nixos-config/hosts/nix-btw/post-install.sh` |
 
 ## Notes
 
-* This repository is **personal and opinionated** — review before reusing
-* Home Manager config is split for clarity and portability
-* Hardware-specific portions (like `hardware-configuration.nix`) may vary per machine
-
----
-
-## Useful Commands
-
-| Task               | Command                                         |
-| ------------------ | ----------------------------------------------- |
-| Update flakes      | `nix flake update`                              |
-| Apply portable HM  | `home-manager switch --flake .#vijeth-portable` |
-| Apply NixOS HM     | `home-manager switch --flake .#vijeth-nixos`    |
-| Apply NixOS system | `sudo nixos-rebuild switch --flake .#nix-btw`   |
-
----
-
-## Conventions (for future maintenance)
-
-- Keep **NixOS concerns** in `modules-common/system/*` and **Home Manager concerns** in `modules-common/home/*`.
-- Keep modules **single-purpose** (`networking.nix`, `desktop.nix`, `nix.nix`, etc.).
-- Prefer typed HM/NixOS options over raw text files when a module exists (for validation and safer refactors).
-- Put host- or hardware-specific behavior behind conditions (for example, `ConditionPathExists` for sysfs battery thresholds).
-- Keep flake outputs constructed via helper functions (`mkPkgs`, `mkHome`) to avoid drift between profiles.
+- This is a personal configuration repository and assumes the primary desktop user is `vijeth` unless overridden via environment variables for the post-install script.
+- Hardware-specific files and module selections may need adjustment before reuse on another machine.
+- The post-install script is intended for local machine setup and should be run as root.
