@@ -8,7 +8,7 @@ HOME_DIR="${HOME_DIR:-$(getent passwd "$TARGET_USER" | cut -d: -f6 || true)}"
 REPO_NAME="${REPO_NAME:-nixos-config}"
 REPO_DIR="${REPO_DIR:-${HOME_DIR:+$HOME_DIR/$REPO_NAME}}"
 DMS_CONFIG="${DMS_CONFIG:-${HOME_DIR:+$HOME_DIR/.config/DankMaterialShell}}"
-NIRI_USER_DIR="${NIRI_USER_DIR:-${HOME_DIR:+$HOME_DIR/.config/niri/dms/user}}"
+NIRI_CONFIG_DIR="${NIRI_CONFIG_DIR:-${HOME_DIR:+$HOME_DIR/.config/niri}}"
 
 log() {
   printf '[post-install] %s\n' "$*"
@@ -67,15 +67,15 @@ fi
 log "Ensuring repository ownership for $TARGET_USER"
 chown -R "$TARGET_USER:users" "$REPO_DIR"
 
-mkdir -p "$DMS_CONFIG" "$NIRI_USER_DIR"
+mkdir -p "$DMS_CONFIG" "$NIRI_CONFIG_DIR/dms/user/"
 
 log "Syncing Dank Material Shell settings"
 copy_if_different "$REPO_DIR/DMS/settings.json" "$DMS_CONFIG/settings.json"
 copy_if_different "$REPO_DIR/DMS/clsettings.json" "$DMS_CONFIG/clsettings.json"
 
 log "Syncing Niri overrides"
-copy_if_different "$REPO_DIR/DMS/overrides.kdl" "$NIRI_USER_DIR/overrides.kdl"
-copy_if_different "$REPO_DIR/DMS/windowrules.kdl" "$NIRI_USER_DIR/windowrules.kdl"
+copy_if_different "$REPO_DIR/DMS/overrides.kdl" "$NIRI_CONFIG_DIR/dms/user/overrides.kdl"
+copy_if_different "$REPO_DIR/DMS/windowrules.kdl" "$NIRI_CONFIG_DIR/dms/windowrules.kdl"
 
 log "Ensuring user ownership under $HOME_DIR/.config"
 chown -R "$TARGET_USER:users" "$HOME_DIR/.config"
