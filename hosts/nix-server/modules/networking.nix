@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, settings, ... }:
 
 let
   unstable = import inputs.nixpkgs {
@@ -7,7 +7,7 @@ let
 in
 {
   networking = {
-    hostName = "nix-server";
+    hostName = settings.hostname;
 
     networkmanager.enable = false;
 
