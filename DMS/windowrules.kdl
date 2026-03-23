@@ -8,3 +8,11 @@ window-rule {
     default-column-width { proportion 0.6; }
     default-window-height { proportion 0.6; }
 }
+
+// @id=wr_1774262336604143996 @name=chrome-music.youtube.com__-Default
+window-rule {
+    match app-id="^chrome-music.youtube.com__-Default$"
+    open-floating true
+    default-column-width { proportion 0.7; }
+    default-window-height { proportion 0.7; }
+}
