@@ -7,16 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./modules-common/system/boot.nix
-    ./modules-common/system/networking.nix
-    ./modules-common/system/locale.nix
-    ./modules-common/system/desktop.nix
-    ./modules-common/system/hardware.nix
-    ./modules-common/system/packages.nix
-    ./modules-common/system/services.nix
-    ./modules-common/system/nix.nix
-    ./modules-common/system/syncthing.nix
-    # ./modules/system/virtualization.nix
+    ./modules-common/system
   ];
 
   users.users.vijeth = {

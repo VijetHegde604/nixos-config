@@ -2,17 +2,7 @@
 
 {
   imports = [
-    ./modules-common/home/starship.nix
-    ./modules-common/home/shell.nix
-    ./modules-common/home/git.nix
-    ./modules-common/home/fastfetch.nix
-    ./modules-common/home/packages.nix
-    ./modules-common/home/dms.nix
-    ./modules-common/home/niri-binds.nix
-    ./modules-common/home/ghostty.nix
-    ./modules-common/home/xdg-user-dirs.nix
-    ./modules-common/home/create-webapp.nix
-    ./modules-common/home/zed.nix
+    ./modules-common/home
   ];
 
   home.username = settings.username;

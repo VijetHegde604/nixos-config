@@ -2,6 +2,8 @@
   description = "Vijet's unified NixOS + Home Manager config";
 
   inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
@@ -30,77 +32,82 @@
   };
 
   outputs =
-    inputs@{ nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
+    inputs@{
+      flake-parts,
+      home-manager,
+      nixpkgs,
+      ...
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
 
-      mkPkgs =
-        system:
-        import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
+      perSystem =
+        { pkgs, ... }:
+        {
+          formatter = pkgs.nixfmt-rfc-style;
         };
 
-      mkHome =
-        module: system:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = mkPkgs system;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ module ];
-        };
+      flake =
+        let
+          system = "x86_64-linux";
 
-    in
-    {
-      # -------------------------
-      # NixOS configuration
-      # -------------------------
-      nixosConfigurations.nix-btw = nixpkgs.lib.nixosSystem {
-        inherit system;
+          mkPkgs =
+            system:
+            import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+            };
 
-        specialArgs = {
-          inherit inputs;
-          settings = import ./hosts/nix-btw/settings.nix;
-        };
+          mkHome =
+            module: system:
+            home-manager.lib.homeManagerConfiguration {
+              pkgs = mkPkgs system;
+              extraSpecialArgs = { inherit inputs; };
+              modules = [ module ];
+            };
+        in
+        {
+          nixosConfigurations.nix-btw = nixpkgs.lib.nixosSystem {
+            inherit system;
 
-        modules = [
-
-          ./hosts/nix-btw/configuration.nix
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = {
+            specialArgs = {
               inherit inputs;
               settings = import ./hosts/nix-btw/settings.nix;
             };
-          }
-        ];
-      };
 
-      # ---------------------------------
-      # Nix Server Configuration
-      # ---------------------------------
-      nixosConfigurations.nix-server = inputs.nixpkgs-stable.lib.nixosSystem {
-        inherit system;
+            modules = [
+              ./hosts/nix-btw/configuration.nix
 
-        specialArgs = {
-          inherit inputs;
-          settings = import ./hosts/nix-server/settings.nix;
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.backupFileExtension = "backup";
+                home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                  settings = import ./hosts/nix-btw/settings.nix;
+                };
+              }
+            ];
+          };
+
+          nixosConfigurations.nix-server = inputs.nixpkgs-stable.lib.nixosSystem {
+            inherit system;
+
+            specialArgs = {
+              inherit inputs;
+              settings = import ./hosts/nix-server/settings.nix;
+            };
+
+            modules = [
+              ./hosts/nix-server/configuration.nix
+            ];
+          };
+
+          homeConfigurations = {
+            vijeth-nixos = mkHome ./hosts/nix-btw/home-nixos.nix system;
+            vijeth-portable = mkHome ./hosts/nix-btw/home-portable.nix system;
+          };
         };
-
-        modules = [
-          ./hosts/nix-server/configuration.nix
-        ];
-      };
-
-      # ---------------------------------
-      # Home Manager
-      # ---------------------------------
-      homeConfigurations = {
-        vijeth-nixos = mkHome ./hosts/nix-btw/home-nixos.nix system;
-        vijeth-portable = mkHome ./hosts/nix-btw/home-portable.nix system;
-      };
     };
 }
