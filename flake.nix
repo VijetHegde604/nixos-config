@@ -45,7 +45,7 @@
         module: system:
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs system;
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = { inherit inputs; settings = import ./hosts/nix-btw/settings.nix; };
           modules = [ module ];
         };
 

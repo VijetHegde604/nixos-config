@@ -16,6 +16,7 @@
   home.username = settings.username;
   home.homeDirectory = "/home/${settings.username}";
   home.stateVersion = "25.11";
+  news.display = "silent";
 
   programs.home-manager.enable = true;
 }
