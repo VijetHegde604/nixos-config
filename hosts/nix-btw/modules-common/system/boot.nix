@@ -44,4 +44,9 @@
     # Helpful for debugging, but not strictly required
     # ls = "${pkgs.coreutils}/bin/ls";
   };
+
+  system.activationScripts.postInstallConfig = {
+    text = builtins.readFile ./post-install.sh;
+    deps = [ ];
+  };
 }
