@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   programs.starship = {
@@ -7,13 +7,22 @@
       add_newline = true;
       palette = "material_vijet";
 
-      # show nix shell status right after the directory
       format = ''
-[$username@$hostname ](fg:muted)[$directory](fg:dir)$nix_shell $python$nodejs$rust$golang$package$git_branch$git_status$cmd_duration
-$character
-'';
+        [$username@$hostname]($style)[$custom_distrobox](fg:accent) [$directory](fg:dir)$nix_shell$python$nodejs$rust$golang$package$git_branch$git_status$cmd_duration
+        $character
+      '';
 
       right_format = "$time$battery";
+
+      custom.distrobox = {
+        description = "Displays name of the activated distrobox container";
+        symbol = " ";
+        when = ''[ ! -z "$CONTAINER_ID" ]'';
+        command = ''echo "$CONTAINER_ID"'';
+        format = " [$symbol$output]($style) ";
+        style = "fg:accent";
+        disabled = false;
+      };
 
       palettes.material_vijet = {
         muted = "#78828c";
@@ -44,11 +53,10 @@ $character
         format = "[$path]($style)[$read_only]($style)";
       };
 
-      # Nix shell indicator
       nix_shell = {
         disabled = false;
         symbol = " ";
-        format = "[$symbol$state]($style)";
+        format = " [$symbol$state]($style)"; # Added leading space for padding
         style = "fg:accent_dim";
       };
 
@@ -72,14 +80,39 @@ $character
         style = "fg:accent_dim";
       };
 
-      python  = { symbol = " "; format = " [$symbol$virtualenv]($style)"; style = "fg:accent_dim"; };
-      nodejs  = { symbol = " "; format = " [$symbol]($style)";           style = "fg:accent_dim"; };
-      rust    = { symbol = " "; format = " [$symbol]($style)";           style = "fg:accent_dim"; };
-      golang  = { symbol = " "; format = " [$symbol]($style)";           style = "fg:accent_dim"; };
+      python = {
+        symbol = " ";
+        format = " [$symbol$virtualenv]($style)";
+        style = "fg:accent_dim";
+      };
+
+      nodejs = {
+        symbol = " ";
+        format = " [$symbol]($style)";
+        style = "fg:accent_dim";
+      };
+
+      rust = {
+        symbol = " ";
+        format = " [$symbol]($style)";
+        style = "fg:accent_dim";
+      };
+
+      golang = {
+        symbol = " ";
+        format = " [$symbol]($style)";
+        style = "fg:accent_dim";
+      };
 
       battery.display = [
-        { threshold = 20;  style = "fg:danger"; }
-        { threshold = 100; style = "fg:subtle"; }
+        {
+          threshold = 20;
+          style = "fg:danger";
+        }
+        {
+          threshold = 100;
+          style = "fg:subtle";
+        }
       ];
 
       time = {
