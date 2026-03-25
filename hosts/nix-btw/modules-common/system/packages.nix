@@ -19,7 +19,6 @@
     sbctl
     efibootmgr
     distrobox
-    distrobox-tui
 
     # Development Tools
     gcc
