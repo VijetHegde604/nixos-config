@@ -18,6 +18,8 @@
     btrfs-assistant
     sbctl
     efibootmgr
+    distrobox
+    distrobox-tui
 
     # Development Tools
     gcc
@@ -48,4 +50,10 @@
 
   programs.firefox.enable = true;
   programs.nix-ld.enable = true;
+
+  # Adding podman for distrobox
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
 }
