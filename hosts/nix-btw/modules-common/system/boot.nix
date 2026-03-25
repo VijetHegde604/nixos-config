@@ -45,8 +45,8 @@
     # ls = "${pkgs.coreutils}/bin/ls";
   };
 
-  system.activationScripts.postInstallConfig = {
-    text = builtins.readFile ./post-install.sh;
-    deps = [ ];
-  };
+#  system.activationScripts.postInstallConfig = {
+#    text = builtins.readFile ./post-install.sh;
+#    deps = [ ];
+#  };
 }
