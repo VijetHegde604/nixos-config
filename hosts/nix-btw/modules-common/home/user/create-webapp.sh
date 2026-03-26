@@ -1,100 +1,129 @@
 #!/usr/bin/env bash
-
-# --- Web App Creator (Refactored) ---
-# Tested on: NixOS Wayland (niri / Hyprland)
 set -euo pipefail
 
-# Configuration
-CHOSEN_BROWSER="helium"
-DESKTOP_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/applications"
-ICON_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/icons/hicolor/256x256/apps"
+echo "--- Web App Creator ---"
 
-# Colors for UX
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-NC='\033[0m' # No Color
+# -------------------------------
+# Detect default browser command
+# -------------------------------
+get_default_browser() {
+  local desktop desktop_file exec
 
-log() { echo -e "${GREEN}[*]${NC} $1"; }
-error() { echo -e "${RED}[!] ERROR:${NC} $1"; exit 1; }
+  desktop="$(xdg-mime query default x-scheme-handler/http 2>/dev/null || true)"
 
-# 1. Dependency Check
-command -v curl >/dev/null || error "curl is required but not installed."
+  if [ -z "$desktop" ]; then
+    desktop="$(xdg-settings get default-web-browser 2>/dev/null || true)"
+  fi
 
-# 2. Collect & Validate User Input
-read -r -p "Enter App Name (e.g., ChatGPT): " APP_NAME
-[[ -z "$APP_NAME" ]] && error "App Name cannot be empty."
+  [ -n "$desktop" ] || {
+    echo "Error: Could not detect default browser (.desktop)"
+    exit 1
+  }
 
-read -r -p "Enter URL (e.g., https://chatgpt.com): " APP_URL
-[[ -z "$APP_URL" ]] && error "URL cannot be empty."
+  desktop_file="$(find \
+    ~/.local/share/applications \
+    /usr/share/applications \
+    /run/current-system/sw/share/applications \
+    -name "$desktop" 2>/dev/null | head -n1)"
 
-read -r -p "Enter Icon URL (Optional, PNG preferred): " ICON_URL
+  [ -f "$desktop_file" ] || {
+    echo "Error: Could not find .desktop file for $desktop"
+    exit 1
+  }
 
-# 3. Generate Clean Slug
-# Trims leading/trailing hyphens and converts to lowercase
-APP_SLUG=$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | sed -e 's/[^a-z0-9]/-/g' -e 's/^-//' -e 's/-$//' -e 's/-+/-/g')
+  exec="$(grep -E '^Exec=' "$desktop_file" | head -n1 | cut -d= -f2)"
 
-DESKTOP_FILE="$DESKTOP_DIR/$APP_SLUG.desktop"
-ICON_PATH="$ICON_DIR/$APP_SLUG.png"
+  # Remove placeholders (%U, %u, etc.)
+  exec="${exec//%u/}"
+  exec="${exec//%U/}"
+  exec="${exec//%f/}"
+  exec="${exec//%F/}"
 
-# 4. Handle Icon Logic
-download_icon() {
-    local url=$1
-    local dest=$2
-    log "Attempting to download icon..."
-    curl -fsL --connect-timeout 5 "$url" -o "$dest"
+  # Extract only the binary (remove extra flags)
+  exec="$(echo "$exec" | awk '{print $1}')"
+
+  echo "$exec"
 }
 
-mkdir -p "$DESKTOP_DIR" "$ICON_DIR"
+CHOSEN_BROWSER="$(get_default_browser)"
+echo "Using browser: $CHOSEN_BROWSER"
 
-ICON_VALUE="web-browser" # Default fallback
+# -------------------------------
+# Collect User Input
+# -------------------------------
+read -rp "Enter App Name (e.g., ChatGPT): " APP_NAME
+read -rp "Enter URL (e.g., https://chatgpt.com): " APP_URL
+read -rp "Enter Icon URL (Optional, press enter for default, prefer png!): " ICON_URL
 
-if [ -n "$ICON_URL" ]; then
-    if download_icon "$ICON_URL" "$ICON_PATH"; then
-        ICON_VALUE="$APP_SLUG"
-    else
-        echo "Provided URL failed."
-    fi
+# Validate input
+[ -n "$APP_NAME" ] || { echo "App name required"; exit 1; }
+[ -n "$APP_URL" ] || { echo "URL required"; exit 1; }
+
+# -------------------------------
+# Prepare paths
+# -------------------------------
+APP_SLUG="$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | tr -cd 'a-z0-9')"
+
+ICON_DIR="$HOME/.local/share/icons"
+APP_DIR="$HOME/.local/share/applications"
+
+ICON_PATH="$ICON_DIR/$APP_SLUG.png"
+DESKTOP_FILE="$APP_DIR/$APP_SLUG.desktop"
+
+mkdir -p "$ICON_DIR" "$APP_DIR"
+
+# -------------------------------
+# Handle Icon
+# -------------------------------
+if [ -z "$ICON_URL" ]; then
+  echo "No icon provided, using default."
+  ICON_VALUE="web-browser"
+else
+  echo "Downloading icon..."
+  if curl -L --fail --silent --show-error "$ICON_URL" -o "$ICON_PATH"; then
+    ICON_VALUE="$ICON_PATH"
+  else
+    echo "Warning: Failed to download icon, using default."
+    ICON_VALUE="web-browser"
+  fi
 fi
 
-# If no icon yet, try Google's Favicon API (better than standard /favicon.ico)
-if [ "$ICON_VALUE" == "web-browser" ]; then
-    DOMAIN=$(echo "$APP_URL" | awk -F[/:] '{print $4}')
-    API_ICON="https://www.google.com/s2/favicons?sz=256&domain=$DOMAIN"
+# -------------------------------
+# Determine browser flags
+# -------------------------------
+# Assume Chromium-based (Helium, Brave, Chrome, etc.)
+APP_FLAG="--app=$APP_URL"
 
-    log "Fetching high-res favicon via API..."
-    if download_icon "$API_ICON" "$ICON_PATH"; then
-        ICON_VALUE="$APP_SLUG"
-    fi
-fi
-
-# 5. Prevent Overwrite
-if [ -f "$DESKTOP_FILE" ]; then
-    read -r -p "Warning: $APP_NAME already exists. Overwrite? (y/N): " confirm
-    [[ "${confirm,,}" == "y" ]] || { log "Aborted."; exit 0; }
-fi
-
-# 6. Create Desktop Entry
+# -------------------------------
+# Create .desktop file
+# -------------------------------
 cat <<EOF > "$DESKTOP_FILE"
 [Desktop Entry]
 Version=1.0
 Type=Application
 Name=$APP_NAME
-Comment=Web App for $APP_NAME
-Exec=$CHOSEN_BROWSER --app="$APP_URL" --ozone-platform=wayland --disable-vulkan %U
+Comment=Web App ($APP_URL)
+Exec=$CHOSEN_BROWSER $APP_FLAG --class=webapp-$APP_SLUG
 Icon=$ICON_VALUE
 Terminal=false
-Categories=Office;Productivity;Network;WebBrowser;
-StartupNotify=true
-StartupWMClass=$APP_SLUG
+Categories=Network;WebBrowser;
+StartupWMClass=webapp-$APP_SLUG
 EOF
 
 chmod +x "$DESKTOP_FILE"
 
-# 7. Refresh Environment
-log "Refreshing desktop database..."
-command -v update-desktop-database >/dev/null && update-desktop-database "$DESKTOP_DIR"
+# -------------------------------
+# Update desktop database (optional)
+# -------------------------------
+if command -v update-desktop-database >/dev/null 2>&1; then
+  update-desktop-database "$APP_DIR" >/dev/null 2>&1 || true
+fi
 
-echo -e "\n----------------------------------------"
-echo -e "${GREEN}SUCCESS:${NC} $APP_NAME web app created"
-echo -e "Location: $DESKTOP_FILE"
+# -------------------------------
+# Done
+# -------------------------------
+echo "----------------------------------------"
+echo "SUCCESS: $APP_NAME created!"
+echo "Browser : $CHOSEN_BROWSER"
+echo "File    : $DESKTOP_FILE"
 echo "----------------------------------------"
