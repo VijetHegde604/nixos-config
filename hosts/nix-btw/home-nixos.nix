@@ -11,7 +11,6 @@
     ./modules-common/home/niri-binds.nix
     ./modules-common/home/ghostty.nix
     ./modules-common/home/xdg-user-dirs.nix
-    ./modules-common/home/create-webapp.nix
     ./modules-common/home/zed.nix
   ];
 
