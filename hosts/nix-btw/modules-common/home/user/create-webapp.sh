@@ -4,126 +4,131 @@ set -euo pipefail
 echo "--- Web App Creator ---"
 
 # -------------------------------
-# Detect default browser command
+# Detect default browser (clean way)
 # -------------------------------
 get_default_browser() {
-  local desktop desktop_file exec
+  local desktop
 
   desktop="$(xdg-mime query default x-scheme-handler/http 2>/dev/null || true)"
 
   if [ -z "$desktop" ]; then
-    desktop="$(xdg-settings get default-web-browser 2>/dev/null || true)"
+    echo "xdg-open"
+    return
   fi
 
-  [ -n "$desktop" ] || {
-    echo "Error: Could not detect default browser (.desktop)"
-    exit 1
-  }
+  echo "$desktop"
+}
 
-  desktop_file="$(find \
-    ~/.local/share/applications \
-    /usr/share/applications \
+DESKTOP_ENTRY="$(get_default_browser)"
+echo "Detected browser entry: $DESKTOP_ENTRY"
+
+# Extract command safely
+get_browser_cmd() {
+  local desktop="$1"
+  local exec
+
+  exec="$(gtk-launch "$desktop" 2>/dev/null || true)"
+
+  # fallback if gtk-launch fails
+  if [ -z "$exec" ]; then
+    exec="xdg-open"
+  fi
+
+  echo "$exec"
+}
+
+# We still prefer direct binary for --app support
+get_browser_binary() {
+  local desktop="$1"
+  local file exec
+
+  file="$(grep -rl "$desktop" \
+    ~/.nix-profile/share/applications \
+    /etc/profiles/per-user/$USER/share/applications \
     /run/current-system/sw/share/applications \
-    -name "$desktop" 2>/dev/null | head -n1)"
+    2>/dev/null | head -n1)"
 
-  [ -f "$desktop_file" ] || {
-    echo "Error: Could not find .desktop file for $desktop"
-    exit 1
-  }
+  if [ -z "$file" ]; then
+    echo "xdg-open"
+    return
+  fi
 
-  exec="$(grep -E '^Exec=' "$desktop_file" | head -n1 | cut -d= -f2)"
+  exec="$(grep '^Exec=' "$file" | head -n1 | cut -d= -f2)"
 
-  # Remove placeholders (%U, %u, etc.)
   exec="${exec//%u/}"
   exec="${exec//%U/}"
   exec="${exec//%f/}"
   exec="${exec//%F/}"
 
-  # Extract only the binary (remove extra flags)
   exec="$(echo "$exec" | awk '{print $1}')"
+
+  if echo "$exec" | grep -q "^/nix/store"; then
+    exec="$(basename "$exec")"
+  fi
 
   echo "$exec"
 }
 
-CHOSEN_BROWSER="$(get_default_browser)"
+CHOSEN_BROWSER="$(get_browser_binary "$DESKTOP_ENTRY")"
 echo "Using browser: $CHOSEN_BROWSER"
 
 # -------------------------------
-# Collect User Input
+# User Input
 # -------------------------------
-read -rp "Enter App Name (e.g., ChatGPT): " APP_NAME
-read -rp "Enter URL (e.g., https://chatgpt.com): " APP_URL
-read -rp "Enter Icon URL (Optional, press enter for default, prefer png!): " ICON_URL
+read -rp "Enter App Name: " APP_NAME
+read -rp "Enter URL: " APP_URL
+read -rp "Enter Icon URL (optional): " ICON_URL
 
-# Validate input
-[ -n "$APP_NAME" ] || { echo "App name required"; exit 1; }
-[ -n "$APP_URL" ] || { echo "URL required"; exit 1; }
+[ -n "$APP_NAME" ] || exit 1
+[ -n "$APP_URL" ] || exit 1
 
-# -------------------------------
-# Prepare paths
-# -------------------------------
 APP_SLUG="$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | tr -cd 'a-z0-9')"
 
 ICON_DIR="$HOME/.local/share/icons"
 APP_DIR="$HOME/.local/share/applications"
 
+mkdir -p "$ICON_DIR" "$APP_DIR"
+
 ICON_PATH="$ICON_DIR/$APP_SLUG.png"
 DESKTOP_FILE="$APP_DIR/$APP_SLUG.desktop"
 
-mkdir -p "$ICON_DIR" "$APP_DIR"
-
 # -------------------------------
-# Handle Icon
+# Icon
 # -------------------------------
-if [ -z "$ICON_URL" ]; then
-  echo "No icon provided, using default."
-  ICON_VALUE="web-browser"
+if [ -n "$ICON_URL" ]; then
+  curl -L --fail --silent "$ICON_URL" -o "$ICON_PATH" \
+    && ICON_VALUE="$ICON_PATH" \
+    || ICON_VALUE="web-browser"
 else
-  echo "Downloading icon..."
-  if curl -L --fail --silent --show-error "$ICON_URL" -o "$ICON_PATH"; then
-    ICON_VALUE="$ICON_PATH"
-  else
-    echo "Warning: Failed to download icon, using default."
-    ICON_VALUE="web-browser"
-  fi
+  ICON_VALUE="web-browser"
 fi
 
 # -------------------------------
-# Determine browser flags
+# Browser flags (safe)
 # -------------------------------
-# Assume Chromium-based (Helium, Brave, Chrome, etc.)
-APP_FLAG="--app=$APP_URL"
+if "$CHOSEN_BROWSER" --help 2>&1 | grep -q -- '--app'; then
+  EXEC_CMD="$CHOSEN_BROWSER --app=$APP_URL"
+else
+  EXEC_CMD="$CHOSEN_BROWSER $APP_URL"
+fi
 
 # -------------------------------
-# Create .desktop file
+# Desktop Entry
 # -------------------------------
 cat <<EOF > "$DESKTOP_FILE"
 [Desktop Entry]
 Version=1.0
 Type=Application
 Name=$APP_NAME
-Comment=Web App ($APP_URL)
-Exec=$CHOSEN_BROWSER $APP_FLAG --class=webapp-$APP_SLUG
+Exec=$EXEC_CMD
 Icon=$ICON_VALUE
 Terminal=false
 Categories=Network;WebBrowser;
-StartupWMClass=webapp-$APP_SLUG
 EOF
 
 chmod +x "$DESKTOP_FILE"
 
-# -------------------------------
-# Update desktop database (optional)
-# -------------------------------
-if command -v update-desktop-database >/dev/null 2>&1; then
-  update-desktop-database "$APP_DIR" >/dev/null 2>&1 || true
-fi
-
-# -------------------------------
-# Done
-# -------------------------------
 echo "----------------------------------------"
 echo "SUCCESS: $APP_NAME created!"
-echo "Browser : $CHOSEN_BROWSER"
-echo "File    : $DESKTOP_FILE"
+echo "Exec: $EXEC_CMD"
 echo "----------------------------------------"
