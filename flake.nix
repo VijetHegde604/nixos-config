@@ -27,6 +27,9 @@
 
     helium-nix.url = "github:AlvaroParker/helium-nix";
     helium-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Use release branch so selected kernels are guaranteed to be in binary cache.
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
   };
 
   outputs =
