@@ -1,6 +1,18 @@
 {
   description = "Vijet's unified NixOS + Home Manager config";
 
+  # Ensure first rebuild on a fresh install can pull CachyOS kernel binaries.
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.garnix.io"
+      "https://attic.xuyh0120.win/lantian"
+    ];
+    extra-trusted-public-keys = [
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";

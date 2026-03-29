@@ -91,6 +91,12 @@ cd /etc/nixos/nixos-config
 sudo nixos-rebuild switch --flake .#nix-btw
 ```
 
+On a brand-new machine, run the first rebuild with flake config enabled so the CachyOS binary caches in `flake.nix` are used immediately:
+
+```bash
+sudo nixos-rebuild switch --flake .#nix-btw --accept-flake-config
+```
+
 If you want the repository to live in the user's home directory after installation, run the post-install script:
 
 ```bash
