@@ -16,7 +16,7 @@
     cockpit
     btop
     intel-gpu-tools
-
+    dua
 
     # Development Tools
     gcc
@@ -35,14 +35,4 @@
     xz
     cacert
   ];
-
-  services.cockpit = {
-    enable = true;
-    port = 9090;
-    settings = {
-      WebService = {
-        AllowUnencrypted = true;
-      };
-    };
-  };
 }
