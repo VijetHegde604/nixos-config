@@ -1,6 +1,7 @@
 {
   pkgs,
-  inputs,
+  lib,
+  settings,
   ...
 }:
 
@@ -16,8 +17,7 @@
     ./modules-common/system/services.nix
     ./modules-common/system/nix.nix
     ./modules-common/system/syncthing.nix
-    ./modules-common/system/virtualization.nix
-  ];
+  ] ++ lib.optional settings.virtualization ./modules-common/system/virtualization.nix;
 
   users.users.vijeth = {
     isNormalUser = true;
