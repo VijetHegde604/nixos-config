@@ -15,5 +15,5 @@
   gitUser = "VijetHegde604";
   gitEmail = "vijethegde604@gmail.com";
 
-  virtualisation = false;
+  virtualization = false;
 }
