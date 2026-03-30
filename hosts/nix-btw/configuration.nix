@@ -16,7 +16,7 @@
     ./modules-common/system/services.nix
     ./modules-common/system/nix.nix
     ./modules-common/system/syncthing.nix
-    # ./modules/system/virtualization.nix
+    ./modules-common/system/virtualization.nix
   ];
 
   users.users.vijeth = {
@@ -36,7 +36,6 @@
     extraSpecialArgs = { inherit inputs; };
     users."vijeth" = import ./home-nixos.nix;
   };
-
 
   system.stateVersion = "25.11";
 }
