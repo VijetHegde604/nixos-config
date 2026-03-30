@@ -1,17 +1,9 @@
-{ config, pkgs, ... }:
+{ settings, ... }:
 
 {
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      swtpm.enable = true;
-    };
-  };
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.virtualbox.guest.dragAndDrop = true;
+  users.extraGroups.vboxusers.members = [ settings.username ];
 
-  programs.virt-manager.enable = true;
-
-  users.users.vijeth.extraGroups = [
-    "libvirtd"
-    "kvm"
-  ];
 }
