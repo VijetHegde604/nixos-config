@@ -3,7 +3,26 @@
 {
   services.pipewire = {
     enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
+  };
+
+  # Enable Advanced Bluetooth Codecs
+  services.pipewire.extraConfig.pipewire = {
+    "10-codecs" = {
+      "context.properties" = {
+        "bluetooth.codecs" = [
+          "sbc_xq"
+          "aac"
+          "ldac"
+          "aptx_hd"
+          "aptx"
+          "sbc"
+        ];
+      };
+    };
   };
 
   hardware.bluetooth = {
