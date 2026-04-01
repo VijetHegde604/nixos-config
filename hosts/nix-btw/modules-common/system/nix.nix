@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   nix = {
@@ -20,14 +20,16 @@
       ];
     };
 
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 7d";
-    };
   };
 
-  # Keep upgrades automatic but deterministic through pinned flake.lock.
+  # Enable nh (Nix Helper)
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 7d --keep 3";
+    flake = "/home/vijeth/nixos-config";
+  };
+
   system.autoUpgrade = {
     enable = true;
     dates = "weekly";
