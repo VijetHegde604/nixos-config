@@ -8,7 +8,6 @@
     git
     bash-completion
     libsecret
-    gnome-keyring
     nautilus
     papirus-icon-theme
     adwaita-icon-theme

@@ -56,11 +56,17 @@
           config.allowUnfree = true;
         };
 
+      nixBtwSettings = import ./hosts/nix-btw/settings.nix;
+      nixServerSettings = import ./hosts/nix-server/settings.nix;
+
       mkHome =
         module: system:
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs system;
-          extraSpecialArgs = { inherit inputs; settings = import ./hosts/nix-btw/settings.nix; };
+          extraSpecialArgs = {
+            inherit inputs;
+            settings = nixBtwSettings;
+          };
           modules = [ module ];
         };
 
@@ -74,7 +80,7 @@
 
         specialArgs = {
           inherit inputs;
-          settings = import ./hosts/nix-btw/settings.nix;
+          settings = nixBtwSettings;
         };
 
         modules = [
@@ -88,7 +94,7 @@
             home-manager.backupFileExtension = "backup";
             home-manager.extraSpecialArgs = {
               inherit inputs;
-              settings = import ./hosts/nix-btw/settings.nix;
+              settings = nixBtwSettings;
             };
           }
         ];
@@ -102,7 +108,7 @@
 
         specialArgs = {
           inherit inputs;
-          settings = import ./hosts/nix-server/settings.nix;
+          settings = nixServerSettings;
         };
 
         modules = [
