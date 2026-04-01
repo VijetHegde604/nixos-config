@@ -42,12 +42,7 @@
     };
 
     initExtra = ''
-      # If we are inside an SSH session, downgrade TERM to something
-      # universally supported on remote machines
-      if [ -n "$SSH_CONNECTION" ]; then
-        export TERM=xterm-256color
-      fi
-
+      # Use a conservative TERM so remote/SSH environments behave consistently.
       export TERM=xterm-256color
 
       # activate mise and zoxide

@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     # CLI tools
     btop
-    starship
     zoxide
     lsd
     lazygit

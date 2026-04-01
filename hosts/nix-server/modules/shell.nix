@@ -35,11 +35,7 @@
   };
 
   environment.shellInit = ''
-    # If we are inside an SSH session, downgrade TERM
-    if [ -n "$SSH_CONNECTION" ]; then
-      export TERM=xterm-256color
-    fi
-
+    # Use a conservative TERM so local and SSH sessions behave consistently.
     export TERM=xterm-256color
 
     # activate zoxide
