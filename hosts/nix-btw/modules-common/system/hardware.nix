@@ -1,39 +1,47 @@
 { pkgs, ... }:
 
 {
+  # --- Bluetooth Configuration  ---
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+        Enable = "Source,Sink,Media,Socket";
+        FastConnectable = true;
+        JustWorksRepairing = "always";
+      };
+    };
+  };
+
+  # --- Audio & PipeWire ---
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
     wireplumber.enable = true;
-  };
 
-  # Enable Advanced Bluetooth Codecs
-  services.pipewire.extraConfig.pipewire = {
-    "10-codecs" = {
-      "context.properties" = {
-        "bluetooth.codecs" = [
-          "sbc_xq"
-          "aac"
-          "ldac"
-          "aptx_hd"
-          "aptx"
-          "sbc"
-        ];
+    # Enable high-quality codecs
+    extraConfig.pipewire = {
+      "10-codecs" = {
+        "context.properties" = {
+          "bluetooth.codecs" = [
+            "sbc_xq"
+            "aac"
+            "ldac"
+            "aptx_hd"
+            "aptx"
+            "sbc"
+          ];
+        };
       };
     };
   };
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-
-  # ------- Graphics Settings -------- #
-
+  # --- Graphics (Intel i5-12500H) ---
   services.xserver.videoDrivers = [ "modesetting" ];
-
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -50,39 +58,13 @@
   hardware.enableRedistributableFirmware = true;
   boot.kernelParams = [ "i915.enable_guc=3" ];
 
-  # -------# -------# -------# -------# -------# -------# -------# -------# -------# -------#
-
+  # --- Power & Performance ---
   services.libinput.enable = true;
   services.upower.enable = true;
   services.acpid.enable = true;
-
   services.thermald.enable = true;
-  services.throttled.enable = true;
-
-  # services.tlp = {
-  #   enable = true;
-  #   settings = {
-  #     CPU_SCALING_GOVERNOR_ON_AC = "powersave";
-  #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-  #     CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
-  #     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-
-  #     PLATFORM_PROFILE_ON_AC = "performance";
-  #     PLATFORM_PROFILE_ON_BAT = "low-power";
-
-  #     INTEL_GPU_MIN_FREQ_ON_AC = 300;
-  #     INTEL_GPU_MAX_FREQ_ON_AC = 1300; # 12500H Max iGPU clock
-  #     INTEL_GPU_MIN_FREQ_ON_BAT = 300;
-  #     INTEL_GPU_MAX_FREQ_ON_BAT = 800;
-  #   };
-  # };
-  #
-
   services.power-profiles-daemon.enable = true;
-
   services.system76-scheduler.settings.cfsProfiles.enable = true;
-
   networking.networkmanager.wifi.powersave = false;
 
   services.ananicy = {
@@ -91,11 +73,17 @@
     rulesProvider = pkgs.ananicy-rules-cachyos;
   };
 
-  # Keep battery wear lower on supported laptops.
+  # --- Required Packages for DMS Codecs ---
+  environment.systemPackages = with pkgs; [
+    libldac
+    bluez-tools
+    pavucontrol
+  ];
+
+  # Battery threshold for BAT0
   systemd.services.battery-threshold = {
     description = "Set battery charge threshold";
     wantedBy = [ "multi-user.target" ];
-    after = [ "multi-user.target" ];
     unitConfig.ConditionPathExists = "/sys/class/power_supply/BAT0/charge_control_end_threshold";
     serviceConfig = {
       Type = "oneshot";
