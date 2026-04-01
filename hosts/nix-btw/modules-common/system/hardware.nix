@@ -75,7 +75,7 @@
 
   # --- Required Packages for DMS Codecs ---
   environment.systemPackages = with pkgs; [
-    libldac
+    libldac-dec
     bluez-tools
     pavucontrol
   ];
