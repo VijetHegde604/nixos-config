@@ -19,6 +19,8 @@
     sbctl
     efibootmgr
     distrobox
+    nix-output-monitor
+    nvd
 
     # Development Tools
     gcc
