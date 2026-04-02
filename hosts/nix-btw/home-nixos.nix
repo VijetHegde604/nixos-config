@@ -12,6 +12,8 @@
     ./modules-common/home/ghostty.nix
     ./modules-common/home/xdg-user-dirs.nix
     ./modules-common/home/zed.nix
+    ./modules-common/home/webapps.nix
+
   ];
 
   home.username = settings.username;
