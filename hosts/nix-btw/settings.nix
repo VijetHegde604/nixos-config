@@ -16,7 +16,4 @@
   gitEmail = "vijethegde604@gmail.com";
 
   virtualization = false;
-
-  # Desktop shell: "dms" or "noctalia"
-  desktopShell = "dms";
 }
