@@ -1,28 +1,37 @@
-{ inputs, pkgs, ... }:
+{ inputs, lib, pkgs, settings, ... }:
 
+let
+  shellChoice = settings.desktopShell or "dms";
+in
 {
-  imports = [
-    inputs.dms.homeModules.dank-material-shell
-    inputs.dms.homeModules.niri
-    inputs.niri-flake.homeModules.niri
-    inputs.danksearch.homeModules.dsearch
-    inputs.dms-plugin-registry.modules.default
+  imports =
+    [
+      inputs.niri-flake.homeModules.niri
 
-    # Required by DMS HM module:
-    # It unconditionally reads this path during eval
-    ./user/niri-compat.nix
-  ];
+      # Required by DMS HM module:
+      # It unconditionally reads this path during eval
+      ./user/niri-compat.nix
+    ]
+    ++ lib.optionals (shellChoice == "dms") [
+      inputs.dms.homeModules.dank-material-shell
+      inputs.dms.homeModules.niri
+      inputs.danksearch.homeModules.dsearch
+      inputs.dms-plugin-registry.modules.default
+    ]
+    ++ lib.optionals (shellChoice == "noctalia") [
+      inputs.noctalia.homeModules.default
+    ];
 
   programs.niri = {
     enable = true;
     package = pkgs.niri;
   };
 
-  programs.dsearch = {
+  programs.dsearch = lib.mkIf (shellChoice == "dms") {
     enable = true;
   };
 
-  programs.dank-material-shell = {
+  programs.dank-material-shell = lib.mkIf (shellChoice == "dms") {
     enable = true;
 
     enableSystemMonitoring = true;
@@ -52,7 +61,7 @@
           "outputs"
           "windowrules"
           "binds"
-          
+
           # user overrides (explicit files!)
           "user/overrides"
         ];
@@ -61,6 +70,20 @@
 
     plugins = {
       dankPomodoroTimer.enable = true;
+    };
+  };
+
+  programs.noctalia-shell = lib.mkIf (shellChoice == "noctalia") {
+    enable = true;
+    systemd.enable = true;
+
+    settings = {
+      general = {
+        animationSpeed = 1.0;
+      };
+      colorSchemes = {
+        useWallpaperColors = true;
+      };
     };
   };
 }

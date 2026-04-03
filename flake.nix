@@ -37,6 +37,9 @@
     dms-plugin-registry.url = "github:AvengeMedia/dms-plugin-registry";
     dms-plugin-registry.inputs.nixpkgs.follows = "nixpkgs";
 
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs";
+
     helium-nix.url = "github:AlvaroParker/helium-nix";
     helium-nix.inputs.nixpkgs.follows = "nixpkgs";
 
