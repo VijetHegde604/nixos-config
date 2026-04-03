@@ -1,16 +1,5 @@
-{ settings, ... }:
+{ ... }:
 
-let
-  shellChoice = settings.desktopShell or "dms";
-
-  shellCommand =
-    if shellChoice == "noctalia" then
-      [ "noctalia-shell" "ipc" "call" ]
-    else
-      [ "dms" "ipc" "call" ];
-
-  shellSpawn = args: shellCommand ++ args;
-in
 {
   programs.niri.settings.binds = {
     # === System & Overview ===
@@ -30,91 +19,217 @@ in
       hotkey-overlay.title = "Open Terminal";
     };
     "Mod+Space" = {
-      action.spawn = shellSpawn [ "spotlight" "toggle" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "spotlight"
+        "toggle"
+      ];
       hotkey-overlay.title = "Application Launcher";
     };
     "Mod+Shift+V" = {
-      action.spawn = shellSpawn [ "clipboard" "toggle" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "clipboard"
+        "toggle"
+      ];
       hotkey-overlay.title = "Clipboard Manager";
     };
     "Mod+M" = {
-      action.spawn = shellSpawn [ "processlist" "focusOrToggle" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "processlist"
+        "focusOrToggle"
+      ];
       hotkey-overlay.title = "Task Manager";
     };
     "Super+X" = {
-      action.spawn = shellSpawn [ "powermenu" "toggle" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "powermenu"
+        "toggle"
+      ];
       hotkey-overlay.title = "Power Menu: Toggle";
     };
     "Mod+Comma" = {
-      action.spawn = shellSpawn [ "settings" "focusOrToggle" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "settings"
+        "focusOrToggle"
+      ];
       hotkey-overlay.title = "Settings";
     };
     "Mod+Y" = {
-      action.spawn = shellSpawn [ "dankdash" "wallpaper" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "dankdash"
+        "wallpaper"
+      ];
       hotkey-overlay.title = "Browse Wallpapers";
     };
     "Mod+N" = {
-      action.spawn = shellSpawn [ "notifications" "toggle" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "notifications"
+        "toggle"
+      ];
       hotkey-overlay.title = "Notification Center";
     };
     "Mod+Shift+N" = {
-      action.spawn = shellSpawn [ "notepad" "toggle" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "notepad"
+        "toggle"
+      ];
       hotkey-overlay.title = "Notepad";
     };
 
     # === Security ===
     "Mod+Alt+L" = {
-      action.spawn = shellSpawn [ "lock" "lock" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "lock"
+        "lock"
+      ];
       hotkey-overlay.title = "Lock Screen";
       allow-when-locked = true;
     };
     "Mod+Shift+E".action.quit = [ ];
     "Ctrl+Alt+Delete" = {
-      action.spawn = shellSpawn [ "processlist" "focusOrToggle" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "processlist"
+        "focusOrToggle"
+      ];
       hotkey-overlay.title = "Task Manager";
     };
 
     # === Audio Controls ===
     "XF86AudioRaiseVolume" = {
-      action.spawn = shellSpawn [ "audio" "increment" "3" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "audio"
+        "increment"
+        "3"
+      ];
       allow-when-locked = true;
     };
     "XF86AudioLowerVolume" = {
-      action.spawn = shellSpawn [ "audio" "decrement" "3" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "audio"
+        "decrement"
+        "3"
+      ];
       allow-when-locked = true;
     };
     "XF86AudioMute" = {
-      action.spawn = shellSpawn [ "audio" "mute" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "audio"
+        "mute"
+      ];
       allow-when-locked = true;
     };
     "XF86AudioMicMute" = {
-      action.spawn = shellSpawn [ "audio" "micmute" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "audio"
+        "micmute"
+      ];
       allow-when-locked = true;
     };
     "XF86AudioPause" = {
-      action.spawn = shellSpawn [ "mpris" "playPause" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "mpris"
+        "playPause"
+      ];
       allow-when-locked = true;
     };
     "XF86AudioPlay" = {
-      action.spawn = shellSpawn [ "mpris" "playPause" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "mpris"
+        "playPause"
+      ];
       allow-when-locked = true;
     };
     "XF86AudioPrev" = {
-      action.spawn = shellSpawn [ "mpris" "previous" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "mpris"
+        "previous"
+      ];
       allow-when-locked = true;
     };
     "XF86AudioNext" = {
-      action.spawn = shellSpawn [ "mpris" "next" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "mpris"
+        "next"
+      ];
       allow-when-locked = true;
     };
 
     # === Brightness Controls ===
     "XF86MonBrightnessUp" = {
-      action.spawn = shellSpawn [ "brightness" "increment" "5" "" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "brightness"
+        "increment"
+        "5"
+        ""
+      ];
       allow-when-locked = true;
     };
     "XF86MonBrightnessDown" = {
-      action.spawn = shellSpawn [ "brightness" "decrement" "5" "" ];
+      action.spawn = [
+        "dms"
+        "ipc"
+        "call"
+        "brightness"
+        "decrement"
+        "5"
+        ""
+      ];
       allow-when-locked = true;
     };
 
