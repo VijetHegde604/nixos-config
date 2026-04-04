@@ -6,10 +6,12 @@
     extra-substituters = [
       "https://cache.garnix.io"
       "https://attic.xuyh0120.win/lantian"
+      "https://noctalia.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
     ];
   };
 
@@ -42,6 +44,11 @@
 
     # Use release branch so selected kernels are guaranteed to be in binary cache.
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

@@ -9,14 +9,14 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./modules-common/system/boot.nix
-    ./modules-common/system/networking.nix
-    ./modules-common/system/locale.nix
-    ./modules-common/system/desktop.nix
-    ./modules-common/system/hardware.nix
-    ./modules-common/system/packages.nix
-    ./modules-common/system/services.nix
-    ./modules-common/system/nix.nix
+    ./modules/system/boot.nix
+    ./modules/system/networking.nix
+    ./modules/system/locale.nix
+    ./modules/system/desktop.nix
+    ./modules/system/hardware.nix
+    ./modules/system/packages.nix
+    ./modules/system/services.nix
+    ./modules/system/nix.nix
     #./modules-common/system/syncthing.nix
   ]
   ++ lib.optional settings.virtualization ./modules-common/system/virtualization.nix;
