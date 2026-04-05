@@ -65,6 +65,7 @@
   services.thermald.enable = true;
   services.power-profiles-daemon.enable = true;
   services.system76-scheduler.settings.cfsProfiles.enable = true;
+  hardware.enableAllFirmware = true;
   networking.networkmanager.wifi.powersave = false;
 
   services.ananicy = {
