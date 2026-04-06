@@ -5,6 +5,8 @@
   services.fstrim.enable = true;
   services.tlp.enable = true;
 
+  hardware.enableAllFirmware = true;
+
   zramSwap = {
     enable = true;
     algorithm = "zstd";
