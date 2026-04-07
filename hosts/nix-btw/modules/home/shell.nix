@@ -39,6 +39,9 @@
       # docker helpers
       start-docker = "sudo systemctl start docker";
       stop-docker = "sudo systemctl stop docker && sudo systemctl stop docker.socket";
+
+      # Editing the config
+      edit-config = "zeditor ~/nixos-config"
     };
 
     initExtra = ''
