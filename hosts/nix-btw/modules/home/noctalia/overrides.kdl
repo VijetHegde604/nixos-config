@@ -6,6 +6,7 @@ config-notification {
 }
 
 spawn-at-startup "xdg-user-dirs-update"
+spawn-at-startup "noctalia-shell"
 
 // ┌──────────────────────────────┐
 // │ Gestures                     │
