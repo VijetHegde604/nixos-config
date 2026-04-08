@@ -44,8 +44,8 @@
           "noctalia-shell"
           "ipc"
           "call"
+          "launcher"
           "clipboard"
-          "toggle"
         ];
         hotkey-overlay.title = "Clipboard Manager";
       };
@@ -54,8 +54,8 @@
           "noctalia-shell"
           "ipc"
           "call"
-          "processlist"
-          "toggle"
+          "launcher"
+          "windows"
         ];
         hotkey-overlay.title = "Task Manager";
       };
@@ -64,7 +64,7 @@
           "noctalia-shell"
           "ipc"
           "call"
-          "powermenu"
+          "sessionMenu"
           "toggle"
         ];
         hotkey-overlay.title = "Power Menu";
@@ -84,8 +84,9 @@
           "noctalia-shell"
           "ipc"
           "call"
+          "settings"
+          "toggleTab"
           "wallpaper"
-          "toggle"
         ];
         hotkey-overlay.title = "Browse Wallpapers";
       };
@@ -95,7 +96,7 @@
           "ipc"
           "call"
           "notifications"
-          "toggle"
+          "toggleHistory"
         ];
         hotkey-overlay.title = "Notification Center";
       };
@@ -104,10 +105,10 @@
           "noctalia-shell"
           "ipc"
           "call"
-          "notepad"
-          "toggle"
+          "launcher"
+          "command"
         ];
-        hotkey-overlay.title = "Notepad";
+        hotkey-overlay.title = "Command Palette";
       };
 
       # === Security ===
@@ -116,7 +117,7 @@
           "noctalia-shell"
           "ipc"
           "call"
-          "lock"
+          "lockScreen"
           "lock"
         ];
         hotkey-overlay.title = "Lock Screen";
@@ -128,10 +129,10 @@
           "noctalia-shell"
           "ipc"
           "call"
-          "processlist"
+          "sessionMenu"
           "toggle"
         ];
-        hotkey-overlay.title = "Task Manager";
+        hotkey-overlay.title = "Power Menu";
       };
 
       # === Audio Controls ===
