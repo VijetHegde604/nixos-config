@@ -12,7 +12,7 @@ in
       spawn-at-startup = [
         { argv = [ "xdg-user-dirs-update" ]; }
         # Official Noctalia startup method for Niri.
-        { argv = [ "qs" "-c" "noctalia-shell" ]; }
+        { argv = [ "noctalia-shell" ]; }
       ];
     };
   };
