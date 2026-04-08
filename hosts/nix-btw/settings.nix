@@ -8,7 +8,7 @@
   locale = "en_US.UTF-8";
 
   # Boot and Styling
-  secureBoot = false; # Set to false to disable during installation
+  secureBoot = true; # Set to false to disable during installation
   plymouthTheme = "hexagon_dots";
 
   # Git Configuration
