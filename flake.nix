@@ -91,6 +91,7 @@
         };
 
         modules = [
+          { nixpkgs.config.allowUnfree = true; }
 
           ./hosts/nix-btw/configuration.nix
 
