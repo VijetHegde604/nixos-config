@@ -18,7 +18,7 @@
   ]
   ++ lib.optionals (settings.desktopShell == "noctalia") [
     ./modules/home/noctalia/noctalia.nix
-    ./modules/home/noctalia/niri-binds.nix
+    #./modules/home/noctalia/niri-binds.nix
     ./modules/home/noctalia/niri-settings.nix
   ];
 
