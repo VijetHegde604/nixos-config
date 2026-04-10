@@ -15,11 +15,6 @@
   ++ lib.optionals (settings.desktopShell == "dms") [
     ./modules/home/dms/dms.nix
     ./modules/home/dms/niri-binds.nix
-  ]
-  ++ lib.optionals (settings.desktopShell == "noctalia") [
-    ./modules/home/noctalia/noctalia.nix
-    #./modules/home/noctalia/niri-binds.nix
-    ./modules/home/noctalia/niri-settings.nix
   ];
 
   home.username = settings.username;
