@@ -43,10 +43,6 @@
     # Use release branch so selected kernels are guaranteed to be in binary cache.
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
