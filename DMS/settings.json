@@ -176,7 +176,13 @@
   "appLauncherViewMode": "list",
   "spotlightModalViewMode": "list",
   "browserPickerViewMode": "grid",
-  "browserUsageHistory": {},
+  "browserUsageHistory": {
+    "helium": {
+      "count": 1,
+      "lastUsed": 1775882792147,
+      "name": "Helium"
+    }
+  },
   "appPickerViewMode": "grid",
   "filePickerUsageHistory": {},
   "sortAppsAlphabetically": true,
