@@ -28,13 +28,13 @@
       };
       theme = {
         mode = "dark";
-        dark = "Ayu Dark";
+        dark = "ultraViolet";
         light = "Ayu Light";
       };
 
       ui_font_size = 16;
       buffer_font_size = 15;
-      buffer_font_family = "JetBrains Mono"; # Highly recommended for coding
+      buffer_font_family = "JetBrains Mono";
 
       terminal = {
         font_family = "JetBrains Mono";
