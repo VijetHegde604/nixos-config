@@ -31,5 +31,6 @@
     mpv
     code-cursor
     freerdp
+    vlc
   ];
 }
