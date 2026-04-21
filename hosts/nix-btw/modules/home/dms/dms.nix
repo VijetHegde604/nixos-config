@@ -52,15 +52,11 @@
           "outputs"
           "windowrules"
           "binds"
-          
+
           # user overrides (explicit files!)
           "user/overrides"
         ];
       };
-    };
-
-    plugins = {
-      dankPomodoroTimer.enable = true;
     };
   };
 }
