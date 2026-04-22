@@ -17,9 +17,9 @@
     ./modules/system/packages.nix
     ./modules/system/services.nix
     ./modules/system/nix.nix
-    #./modules-common/system/syncthing.nix
+    #./modules/system/syncthing.nix
   ]
-  ++ lib.optional settings.virtualization ./modules-common/system/virtualization.nix;
+  ++ lib.optional settings.virtualization ./modules/system/virtualization.nix;
 
   users.users.vijeth = {
     isNormalUser = true;

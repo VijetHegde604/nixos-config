@@ -1,11 +1,11 @@
 { settings, ... }:
 {
   imports = [
-    ./modules-common/home/git.nix
-    ./modules-common/home/fastfetch.nix
-    ./modules-common/home/starship.nix
-    ./modules-common/home/xdg-user-dirs.nix
-    ./modules-common/home/create-webapp.nix
+    ./modules/home/git.nix
+    ./modules/home/fastfetch.nix
+    ./modules/home/starship.nix
+    ./modules/home/xdg-user-dirs.nix
+    ./modules/home/create-webapp.nix
 
     ./modules-portable/packages.nix
     ./modules-portable/ghostty.nix
