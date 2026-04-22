@@ -1,15 +1,16 @@
 # Vijet's NixOS Configuration
 
-This repository contains the Nix flakes and host modules used to manage two machines:
+This repository is a flake-based setup for two machines and one Home Manager profile family:
 
-- `nix-btw`: a desktop NixOS system with Home Manager, Niri, and Dank Material Shell.
-- `nix-server`: a separate NixOS server profile.
+- **`nix-btw`**: personal desktop/laptop NixOS profile (Niri + Dank Material Shell + Home Manager).
+- **`nix-server`**: server NixOS profile with static networking, Docker, and Tailscale.
+- **portable Home Manager profile**: a non-NixOS user profile target (`vijeth-portable`) intended for Linux hosts.
 
-It also exposes a portable Home Manager configuration for reusing the user environment outside NixOS.
+---
 
 ## Flake outputs
 
-The current flake exports these entry points:
+Defined in `flake.nix`:
 
 ```text
 nixosConfigurations.nix-btw
@@ -18,171 +19,221 @@ homeConfigurations.vijeth-nixos
 homeConfigurations.vijeth-portable
 ```
 
-## Repository layout
+The flake also sets custom binary caches in `nixConfig` and pins:
+
+- `nixpkgs` (`nixos-unstable`) for desktop + Home Manager
+- `nixpkgs-stable` (`nixos-25.11`) for server
+- `home-manager`, `niri-flake`, `DankMaterialShell`, `danksearch`, `helium-nix`, `nix-cachyos-kernel`
+
+---
+
+## Repository layout (current)
 
 ```text
 .
 ├── flake.nix
 ├── flake.lock
-├── DMS/                              # Checked-in DMS and Niri override files
-├── hosts/
-│   ├── nix-btw/                      # Desktop host
-│   │   ├── configuration.nix
-│   │   ├── hardware-configuration.nix
-│   │   ├── home-nixos.nix
-│   │   ├── home-portable.nix
-│   │   ├── modules-common/
-│   │   ├── modules-portable/
-│   │   ├── post-install.sh
-│   │   └── settings.nix
-│   └── nix-server/                   # Server host
-│       ├── configuration.nix
-│       ├── hardware-configuration.nix
-│       ├── modules/
-│       └── settings.nix
-└── README.md
+├── DMS/
+│   ├── binds.kdl
+│   ├── clsettings.json
+│   ├── overrides.kdl
+│   ├── settings.json
+│   └── windowrules.kdl
+└── hosts/
+    ├── nix-btw/
+    │   ├── configuration.nix
+    │   ├── hardware-configuration.nix
+    │   ├── home-nixos.nix
+    │   ├── home-portable.nix
+    │   ├── settings.nix
+    │   ├── modules/system/
+    │   ├── modules/home/
+    │   └── modules-portable/
+    └── nix-server/
+        ├── configuration.nix
+        ├── hardware-configuration.nix
+        ├── settings.nix
+        └── modules/
 ```
 
-## What each profile does
+---
 
-### `nixosConfigurations.nix-btw`
+## Configuration overview
 
-Builds the full desktop system, including:
+## 1) `nixosConfigurations.nix-btw` (desktop)
 
-- system services and boot configuration
-- Niri and desktop-related system settings
-- Home Manager integration for the `vijeth` user
-- Dank Material Shell and related user tooling
+Main file: `hosts/nix-btw/configuration.nix`
 
-### `nixosConfigurations.nix-server`
+### System modules
 
-Builds the server-specific NixOS system with its own module set.
+- **Boot (`modules/system/boot.nix`)**
+  - Limine bootloader
+  - optional Secure Boot toggle from `settings.secureBoot`
+  - CachyOS kernel (`pkgs.cachyosKernels.linuxPackages-cachyos-latest`)
+  - Plymouth theming and quiet boot tuning
+
+- **Networking (`modules/system/networking.nix`)**
+  - NetworkManager enabled
+  - Tailscale enabled
+  - custom resolver/fallback DNS
+
+- **Desktop (`modules/system/desktop.nix`)**
+  - `greetd` starts `niri-session`
+  - Niri enabled at system level
+  - XDG portal with GTK portal
+
+- **Hardware + multimedia (`modules/system/hardware.nix`)**
+  - PipeWire stack
+  - Intel graphics/media runtime packages
+  - Bluetooth with experimental features
+  - power/perf services (`thermald`, `upower`, `ananicy`, etc.)
+  - battery threshold oneshot service (80%)
+
+- **Packages (`modules/system/packages.nix`)**
+  - core system tools + dev toolchain
+  - Firefox, nix-ld, Podman (docker compat), fonts
+
+- **Nix behavior (`modules/system/nix.nix`)**
+  - flakes + nix-command
+  - `programs.nh`
+  - weekly `system.autoUpgrade`
+
+- **Services (`modules/system/services.nix`)**
+  - GNOME keyring, GVFS, udisks2, accounts-daemon, tumbler, zram
+
+### Home Manager for `vijeth`
+
+`home-nixos.nix` imports:
+
+- shell, starship, git, fastfetch, packages, ghostty, xdg-user-dirs, zed, webapps
+- plus DMS/Niri bindings when `settings.desktopShell == "dms"`
+
+DMS module details (`modules/home/dms/dms.nix`):
+
+- imports DMS + Niri + dsearch modules from flake inputs
+- enables DMS systemd user service
+- includes Niri fragments and explicit user overrides
+
+---
+
+## 2) `nixosConfigurations.nix-server`
+
+Main file: `hosts/nix-server/configuration.nix`
+
+### Highlights
+
+- systemd-boot + latest kernel
+- static network on `enp2s0` (no NetworkManager)
+- firewall disabled
+- Tailscale enabled
+- Docker enabled
+- OpenSSH enabled (`PermitRootLogin = no`, password auth on)
+- mounted extra filesystems (`/media`, `/backup`)
+- user `vijeth` + service `sys-monitor-api`
+- daily Nix garbage collection
+
+---
+
+## 3) Home Manager outputs
 
 ### `homeConfigurations.vijeth-nixos`
 
-Applies the Home Manager profile used on the desktop host.
+Backed by `hosts/nix-btw/home-nixos.nix`, intended for NixOS host usage.
 
 ### `homeConfigurations.vijeth-portable`
 
-Applies the portable Home Manager profile for non-NixOS Linux systems.
+Backed by `hosts/nix-btw/home-portable.nix` and `modules-portable/*`.
+
+> **Important:** `home-portable.nix` currently references `./modules-common/home/*`, but this directory is not present in this repository. As written, this output may fail to evaluate until those imports are fixed or restored.
+
+---
+
+## DMS / Niri managed files
+
+Tracked canonical files are in `DMS/`.
+
+`hosts/nix-btw/modules/system/post-install.sh` is designed to:
+
+1. Move repo from `/etc/nixos/nixos-config` to `/home/<user>/nixos-config` (if needed).
+2. Set ownership to target user.
+3. Create **symlinks** from user config locations to tracked repo files:
+   - `DMS/settings.json` → `~/.config/DankMaterialShell/settings.json`
+   - `DMS/clsettings.json` → `~/.config/DankMaterialShell/clsettings.json`
+   - `DMS/overrides.kdl` → `~/.config/niri/dms/user/overrides.kdl`
+   - `DMS/windowrules.kdl` → `~/.config/niri/dms/windowrules.kdl`
+
+This keeps runtime config and repository state in sync without copy drift.
+
+---
+
+## Usage
 
 ## Requirements
 
-Before using the flake, make sure:
+- Nix installed
+- Flakes enabled:
 
-1. Nix is installed.
-2. Flakes are enabled in `/etc/nix/nix.conf`:
+```conf
+experimental-features = nix-command flakes
+```
 
-   ```conf
-   experimental-features = nix-command flakes
-   ```
+- For Home Manager standalone usage: `home-manager` CLI available
 
-3. On non-NixOS systems, Home Manager is installed and available in `PATH`.
-
-## Desktop host setup (`nix-btw`)
-
-### Fresh install workflow
-
-After a fresh NixOS installation, clone this repository into `/etc/nixos/nixos-config` and apply the desktop configuration:
+## Fresh desktop install (`nix-btw`)
 
 ```bash
 git clone https://github.com/VijetHegde604/nixos-config.git /etc/nixos/nixos-config
 cd /etc/nixos/nixos-config
-sudo nixos-rebuild switch --flake .#nix-btw
-```
-
-On a brand-new machine, run the first rebuild with flake config enabled so the CachyOS binary caches in `flake.nix` are used immediately:
-
-```bash
 sudo nixos-rebuild switch --flake .#nix-btw --accept-flake-config
 ```
 
-If you want the repository to live in the user's home directory after installation, run the post-install script:
+(Optional, to migrate repo into user home and wire DMS/Niri symlinks):
 
 ```bash
-cd /etc/nixos/nixos-config
-sudo ./hosts/nix-btw/post-install.sh
+sudo ./hosts/nix-btw/modules/system/post-install.sh
 ```
 
-The script currently does the following:
-
-- resolves the target user's home directory
-- moves `/etc/nixos/nixos-config` to `/home/vijeth/nixos-config` if the home copy does not already exist
-- creates the DMS and Niri user config directories if needed
-- syncs the tracked DMS JSON and KDL files into the user's config directories
-- fixes ownership under the repository and `.config`
-
-The script is idempotent:
-
-- if the repository is already in `/home/vijeth/nixos-config`, it will not move it again
-- if destination files already match, they are left unchanged
-- running it multiple times is safe and only re-applies ownership and changed config files
-
-### Applying later changes on `nix-btw`
-
-If the repository already lives in `~/nixos-config`, rebuild from there:
+## Apply updates later
 
 ```bash
 cd ~/nixos-config
 sudo nixos-rebuild switch --flake .#nix-btw
 ```
 
-To apply only the Home Manager profile on the desktop host:
+## Server apply
 
 ```bash
-home-manager switch --flake ~/nixos-config#vijeth-nixos
-```
-
-## Server host setup (`nix-server`)
-
-To build or switch the server profile:
-
-```bash
+cd ~/nixos-config
 sudo nixos-rebuild switch --flake .#nix-server
 ```
 
-## Portable Home Manager setup
-
-On a non-NixOS Linux system:
+## Home Manager apply
 
 ```bash
-git clone https://github.com/VijetHegde604/nixos-config.git ~/nixos-config
-cd ~/nixos-config
-home-manager switch --flake .#vijeth-portable
+# NixOS desktop user profile
+home-manager switch --flake ~/nixos-config#vijeth-nixos
+
+# Portable profile (currently requires fixing missing modules-common imports)
+home-manager switch --flake ~/nixos-config#vijeth-portable
 ```
 
-The portable profile is intended for user-level tooling and avoids NixOS-only system services.
+---
 
-## DMS-managed files in this repository
-
-The repository keeps these user-managed files under `DMS/`:
-
-- `settings.json`
-- `clsettings.json`
-- `overrides.kdl`
-- `binds.kdl`
-- `windowrules.kdl`
-
-The post-install script currently syncs:
-
-- `settings.json`
-- `clsettings.json`
-- `overrides.kdl`
-- `windowrules.kdl`
-
-## Useful commands
+## Handy commands
 
 | Task | Command |
-| --- | --- |
-| Rebuild desktop host | `sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw` |
-| Rebuild server host | `sudo nixos-rebuild switch --flake ~/nixos-config#nix-server` |
-| Apply desktop Home Manager | `home-manager switch --flake ~/nixos-config#vijeth-nixos` |
-| Apply portable Home Manager | `home-manager switch --flake ~/nixos-config#vijeth-portable` |
-| Update flake inputs | `nix flake update --flake ~/nixos-config` |
-| Run the post-install sync | `sudo ~/nixos-config/hosts/nix-btw/post-install.sh` |
+|---|---|
+| Show flake outputs | `nix flake show ~/nixos-config` |
+| Rebuild desktop | `sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw` |
+| Rebuild server | `sudo nixos-rebuild switch --flake ~/nixos-config#nix-server` |
+| Apply desktop HM | `home-manager switch --flake ~/nixos-config#vijeth-nixos` |
+| Update lockfile | `nix flake update --flake ~/nixos-config` |
+| Run post-install linker | `sudo ~/nixos-config/hosts/nix-btw/modules/system/post-install.sh` |
+
+---
 
 ## Notes
 
-- This is a personal configuration repository and assumes the primary desktop user is `vijeth` unless overridden via environment variables for the post-install script.
-- Hardware-specific files and module selections may need adjustment before reuse on another machine.
-- The post-install script is intended for local machine setup and should be run as root.
+- This is a personal configuration repo and defaults assume username `vijeth`.
+- Hardware-specific files (`hardware-configuration.nix`) and static network values should be adapted before reuse.
+- Some modules contain host-specific values (disk UUIDs, gateway, local DNS).
