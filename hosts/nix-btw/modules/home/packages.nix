@@ -18,7 +18,6 @@
     wget
     ouch
     zellij
-    vicinae
 
     # apps for this user
     ghostty
