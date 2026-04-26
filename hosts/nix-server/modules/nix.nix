@@ -11,11 +11,11 @@
       trusted-users = [ "@wheel" ];
     };
 
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 14d";
-    };
+    # gc = {
+    #   automatic = true;
+    #   dates = "daily";
+    #   options = "--delete-older-than 14d";
+    # };
   };
 
   # Enable nh (Nix Helper)
