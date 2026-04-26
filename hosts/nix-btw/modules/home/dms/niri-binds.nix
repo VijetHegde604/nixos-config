@@ -20,10 +20,7 @@
     };
     "Mod+Space" = {
       action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "spotlight"
+        "vicinae"
         "toggle"
       ];
       hotkey-overlay.title = "Application Launcher";
