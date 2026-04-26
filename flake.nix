@@ -6,10 +6,12 @@
     extra-substituters = [
       "https://cache.garnix.io"
       "https://attic.xuyh0120.win/lantian"
+      "https://vicinae.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
     ];
   };
 
@@ -40,8 +42,13 @@
     helium-nix.url = "github:AlvaroParker/helium-nix";
     helium-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Use release branch so selected kernels are guaranteed to be in binary cache.
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+
+    vicinae.url = "github:vicinaehq/vicinae";
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 
