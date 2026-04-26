@@ -7,6 +7,7 @@
     inputs.niri-flake.homeModules.niri
     inputs.danksearch.homeModules.dsearch
     inputs.dms-plugin-registry.modules.default
+    inputs.vicinae.homeManagerModules.default
 
     # Required by DMS HM module:
     # It unconditionally reads this path during eval
@@ -18,6 +19,19 @@
     package = pkgs.niri;
   };
 
+  services.vicinae = {
+    enable = true;
+    package = pkgs.vicinae;
+    systemd = {
+      enable = true;
+      autoStart = true;
+    };
+    extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
+      bluetooth
+      nix
+      power-profile
+    ];
+  };
   programs.dsearch = {
     enable = true;
   };
