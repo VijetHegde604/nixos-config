@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   # --- Bluetooth Configuration  ---
@@ -56,7 +56,13 @@
   };
 
   hardware.enableRedistributableFirmware = true;
-  boot.kernelParams = [ "i915.enable_guc=3" ];
+  boot.kernelParams = [
+    "i915.enable_guc=3"
+    "intel_pstate=active"
+  ];
+
+  # Alder Lake hybrid-core friendly default governor.
+  powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
 
   # --- Power & Performance ---
   services.libinput.enable = true;

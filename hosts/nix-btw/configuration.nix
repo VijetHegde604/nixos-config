@@ -33,6 +33,13 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
+  nixpkgs.hostPlatform = {
+    system = "x86_64-linux";
+    gcc = {
+      arch = "alderlake";
+      tune = "alderlake";
+    };
+  };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
