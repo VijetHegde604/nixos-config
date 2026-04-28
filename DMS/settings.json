@@ -44,7 +44,7 @@
   "blurBorderOpacity": 0.35,
   "wallpaperFillMode": "Fill",
   "blurredWallpaperLayer": false,
-  "blurWallpaperOnOverview": true,
+  "blurWallpaperOnOverview": false,
   "showLauncherButton": true,
   "showWorkspaceSwitcher": true,
   "showFocusedWindow": true,
@@ -163,7 +163,7 @@
   "appsDockEnlargePercentage": 125,
   "appsDockIconSizePercentage": 100,
   "keyboardLayoutNameCompactMode": false,
-  "runningAppsCurrentWorkspace": false,
+  "runningAppsCurrentWorkspace": true,
   "runningAppsGroupByApp": false,
   "runningAppsCurrentMonitor": false,
   "appIdSubstitutions": [],
@@ -188,13 +188,13 @@
   "browserUsageHistory": {
     "helium": {
       "count": 1,
-      "lastUsed": 1775882792147,
+      "lastUsed": 1777392051961,
       "name": "Helium"
     }
   },
   "appPickerViewMode": "grid",
   "filePickerUsageHistory": {},
-  "sortAppsAlphabetically": true,
+  "sortAppsAlphabetically": false,
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
   "spotlightSectionViewModes": {},
@@ -208,7 +208,7 @@
   "dankLauncherV2UnloadOnClose": false,
   "useAutoLocation": true,
   "weatherEnabled": true,
-  "networkPreference": "wifi",
+  "networkPreference": "auto",
   "iconTheme": "System Default",
   "cursorSettings": {
     "theme": "System Default",
@@ -249,8 +249,8 @@
   "soundVolumeChanged": true,
   "soundPluggedIn": true,
   "acMonitorTimeout": 300,
-  "acLockTimeout": 300,
-  "acSuspendTimeout": 900,
+  "acLockTimeout": 0,
+  "acSuspendTimeout": 0,
   "acSuspendBehavior": 0,
   "acProfileName": "2",
   "batteryMonitorTimeout": 300,
@@ -291,7 +291,7 @@
   "matugenTemplateKitty": true,
   "matugenTemplateFoot": true,
   "matugenTemplateAlacritty": true,
-  "matugenTemplateNeovim": true,
+  "matugenTemplateNeovim": false,
   "matugenTemplateWezterm": true,
   "matugenTemplateDgop": true,
   "matugenTemplateKcolorscheme": true,
@@ -315,9 +315,9 @@
   "dockBorderThickness": 1,
   "dockIsolateDisplays": false,
   "dockLauncherEnabled": false,
-  "dockLauncherLogoMode": "apps",
+  "dockLauncherLogoMode": "os",
   "dockLauncherLogoCustomPath": "",
-  "dockLauncherLogoColorOverride": "",
+  "dockLauncherLogoColorOverride": "primary",
   "dockLauncherLogoSizeOffset": 0,
   "dockLauncherLogoBrightness": 0.5,
   "dockLauncherLogoContrast": 1,
@@ -363,7 +363,7 @@
   "osdPosition": 5,
   "osdVolumeEnabled": true,
   "osdMediaVolumeEnabled": true,
-  "osdMediaPlaybackEnabled": true,
+  "osdMediaPlaybackEnabled": false,
   "osdBrightnessEnabled": true,
   "osdIdleInhibitorEnabled": true,
   "osdMicMuteEnabled": true,
@@ -393,22 +393,9 @@
   "updaterCustomCommand": "",
   "updaterTerminalAdditionalParams": "",
   "displayNameMode": "system",
-  "screenPreferences": {
-    "wallpaper": [
-      "all"
-    ]
-  },
+  "screenPreferences": {},
   "showOnLastDisplay": {},
-  "niriOutputSettings": {
-    "eDP-1": {
-      "layout": null
-    },
-    "HDMI-A-1": {
-      "layout": {
-        "alwaysCenterSingleColumn": true
-      }
-    }
-  },
+  "niriOutputSettings": {},
   "hyprlandOutputSettings": {},
   "displayProfiles": {},
   "activeDisplayProfile": {},
@@ -433,11 +420,7 @@
       "centerWidgets": [
         "music",
         "clock",
-        "weather",
-        {
-          "id": "dankPomodoroTimer",
-          "enabled": true
-        }
+        "weather"
       ],
       "rightWidgets": [
         "systemTray",
@@ -455,6 +438,10 @@
       "widgetTransparency": 1,
       "squareCorners": false,
       "noBackground": false,
+      "maximizeWidgetIcons": false,
+      "maximizeWidgetText": false,
+      "removeWidgetPadding": false,
+      "widgetPadding": 8,
       "gothCornersEnabled": false,
       "gothCornerRadiusOverride": false,
       "gothCornerRadiusValue": 12,
@@ -467,6 +454,7 @@
       "widgetOutlineOpacity": 1,
       "widgetOutlineThickness": 1,
       "fontScale": 1,
+      "iconScale": 1,
       "autoHide": false,
       "autoHideDelay": 250,
       "showOnWindowsOpen": false,
@@ -481,7 +469,8 @@
       "shadowIntensity": 0,
       "shadowOpacity": 60,
       "shadowColorMode": "text",
-      "shadowCustomColor": "#000000"
+      "shadowCustomColor": "#000000",
+      "clickThrough": false
     }
   ],
   "desktopClockEnabled": false,
@@ -560,7 +549,7 @@
       "trigger": "?"
     }
   },
-  "clipboardEnterToPaste": true,
+  "clipboardEnterToPaste": false,
   "launcherPluginVisibility": {},
   "launcherPluginOrder": [],
   "configVersion": 5
