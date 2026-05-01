@@ -17,7 +17,7 @@
 
   virtualization = false;
 
-  gaming = true;
+  gaming = false;
 
   desktopShell = "dms";
 }
