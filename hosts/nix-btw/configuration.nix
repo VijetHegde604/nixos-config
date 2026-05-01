@@ -19,7 +19,8 @@
     ./modules/system/nix.nix
     #./modules/system/syncthing.nix
   ]
-  ++ lib.optional settings.virtualization ./modules/system/virtualization.nix;
+  ++ lib.optional settings.virtualization ./modules/system/virtualization.nix
+  ++ lib.optional.settings.gaming ./modules/system/steam.nix;
 
   users.users.vijeth = {
     isNormalUser = true;
