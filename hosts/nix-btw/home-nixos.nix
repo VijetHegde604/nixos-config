@@ -17,7 +17,6 @@
     ./modules/home/niri/niri-binds.nix
   ]
   ++ lib.optionals (settings.desktopShell == "mango") [
-    ./modules/home/mango-wm/mangowm.nix
     ./modules/home/mango-wm/dms.nix
 
   ];

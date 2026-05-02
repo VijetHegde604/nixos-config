@@ -20,7 +20,8 @@
     #./modules/system/syncthing.nix
   ]
   ++ lib.optional settings.virtualization ./modules/system/virtualization.nix
-  ++ lib.optional settings.gaming ./modules/system/steam.nix;
+  ++ lib.optional settings.gaming ./modules/system/steam.nix
+  ++ lib.optional (settings.desktopShell == "mango") ./modules/home/mango-wm/mangowm.nix;
 
   users.users.vijeth = {
     isNormalUser = true;

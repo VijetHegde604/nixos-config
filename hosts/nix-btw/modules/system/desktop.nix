@@ -6,7 +6,7 @@
     enable = true;
     settings = {
       initial_session = {
-        command = "niri-session";
+        command = "mango";
         user = "vijeth";
       };
       default_session = {
