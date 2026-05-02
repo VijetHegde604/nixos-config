@@ -15,10 +15,6 @@
   ++ lib.optionals (settings.desktopShell == "niri") [
     ./modules/home/niri/dms.nix
     ./modules/home/niri/niri-binds.nix
-  ]
-  ++ lib.optionals (settings.desktopShell == "mango") [
-    ./modules/home/mango-wm/dms.nix
-
   ];
 
   home.username = settings.username;
