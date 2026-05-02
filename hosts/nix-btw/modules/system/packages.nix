@@ -1,8 +1,8 @@
 { pkgs, inputs, ... }:
 
 {
-  import = [
-    inputs.nix-flatpak.nixosModule.nix-flatpak
+  imports = [
+    inputs.nix-flatpak.nixosModules.nix-flatpak
   ];
 
   environment.systemPackages = with pkgs; [
