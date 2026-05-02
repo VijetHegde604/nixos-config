@@ -19,5 +19,5 @@
 
   gaming = false;
 
-  desktopShell = "mango"; # mango or niri
+  desktopShell = "niri"; # mango or niri
 }
