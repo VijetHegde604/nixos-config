@@ -1,6 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
+  import = [
+    inputs.nix-flatpak.nixosModule.nix-flatpak
+  ];
 
   environment.systemPackages = with pkgs; [
     vim
@@ -50,6 +53,16 @@
 
   programs.firefox.enable = true;
   programs.nix-ld.enable = true;
+
+  services.flatpak = {
+    enable = true;
+    packages = [
+      {
+        appId = "org.jellyfin.JellyfinDesktop";
+        origin = "flathub";
+      }
+    ];
+  };
 
   # Adding podman for distrobox
   virtualisation.podman = {

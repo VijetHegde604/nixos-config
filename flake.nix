@@ -48,8 +48,7 @@
     vicinae-extensions.url = "github:vicinaehq/extensions";
     vicinae-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
-    mangowm.url = "github:mangowm/mango";
-    mangowm.inputs.nixpkgs.follows = "nixpkgs";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
   outputs =

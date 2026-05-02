@@ -24,7 +24,6 @@
     inputs.helium-nix.packages.${pkgs.stdenv.hostPlatform.system}.default # Helium Browser from flakes
     zed-editor
     onlyoffice-desktopeditors
-    jellyfin-desktop
     evince
     bruno
     localsend
