@@ -19,7 +19,7 @@
       options = [ "subvol=@" ];
     };
 
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/5b0c64b6-95ff-4db1-9380-473a0a48e40f";
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/268e06f1-9f73-44e7-b57f-bb6ccd8067ae";
 
   fileSystems."/home" =
     { device = "/dev/mapper/root";
@@ -40,7 +40,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/28CD-2A69";
+    { device = "/dev/disk/by-uuid/567A-F1B1";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
