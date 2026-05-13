@@ -16,7 +16,7 @@ in
     "whatsapp" = {
       name = "WhatsApp";
       genericName = "Messaging";
-      exec = "xdg-open https://web.whatsapp.com"; # Fixed your URL (was excalidraw!)
+      exec = "helium --app=https://web.whatsapp.com"; # Fixed your URL (was excalidraw!)
       icon = "${whatsappIcon}";
       terminal = false;
       categories = [
@@ -26,7 +26,7 @@ in
     };
     "youtube-music" = {
       name = "YouTube Music";
-      exec = "xdg-open https://music.youtube.com";
+      exec = "helium --app=https://music.youtube.com";
       icon = "${ytMusicIcon}";
       type = "Application";
       categories = [
