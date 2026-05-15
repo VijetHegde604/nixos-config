@@ -13,6 +13,24 @@
     };
     "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
 
+    "Mod+F1" = {
+      action.spawn = [
+        "obs-cmd"
+        "scene"
+        "switch"
+        "real"
+      ];
+    };
+
+    "Mod+F2" = {
+      action.spawn = [
+        "obs-cmd"
+        "scene"
+        "switch"
+        "spoof"
+      ];
+    };
+
     # === Application Launchers ===
     "Mod+Return" = {
       action.spawn = "ghostty";
