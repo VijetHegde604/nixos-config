@@ -23,6 +23,8 @@
     distrobox
     nix-output-monitor
     nvd
+    obs-cmd
+    obs-studio
 
     # Development Tools
     gcc
@@ -59,6 +61,10 @@
     packages = [
       {
         appId = "org.jellyfin.JellyfinDesktop";
+        origin = "flathub";
+      }
+      {
+        appId = "com.sejda.Sejda";
         origin = "flathub";
       }
     ];
