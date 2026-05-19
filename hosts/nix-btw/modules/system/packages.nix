@@ -23,8 +23,6 @@
     distrobox
     nix-output-monitor
     nvd
-    obs-cmd
-    obs-studio
 
     # Development Tools
     gcc
