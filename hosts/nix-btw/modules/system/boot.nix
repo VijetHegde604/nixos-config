@@ -7,7 +7,7 @@
     efi.canTouchEfiVariables = true;
   };
 
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-x86_64-v3;
 
   # Enable systemd in initrd
   boot.initrd.systemd.enable = true;
