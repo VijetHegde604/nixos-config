@@ -12,7 +12,7 @@
               priority = 1;
               name = "boot";
               start = "1M";
-              end = "512M";
+              end = "2G";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -28,23 +28,50 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "root"; # Creates /dev/mapper/root
+                name = "root";
                 content = {
                   type = "btrfs";
-                  extraArgs = [ "-f" ]; # Forces overwrite during formatting
+                  extraArgs = [ "-f" ];
                   subvolumes = {
                     "@" = {
                       mountpoint = "/";
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                        "space_cache=v2"
+                        "discard=async"
+                        "ssd"
+                      ];
                     };
                     "@home" = {
                       mountpoint = "/home";
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                        "space_cache=v2"
+                        "discard=async"
+                        "ssd"
+                      ];
                     };
                     "@nix" = {
                       mountpoint = "/nix";
-                      # Optional: mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                        "space_cache=v2"
+                        "discard=async"
+                        "ssd"
+                      ];
                     };
                     "@log" = {
                       mountpoint = "/var/log";
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                        "space_cache=v2"
+                        "discard=async"
+                        "ssd"
+                      ];
                     };
                   };
                 };
