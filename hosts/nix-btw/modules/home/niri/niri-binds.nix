@@ -1,7 +1,320 @@
-{ ... }:
+{ lib, settings, ... }:
 
-{
-  programs.niri.settings.binds = {
+let
+  noctaliaEnabled = settings.desktopShell == "noctalia";
+
+  dms = command: [ "dms" "ipc" "call" ] ++ command;
+  noctalia = command: [ "noctalia-shell" "ipc" "call" ] ++ command;
+
+  dmsBinds = {
+    # === DMS Application Launchers ===
+    "Mod+Space" = {
+      action.spawn = [
+        "vicinae"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Application Launcher";
+    };
+    "Mod+Shift+V" = {
+      action.spawn = dms [
+        "clipboard"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Clipboard Manager";
+    };
+    "Mod+M" = {
+      action.spawn = dms [
+        "processlist"
+        "focusOrToggle"
+      ];
+      hotkey-overlay.title = "Task Manager";
+    };
+    "Super+X" = {
+      action.spawn = dms [
+        "powermenu"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Power Menu: Toggle";
+    };
+    "Mod+Comma" = {
+      action.spawn = dms [
+        "settings"
+        "focusOrToggle"
+      ];
+      hotkey-overlay.title = "Settings";
+    };
+    "Mod+Y" = {
+      action.spawn = dms [
+        "dankdash"
+        "wallpaper"
+      ];
+      hotkey-overlay.title = "Browse Wallpapers";
+    };
+    "Mod+N" = {
+      action.spawn = dms [
+        "notifications"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Notification Center";
+    };
+    "Mod+Shift+N" = {
+      action.spawn = dms [
+        "notepad"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Notepad";
+    };
+
+    # === DMS Security ===
+    "Mod+Alt+L" = {
+      action.spawn = dms [
+        "lock"
+        "lock"
+      ];
+      hotkey-overlay.title = "Lock Screen";
+      allow-when-locked = true;
+    };
+    "Ctrl+Alt+Delete" = {
+      action.spawn = dms [
+        "processlist"
+        "focusOrToggle"
+      ];
+      hotkey-overlay.title = "Task Manager";
+    };
+
+    # === DMS Audio Controls ===
+    "XF86AudioRaiseVolume" = {
+      action.spawn = dms [
+        "audio"
+        "increment"
+        "3"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioLowerVolume" = {
+      action.spawn = dms [
+        "audio"
+        "decrement"
+        "3"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioMute" = {
+      action.spawn = dms [
+        "audio"
+        "mute"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioMicMute" = {
+      action.spawn = dms [
+        "audio"
+        "micmute"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioPause" = {
+      action.spawn = dms [
+        "mpris"
+        "playPause"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioPlay" = {
+      action.spawn = dms [
+        "mpris"
+        "playPause"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioPrev" = {
+      action.spawn = dms [
+        "mpris"
+        "previous"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioNext" = {
+      action.spawn = dms [
+        "mpris"
+        "next"
+      ];
+      allow-when-locked = true;
+    };
+
+    # === DMS Brightness Controls ===
+    "XF86MonBrightnessUp" = {
+      action.spawn = dms [
+        "brightness"
+        "increment"
+        "5"
+        ""
+      ];
+      allow-when-locked = true;
+    };
+    "XF86MonBrightnessDown" = {
+      action.spawn = dms [
+        "brightness"
+        "decrement"
+        "5"
+        ""
+      ];
+      allow-when-locked = true;
+    };
+  };
+
+  noctaliaBinds = {
+    # === Noctalia Application Launchers ===
+    "Mod+Space" = {
+      action.spawn = noctalia [
+        "launcher"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Noctalia Launcher";
+    };
+    "Mod+Shift+V" = {
+      action.spawn = noctalia [
+        "launcher"
+        "clipboard"
+      ];
+      hotkey-overlay.title = "Noctalia Clipboard";
+    };
+    "Mod+M" = {
+      action.spawn = noctalia [
+        "systemMonitor"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Noctalia System Monitor";
+    };
+    "Super+X" = {
+      action.spawn = noctalia [
+        "sessionMenu"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Noctalia Session Menu";
+    };
+    "Mod+Comma" = {
+      action.spawn = noctalia [
+        "settings"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Noctalia Settings";
+    };
+    "Mod+Y" = {
+      action.spawn = noctalia [
+        "wallpaper"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Noctalia Wallpaper Selector";
+    };
+    "Mod+N" = {
+      action.spawn = noctalia [
+        "notifications"
+        "toggleHistory"
+      ];
+      hotkey-overlay.title = "Noctalia Notification History";
+    };
+    "Mod+Shift+N" = {
+      action.spawn = noctalia [
+        "notifications"
+        "toggleDND"
+      ];
+      hotkey-overlay.title = "Noctalia Do Not Disturb";
+    };
+
+    # === Noctalia Security ===
+    "Mod+Alt+L" = {
+      action.spawn = noctalia [
+        "lockScreen"
+        "lock"
+      ];
+      hotkey-overlay.title = "Noctalia Lock Screen";
+      allow-when-locked = true;
+    };
+    "Ctrl+Alt+Delete" = {
+      action.spawn = noctalia [
+        "systemMonitor"
+        "toggle"
+      ];
+      hotkey-overlay.title = "Noctalia System Monitor";
+    };
+
+    # === Noctalia Audio Controls ===
+    "XF86AudioRaiseVolume" = {
+      action.spawn = noctalia [
+        "volume"
+        "increase"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioLowerVolume" = {
+      action.spawn = noctalia [
+        "volume"
+        "decrease"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioMute" = {
+      action.spawn = noctalia [
+        "volume"
+        "muteOutput"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioMicMute" = {
+      action.spawn = noctalia [
+        "volume"
+        "muteInput"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioPause" = {
+      action.spawn = noctalia [
+        "media"
+        "playPause"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioPlay" = {
+      action.spawn = noctalia [
+        "media"
+        "playPause"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioPrev" = {
+      action.spawn = noctalia [
+        "media"
+        "previous"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86AudioNext" = {
+      action.spawn = noctalia [
+        "media"
+        "next"
+      ];
+      allow-when-locked = true;
+    };
+
+    # === Noctalia Brightness Controls ===
+    "XF86MonBrightnessUp" = {
+      action.spawn = noctalia [
+        "brightness"
+        "increase"
+      ];
+      allow-when-locked = true;
+    };
+    "XF86MonBrightnessDown" = {
+      action.spawn = noctalia [
+        "brightness"
+        "decrease"
+      ];
+      allow-when-locked = true;
+    };
+  };
+
+  baseBinds = {
     # === System & Overview ===
     "Mod+O" = {
       action.toggle-overview = [ ];
@@ -31,222 +344,12 @@
       ];
     };
 
-    # === Application Launchers ===
     "Mod+Return" = {
       action.spawn = "ghostty";
       hotkey-overlay.title = "Open Terminal";
     };
-    "Mod+Space" = {
-      action.spawn = [
-        "vicinae"
-        "toggle"
-      ];
-      hotkey-overlay.title = "Application Launcher";
-    };
-    "Mod+Shift+V" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "clipboard"
-        "toggle"
-      ];
-      hotkey-overlay.title = "Clipboard Manager";
-    };
-    "Mod+M" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "processlist"
-        "focusOrToggle"
-      ];
-      hotkey-overlay.title = "Task Manager";
-    };
-    "Super+X" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "powermenu"
-        "toggle"
-      ];
-      hotkey-overlay.title = "Power Menu: Toggle";
-    };
-    "Mod+Comma" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "settings"
-        "focusOrToggle"
-      ];
-      hotkey-overlay.title = "Settings";
-    };
-    "Mod+Y" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "dankdash"
-        "wallpaper"
-      ];
-      hotkey-overlay.title = "Browse Wallpapers";
-    };
-    "Mod+N" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "notifications"
-        "toggle"
-      ];
-      hotkey-overlay.title = "Notification Center";
-    };
-    "Mod+Shift+N" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "notepad"
-        "toggle"
-      ];
-      hotkey-overlay.title = "Notepad";
-    };
 
-    # === Security ===
-    "Mod+Alt+L" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "lock"
-        "lock"
-      ];
-      hotkey-overlay.title = "Lock Screen";
-      allow-when-locked = true;
-    };
     "Mod+Shift+E".action.quit = [ ];
-    "Ctrl+Alt+Delete" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "processlist"
-        "focusOrToggle"
-      ];
-      hotkey-overlay.title = "Task Manager";
-    };
-
-    # === Audio Controls ===
-    "XF86AudioRaiseVolume" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "audio"
-        "increment"
-        "3"
-      ];
-      allow-when-locked = true;
-    };
-    "XF86AudioLowerVolume" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "audio"
-        "decrement"
-        "3"
-      ];
-      allow-when-locked = true;
-    };
-    "XF86AudioMute" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "audio"
-        "mute"
-      ];
-      allow-when-locked = true;
-    };
-    "XF86AudioMicMute" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "audio"
-        "micmute"
-      ];
-      allow-when-locked = true;
-    };
-    "XF86AudioPause" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "mpris"
-        "playPause"
-      ];
-      allow-when-locked = true;
-    };
-    "XF86AudioPlay" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "mpris"
-        "playPause"
-      ];
-      allow-when-locked = true;
-    };
-    "XF86AudioPrev" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "mpris"
-        "previous"
-      ];
-      allow-when-locked = true;
-    };
-    "XF86AudioNext" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "mpris"
-        "next"
-      ];
-      allow-when-locked = true;
-    };
-
-    # === Brightness Controls ===
-    "XF86MonBrightnessUp" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "brightness"
-        "increment"
-        "5"
-        ""
-      ];
-      allow-when-locked = true;
-    };
-    "XF86MonBrightnessDown" = {
-      action.spawn = [
-        "dms"
-        "ipc"
-        "call"
-        "brightness"
-        "decrement"
-        "5"
-        ""
-      ];
-      allow-when-locked = true;
-    };
 
     # === Window Management ===
     "Mod+W" = {
@@ -411,4 +514,7 @@
     "Ctrl+Print".action.screenshot-screen = [ ];
     "Alt+Print".action.screenshot-window = [ ];
   };
+in
+{
+  programs.niri.settings.binds = baseBinds // lib.optionalAttrs noctaliaEnabled noctaliaBinds // lib.optionalAttrs (!noctaliaEnabled) dmsBinds;
 }

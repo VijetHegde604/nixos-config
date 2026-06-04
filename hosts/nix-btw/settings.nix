@@ -19,7 +19,7 @@
 
   gaming = false;
 
-  desktopShell = "niri"; # mango or niri
+  desktopShell = "dms"; # dms or noctalia (both run on niri)
 
   systemVersion = "26.05";
 }
