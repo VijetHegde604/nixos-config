@@ -7,11 +7,13 @@
       "https://cache.garnix.io"
       "https://attic.xuyh0120.win/lantian"
       "https://vicinae.cachix.org"
+      "https://noctalia.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
     ];
   };
 
@@ -29,6 +31,9 @@
 
     quickshell.url = "git+https://git.outfoxxed.me/quickshell/quickshell";
     quickshell.inputs.nixpkgs.follows = "nixpkgs";
+
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs";
 
     dms.url = "github:AvengeMedia/DankMaterialShell/stable";
     dms.inputs.nixpkgs.follows = "nixpkgs";
