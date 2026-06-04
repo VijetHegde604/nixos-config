@@ -121,13 +121,19 @@ Main file: `hosts/nix-btw/configuration.nix`
 
 #### Home Manager for `vijeth`
 
-`home-nixos.nix` imports shell, starship, git, fastfetch, packages, Ghostty, XDG user directories, Zed, and webapp modules. It also imports the DMS/Niri module when `settings.desktopShell == "dms"`.
+`home-nixos.nix` imports shell, starship, git, fastfetch, packages, Ghostty, XDG user directories, Zed, and webapp modules. It also imports the shared Niri keybinds plus either the DMS or Noctalia shell module when `settings.desktopShell` is set to `"dms"` or `"noctalia"`.
 
 DMS module details (`modules/home/niri/dms.nix`):
 
 - imports DMS, Niri, and dsearch modules from flake inputs
 - enables the DMS systemd user service
 - includes Niri fragments and explicit user overrides
+
+Noctalia module details (`modules/home/niri/noctalia.nix`):
+
+- imports the Noctalia and Niri modules from flake inputs
+- enables `programs.noctalia-shell`
+- starts `noctalia-shell` from Niri and uses Noctalia-specific replacements for shell keybinds
 
 ---
 
