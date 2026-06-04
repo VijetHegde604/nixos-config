@@ -15,11 +15,11 @@
   gitUser = "VijetHegde604";
   gitEmail = "vijethegde604@gmail.com";
 
-  virtualization = true;
+  virtualization = false;
 
   gaming = false;
 
-  desktopShell = "niri"; # mango or niri
+  desktopShell = "niri"; 
 
   systemVersion = "26.05";
 }
