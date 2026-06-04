@@ -9,7 +9,7 @@
 
   # Boot and Styling
   secureBoot = true; # Set to false to disable during installation
-  plymouthTheme = "hexagon_dots";
+  plymouthTheme = "connect";
 
   # Git Configuration
   gitUser = "VijetHegde604";
@@ -20,4 +20,6 @@
   gaming = false;
 
   desktopShell = "niri"; # mango or niri
+
+  systemVersion = "26.05";
 }

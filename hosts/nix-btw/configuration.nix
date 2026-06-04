@@ -40,5 +40,5 @@
     users."vijeth" = import ./home-nixos.nix;
   };
 
-  system.stateVersion = "26.05";
+  system.stateVersion = settings.systemVersion;
 }
