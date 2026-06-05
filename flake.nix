@@ -18,6 +18,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # chaotic nyx
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -52,7 +53,12 @@
   };
 
   outputs =
-    inputs@{ nixpkgs, home-manager, ... }:
+    inputs@{
+      nixpkgs,
+      home-manager,
+      chaotic,
+      ...
+    }:
     let
       system = "x86_64-linux";
 
@@ -93,6 +99,7 @@
         modules = [
 
           ./hosts/nix-btw/configuration.nix
+          chaotic.nixosModules.default
 
           home-manager.nixosModules.home-manager
           {
