@@ -16,9 +16,7 @@
       # ───────── Tools ─────────
       lg = "lazygit";
 
-      # ───────── Nix / Home Manager (portable) ─────────
-      hms = "home-manager switch --flake ~/nixos-config#vijeth-portable";
-
+      # ───────── Nix helpers ─────────
       nf = "nix flake update --flake ~/nixos-config";
       ns = "nix shell nixpkgs#"; # modern replacement for nix-shell -p
 

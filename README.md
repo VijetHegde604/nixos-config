@@ -1,10 +1,9 @@
 # Vijet's NixOS Configuration
 
-This repository is a flake-based NixOS and Home Manager setup for two machines, plus a portable Home Manager profile.
+This repository is a flake-based NixOS and Home Manager setup for two machines.
 
 - **`nix-btw`**: personal desktop/laptop NixOS profile with Niri, Dank Material Shell, Home Manager, and declarative Disko partitioning.
 - **`nix-server`**: server NixOS profile with static networking, Docker, Tailscale, and additional storage mounts.
-- **`vijeth-portable`**: standalone Home Manager profile intended for non-NixOS Linux hosts.
 
 ---
 
@@ -15,13 +14,11 @@ Defined in `flake.nix`:
 ```text
 nixosConfigurations.nix-btw
 nixosConfigurations.nix-server
-homeConfigurations.vijeth-nixos
-homeConfigurations.vijeth-portable
 ```
 
 The flake sets custom binary caches in `nixConfig` and pins these major inputs:
 
-- `nixpkgs` (`nixos-unstable`) for the desktop and Home Manager profiles
+- `nixpkgs` (`nixos-unstable`) for the desktop profile
 - `nixpkgs-stable` (`nixos-26.05`) for the server profile
 - `home-manager`, `niri-flake`, Dank Material Shell (`dms`), `danksearch`, `dms-plugin-registry`, `helium-nix`, `nix-cachyos-kernel`, `vicinae`, `vicinae-extensions`, and `nix-flatpak`
 
@@ -45,7 +42,6 @@ The flake sets custom binary caches in `nixConfig` and pins these major inputs:
     │   ├── disko-config.nix
     │   ├── hardware-configuration.nix
     │   ├── home-nixos.nix
-    │   ├── home-portable.nix
     │   ├── settings.nix
     │   ├── modules/system/
     │   ├── modules/home/
@@ -149,20 +145,6 @@ Highlights:
 
 ---
 
-### 3) Home Manager outputs
-
-#### `homeConfigurations.vijeth-nixos`
-
-Backed by `hosts/nix-btw/home-nixos.nix`, intended for NixOS desktop usage.
-
-#### `homeConfigurations.vijeth-portable`
-
-Backed by `hosts/nix-btw/home-portable.nix` and `modules-portable/*`.
-
-> **Important:** `home-portable.nix` currently references `./modules-common/home/*`, but this directory is not present in this repository. As written, this output may fail to evaluate until those imports are fixed or restored.
-
----
-
 ## DMS / Niri managed files
 
 Tracked canonical files are in `DMS/`.
@@ -191,8 +173,6 @@ This keeps runtime config and repository state in sync without copy drift.
 ```conf
 experimental-features = nix-command flakes
 ```
-
-- For standalone Home Manager usage: `home-manager` CLI available
 
 ### Fresh desktop install with Disko (`nix-btw`)
 
@@ -250,16 +230,6 @@ cd ~/nixos-config
 sudo nixos-rebuild switch --flake .#nix-server --accept-flake-config
 ```
 
-### Apply Home Manager profiles
-
-```bash
-# NixOS desktop user profile
-home-manager switch --flake ~/nixos-config#vijeth-nixos
-
-# Portable profile (currently requires fixing missing modules-common imports)
-home-manager switch --flake ~/nixos-config#vijeth-portable
-```
-
 ---
 
 ## Handy commands
@@ -269,7 +239,6 @@ home-manager switch --flake ~/nixos-config#vijeth-portable
 | Show flake outputs | `nix flake show ~/nixos-config --accept-flake-config` |
 | Rebuild desktop | `sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw --accept-flake-config` |
 | Rebuild server | `sudo nixos-rebuild switch --flake ~/nixos-config#nix-server --accept-flake-config` |
-| Apply desktop Home Manager | `home-manager switch --flake ~/nixos-config#vijeth-nixos` |
 | Update lockfile | `nix flake update --flake ~/nixos-config --accept-flake-config` |
 | Run Disko format/mount for desktop | `sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ~/nixos-config/hosts/nix-btw/disko-config.nix` |
 | Run post-install linker | `sudo ~/nixos-config/hosts/nix-btw/modules/system/post-install.sh` |
