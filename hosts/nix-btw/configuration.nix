@@ -8,6 +8,7 @@
 
 {
   imports = [
+    ./hardware-configuration.nix
     (inputs.import-tree ./modules/system)
   ]
   ++ lib.optional settings.virtualization ./modules/_virtualization/virtualization.nix
