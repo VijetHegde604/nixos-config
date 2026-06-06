@@ -37,7 +37,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users."vijeth" = import ./home-nixos.nix;
+    users."vijeth" = import ./home.nix;
   };
 
   system.stateVersion = settings.systemVersion;
