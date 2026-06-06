@@ -79,7 +79,6 @@
         };
 
         modules = [
-
           ./hosts/nix-btw/configuration.nix
           chaotic.nixosModules.default
 
