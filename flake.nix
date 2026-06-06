@@ -62,26 +62,8 @@
     let
       system = "x86_64-linux";
 
-      mkPkgs =
-        system:
-        import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-
       nixBtwSettings = import ./hosts/nix-btw/settings.nix;
       nixServerSettings = import ./hosts/nix-server/settings.nix;
-
-      mkHome =
-        module: system:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = mkPkgs system;
-          extraSpecialArgs = {
-            inherit inputs;
-            settings = nixBtwSettings;
-          };
-          modules = [ module ];
-        };
 
     in
     {
@@ -129,14 +111,6 @@
           { nixpkgs.config.allowUnfree = true; }
           ./hosts/nix-server/configuration.nix
         ];
-      };
-
-      # ---------------------------------
-      # Home Manager
-      # ---------------------------------
-      homeConfigurations = {
-        vijeth-nixos = mkHome ./hosts/nix-btw/home-nixos.nix system;
-        vijeth-portable = mkHome ./hosts/nix-btw/home-portable.nix system;
       };
     };
 }
