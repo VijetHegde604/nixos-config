@@ -1,20 +1,17 @@
-{ settings, lib, ... }:
+{
+  settings,
+  lib,
+  inputs,
+  ...
+}:
 
 {
   imports = [
-    ./modules/home/starship.nix
-    ./modules/home/shell.nix
-    ./modules/home/git.nix
-    ./modules/home/fastfetch.nix
-    ./modules/home/packages.nix
-    ./modules/home/ghostty.nix
-    ./modules/home/xdg-user-dirs.nix
-    ./modules/home/zed.nix
-    ./modules/home/webapps.nix
+    (inputs.import-tree ./modules/home)
   ]
   ++ lib.optionals (settings.desktopShell == "niri") [
-    ./modules/home/niri/dms.nix
-    ./modules/home/niri/niri-binds.nix
+    ./modules/home/_niri/dms.nix
+    ./modules/home/_niri/niri-binds.nix
   ];
 
   home.username = settings.username;

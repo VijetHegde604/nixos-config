@@ -8,19 +8,10 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
-    ./modules/system/boot.nix
-    ./modules/system/networking.nix
-    ./modules/system/locale.nix
-    ./modules/system/desktop.nix
-    ./modules/system/hardware.nix
-    ./modules/system/packages.nix
-    ./modules/system/services.nix
-    ./modules/system/nix.nix
-    #./modules/system/syncthing.nix
+    (inputs.import-tree ./modules/system)
   ]
-  ++ lib.optional settings.virtualization ./modules/system/virtualization.nix
-  ++ lib.optional settings.gaming ./modules/system/steam.nix;
+  ++ lib.optional settings.virtualization ./modules/_virtualization/virtualization.nix
+  ++ lib.optional settings.gaming ./modules/_gaming/steam.nix;
 
   users.users.vijeth = {
     isNormalUser = true;
