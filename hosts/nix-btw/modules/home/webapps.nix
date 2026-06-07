@@ -40,7 +40,7 @@ in
     };
     "notion" = {
       name = "Notion";
-      exec = "helium --app=https://notion.so";
+      exec = "helium --app=https://app.notion.com";
       icon = "${notionIcon}";
       type = "Application";
       categories = [
