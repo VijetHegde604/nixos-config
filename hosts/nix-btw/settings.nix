@@ -19,7 +19,7 @@
 
   gaming = false;
 
-  desktopShell = "niri"; 
+  desktopShell = "niri";
 
   systemVersion = "26.05";
 }
