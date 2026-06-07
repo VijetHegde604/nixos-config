@@ -44,7 +44,8 @@ in
       icon = "${notionIcon}";
       type = "Application";
       categories = [
-        "Productivity"
+        "Office"
+        "Utility"
       ];
     };
   };
