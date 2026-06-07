@@ -10,13 +10,17 @@ let
     url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/youtube-music.png";
     sha256 = "sha256-2XzJkhMPbmLjuHiD/kIh7qA9B5gZ3Uby60U2nQC2dqI=";
   };
+  notionIcon = pkgs.fetchurl {
+    url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/notion.png";
+    sha256 = "1wgnfflmchapad67ic3lrgz6j6xjpnqyxqvyjssnphvdk473cp9q";
+  };
 in
 {
   xdg.desktopEntries = {
     "whatsapp" = {
       name = "WhatsApp";
       genericName = "Messaging";
-      exec = "helium --app=https://web.whatsapp.com"; # Fixed your URL (was excalidraw!)
+      exec = "helium --app=https://web.whatsapp.com";
       icon = "${whatsappIcon}";
       terminal = false;
       categories = [
@@ -32,6 +36,15 @@ in
       categories = [
         "Audio"
         "Music"
+      ];
+    };
+    "notion" = {
+      name = "Notion";
+      exec = "helium --app=https://notion.so";
+      icon = "${notionIcon}";
+      type = "Application";
+      categories = [
+        "Productivity"
       ];
     };
   };
