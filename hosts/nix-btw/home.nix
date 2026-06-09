@@ -15,7 +15,7 @@
   ]
   ++ lib.optionals (settings.desktopShell == "noctalia") [
     ./modules/home/_noctalia/noctalia.nix
-    ./modules/home/_noctalia/niri-binds.nix
+    ./modules/home/_noctalia/niri-config.nix
   ];
 
   home.username = settings.username;
