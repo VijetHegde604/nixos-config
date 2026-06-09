@@ -5,8 +5,6 @@
     spawn-at-startup = [
       {
         command = [
-          "qs"
-          "-c"
           "noctalia-shell"
         ];
       }
