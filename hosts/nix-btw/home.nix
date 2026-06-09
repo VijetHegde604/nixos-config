@@ -10,8 +10,12 @@
     (inputs.import-tree ./modules/home)
   ]
   ++ lib.optionals (settings.desktopShell == "niri") [
-    ./modules/home/_niri/dms.nix
-    ./modules/home/_niri/niri-binds.nix
+    ./modules/home/_dms/dms.nix
+    ./modules/home/_dms/niri-binds.nix
+  ]
+  ++ lib.optionals (settings.desktopShell == "noctalia") [
+    ./modules/home/_noctalia/noctalia.nix
+    ./modules/home/_noctalia/niri_binds.nix
   ];
 
   home.username = settings.username;
