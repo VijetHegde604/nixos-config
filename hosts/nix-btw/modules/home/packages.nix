@@ -32,4 +32,5 @@
     freerdp
     vlc
   ];
+  programs.kdeconnect.enable = true;
 }
