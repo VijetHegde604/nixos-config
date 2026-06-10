@@ -32,5 +32,11 @@
     freerdp
     vlc
   ];
-  programs.kdeconnect.enable = true;
+
+  # KDE Connect 
+  services.kdeconnect.enable = true;
+  networking.firewall = rec {
+    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+    allowedUDPPortRanges = allowedTCPPortRanges;
+  };
 }
