@@ -6,7 +6,6 @@
     inputs.dms.homeModules.niri
     inputs.niri-flake.homeModules.niri
     inputs.danksearch.homeModules.dsearch
-    inputs.dms-plugin-registry.modules.default
     inputs.vicinae.homeManagerModules.default
 
     # Required by DMS HM module:
