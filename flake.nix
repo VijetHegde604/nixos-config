@@ -43,9 +43,6 @@
     danksearch.url = "github:AvengeMedia/danksearch";
     danksearch.inputs.nixpkgs.follows = "nixpkgs";
 
-    dms-plugin-registry.url = "github:AvengeMedia/dms-plugin-registry";
-    dms-plugin-registry.inputs.nixpkgs.follows = "nixpkgs";
-
     noctalia = {
       url = "github:noctalia-dev/noctalia/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";
