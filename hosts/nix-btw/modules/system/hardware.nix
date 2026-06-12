@@ -40,7 +40,7 @@
     };
   };
 
-  # --- Graphics (Intel i5-12500H) ---
+  # --- Graphics ---
   services.xserver.videoDrivers = [ "modesetting" ];
   hardware.graphics = {
     enable = true;

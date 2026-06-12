@@ -39,6 +39,7 @@
     "rd.systemd.show_status=false"
     "rd.udev.log_level=3"
     "udev.log_priority=3"
+    "i915.enable_guc=3"
   ];
 
   # 4. Ensure the display is initialized early
