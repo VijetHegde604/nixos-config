@@ -17,6 +17,8 @@
     btop
     intel-gpu-tools
     dua
+    curl 
+    wget 
 
     # Development Tools
     gcc
