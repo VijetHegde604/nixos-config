@@ -6,7 +6,7 @@
     # │ Startup & Environment        │
     # └──────────────────────────────┘
     spawn-at-startup = [
-      { command = [ "noctalia-shell" ]; }
+      { command = [ "noctalia" ]; }
       {
         command = [
           "vicinae"

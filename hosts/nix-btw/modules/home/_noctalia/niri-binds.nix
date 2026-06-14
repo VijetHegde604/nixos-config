@@ -6,7 +6,7 @@
     # │ Startup & Environment        │
     # └──────────────────────────────┘
     spawn-at-startup = [
-      { command = [ "noctalia-shell" ]; }
+      { command = [ "noctalia" ]; }
       {
         command = [
           "vicinae"
@@ -229,7 +229,7 @@
       };
       "Mod+Space" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "launcher"
@@ -239,7 +239,7 @@
       };
       "Mod+Shift+V" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "clipboard"
@@ -249,7 +249,7 @@
       };
       "Mod+M" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "systemMonitor"
@@ -259,7 +259,7 @@
       };
       "Super+X" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "sessionMenu"
@@ -269,7 +269,7 @@
       };
       "Mod+Comma" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "settings"
@@ -279,7 +279,7 @@
       };
       "Mod+Y" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "wallpaper"
@@ -289,7 +289,7 @@
       };
       "Mod+N" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "controlCenter"
@@ -299,7 +299,7 @@
       };
       "Mod+Shift+N" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "notepad"
@@ -310,7 +310,7 @@
 
       "Mod+Alt+L" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "lockScreen"
@@ -323,7 +323,7 @@
 
       "XF86AudioRaiseVolume" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "volume"
@@ -333,7 +333,7 @@
       };
       "XF86AudioLowerVolume" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "volume"
@@ -343,7 +343,7 @@
       };
       "XF86AudioMute" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "volume"
@@ -353,7 +353,7 @@
       };
       "XF86AudioMicMute" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "volume"
@@ -363,7 +363,7 @@
       };
       "XF86AudioPlay" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "media"
@@ -373,7 +373,7 @@
       };
       "XF86AudioNext" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "media"
@@ -383,7 +383,7 @@
       };
       "XF86MonBrightnessUp" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "brightness"
@@ -393,7 +393,7 @@
       };
       "XF86MonBrightnessDown" = {
         action.spawn = [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "call"
           "brightness"
