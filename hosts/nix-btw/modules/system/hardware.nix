@@ -88,6 +88,7 @@
     unitConfig.ConditionPathExists = "/sys/class/power_supply/BAT0/charge_control_end_threshold";
     serviceConfig = {
       Type = "oneshot";
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
       ExecStart = "${pkgs.bash}/bin/bash -c 'echo 80 > /sys/class/power_supply/BAT0/charge_control_end_threshold'";
       RemainAfterExit = true;
     };
