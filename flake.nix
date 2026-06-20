@@ -4,15 +4,11 @@
   # Ensure first rebuild on a fresh install can pull CachyOS kernel binaries.
   nixConfig = {
     extra-substituters = [
-      "https://cache.garnix.io"
-      "https://attic.xuyh0120.win/lantian"
       "https://vicinae.cachix.org"
       "https://nyx-cache.chaotic.cx/"
       "https://noctalia.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
       "nyx-cache.chaotic.cx:dJxTrgMC3V3cFfyIiBQDQorG6k1LsqurH/srpMSq7qk="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
