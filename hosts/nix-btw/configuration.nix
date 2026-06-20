@@ -25,8 +25,7 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
-
+ 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users."vijeth" = import ./home.nix;
