@@ -23,6 +23,7 @@
     distrobox
     nix-output-monitor
     nvd
+    easyeffects
 
     # Development Tools
     gcc
