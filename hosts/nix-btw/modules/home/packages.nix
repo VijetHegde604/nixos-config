@@ -18,7 +18,6 @@
     wget
     ouch
     zellij
-    motrix
 
     # apps for this user
     ghostty
@@ -33,7 +32,4 @@
     freerdp
     vlc
   ];
-
-  # KDE Connect
-  services.kdeconnect.enable = true;
 }
