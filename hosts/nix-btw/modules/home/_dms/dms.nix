@@ -18,7 +18,7 @@
     package = pkgs.niri;
   };
 
-  services.vicinae = {
+  programs.vicinae = {
     enable = true;
     package = pkgs.vicinae;
     systemd = {
@@ -31,6 +31,7 @@
       power-profile
     ];
   };
+  
   programs.dsearch = {
     enable = true;
   };
