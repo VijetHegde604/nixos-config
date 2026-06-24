@@ -1,5 +1,5 @@
-# { ... }:
-# {
+ { ... }:
+ {
 
 #   services.immich = {
 #     enable = true;
@@ -9,4 +9,4 @@
 #     mediaLocation = "/media/immich";
 #     accelerationDevices = null;
 #   };
-# }
+ }
