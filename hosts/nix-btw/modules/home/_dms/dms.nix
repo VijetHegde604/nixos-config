@@ -31,7 +31,7 @@
       power-profile
     ];
   };
-  
+
   programs.dsearch = {
     enable = true;
   };
