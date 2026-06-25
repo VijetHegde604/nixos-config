@@ -26,10 +26,14 @@
     onlyoffice-desktopeditors
     evince
     bruno
-    localsend
     mpv
     code-cursor
     freerdp
     vlc
   ];
+
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
 }
