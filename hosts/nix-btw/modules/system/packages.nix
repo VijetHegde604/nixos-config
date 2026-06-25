@@ -55,6 +55,11 @@
   programs.firefox.enable = true;
   programs.nix-ld.enable = true;
 
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.flatpak = {
     enable = true;
     packages = [
