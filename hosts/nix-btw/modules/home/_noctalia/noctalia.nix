@@ -30,4 +30,6 @@
 
     };
   };
+
+  xdg.configFile."niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/hosts/nix-btw/modules/home/_noctalia/config.kdl"
 }
