@@ -31,7 +31,6 @@
     # CachyOS defaults to bpfland with low-latency flags; make NixOS do the same
     # instead of relying on the NixOS scx default scheduler.
     scheduler = "scx_bpfland";
-    extraArgs = [ "--lowlatency" ];
   };
 
   services.earlyoom = {
