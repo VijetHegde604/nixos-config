@@ -24,6 +24,7 @@
     nix-output-monitor
     nvd
     easyeffects
+    netbird-ui
 
     # Development Tools
     gcc
