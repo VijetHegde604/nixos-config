@@ -1,4 +1,9 @@
-{ pkgs, inputs, settings, ... }:
+{
+  pkgs,
+  inputs,
+  settings,
+  ...
+}:
 
 let
   unstable = import inputs.nixpkgs {
@@ -36,4 +41,6 @@ in
     enable = true;
     package = unstable.tailscale;
   };
+
+  services.netbird.enable = true;
 }
