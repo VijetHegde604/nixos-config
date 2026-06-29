@@ -30,5 +30,6 @@
     code-cursor
     freerdp
     vlc
+    qbittorrent
   ];
 }
