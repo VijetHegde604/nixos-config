@@ -26,9 +26,7 @@
       autoStart = true;
     };
     extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
-      bluetooth
       nix
-      power-profile
     ];
   };
 
