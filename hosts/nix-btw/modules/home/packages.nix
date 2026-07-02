@@ -27,9 +27,7 @@
     evince
     bruno
     mpv
-    code-cursor
     freerdp
     vlc
-    qbittorrent
   ];
 }

@@ -23,8 +23,6 @@
     distrobox
     nix-output-monitor
     nvd
-    easyeffects
-    netbird-ui
 
     # Development Tools
     gcc
@@ -49,7 +47,6 @@
     noto-fonts-cjk-sans
     noto-fonts-color-emoji
     jetbrains-mono
-    cantarell-fonts
     inter
   ];
 
