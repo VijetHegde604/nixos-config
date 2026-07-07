@@ -12,7 +12,7 @@
   zramSwap = {
     enable = true;
     algorithm = "lz4"; # lower latency than zstd for interactive zram swap
-    memoryPercent = 75; # keep more pressure in fast compressed RAM before disk
+    memoryPercent = 100; # keep more pressure in fast compressed RAM before disk
     priority = 100; # higher = preferred over disk swap
   };
 
