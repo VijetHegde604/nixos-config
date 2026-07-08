@@ -16,4 +16,7 @@
     priority = 100; # higher = preferred over disk swap
   };
 
+  services.fstrim.enable = true;
+  
+
 }
