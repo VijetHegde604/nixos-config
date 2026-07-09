@@ -48,6 +48,7 @@
     noto-fonts-color-emoji
     jetbrains-mono
     inter
+    fira-code
   ];
 
   programs.firefox.enable = true;
