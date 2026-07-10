@@ -16,3 +16,9 @@ window-rule {
     default-column-width { proportion 0.7; }
     default-window-height { proportion 0.7; }
 }
+
+// @id=wr_1783607318816256721 @name=com.danklinux.dms
+window-rule {
+    match app-id="^com.danklinux.dms$"
+    open-floating true
+}
