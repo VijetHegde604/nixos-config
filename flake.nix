@@ -20,11 +20,6 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # chaotic nyx
 
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     import-tree.url = "github:denful/import-tree";
 
     home-manager = {
@@ -64,7 +59,6 @@
       nixpkgs,
       home-manager,
       chaotic,
-      nur,
       ...
     }:
     let
@@ -90,8 +84,6 @@
           ./hosts/nix-btw/configuration.nix
 
           chaotic.nixosModules.default
-
-          nur.modules.nixos.default
 
           home-manager.nixosModules.home-manager
           {
