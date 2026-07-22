@@ -263,7 +263,9 @@
   "rememberLastQuery": false,
   "rememberLastMode": true,
   "spotlightSectionViewModes": {},
-  "appDrawerSectionViewModes": {},
+  "appDrawerSectionViewModes": {
+    "apps": "list"
+  },
   "niriOverviewOverlayEnabled": true,
   "niriOverviewLauncherStyle": "full",
   "dankLauncherV2Size": "compact",
