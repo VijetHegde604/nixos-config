@@ -20,7 +20,7 @@ in
     "whatsapp" = {
       name = "WhatsApp";
       genericName = "Messaging";
-      exec = "helium --app=https://web.whatsapp.com";
+      exec = "firefox --no-remote --new-window https://web.whatsapp.com";
       icon = "${whatsappIcon}";
       terminal = false;
       categories = [
@@ -30,7 +30,7 @@ in
     };
     "youtube-music" = {
       name = "YouTube Music";
-      exec = "helium --app=https://music.youtube.com";
+      exec = "firefox --no-remote --new-window https://music.youtube.com";
       icon = "${ytMusicIcon}";
       type = "Application";
       categories = [
@@ -40,7 +40,7 @@ in
     };
     "notion" = {
       name = "Notion";
-      exec = "helium --app=https://app.notion.com";
+      exec = "firefox --no-remote --new-window https://app.notion.com";
       icon = "${notionIcon}";
       type = "Application";
       categories = [
