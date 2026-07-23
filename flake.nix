@@ -44,9 +44,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helium-nix.url = "github:AlvaroParker/helium-nix";
-    helium-nix.inputs.nixpkgs.follows = "nixpkgs";
-
     vicinae.url = "github:vicinaehq/vicinae";
     vicinae-extensions.url = "github:vicinaehq/extensions";
     vicinae-extensions.inputs.nixpkgs.follows = "nixpkgs";
