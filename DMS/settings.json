@@ -253,10 +253,21 @@
       "count": 2,
       "lastUsed": 1777551387770,
       "name": "Helium"
+    },
+    "firefox": {
+      "count": 6,
+      "lastUsed": 1784807479902,
+      "name": "Firefox"
     }
   },
   "appPickerViewMode": "grid",
-  "filePickerUsageHistory": {},
+  "filePickerUsageHistory": {
+    "org.gnome.Evince": {
+      "count": 1,
+      "lastUsed": 1784798681332,
+      "name": "Document Viewer"
+    }
+  },
   "sortAppsAlphabetically": false,
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
