@@ -28,5 +28,6 @@
     mpv
     freerdp
     vlc
+    antigravity-fhs
   ];
 }
