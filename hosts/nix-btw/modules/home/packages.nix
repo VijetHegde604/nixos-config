@@ -29,5 +29,6 @@
     freerdp
     vlc
     antigravity-fhs
+    code-code-cursor-fhs
   ];
 }
