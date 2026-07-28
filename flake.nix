@@ -77,7 +77,7 @@
             owner = "emersion";
             repo = "libdisplay-info";
             rev = "0.2.0";
-            hash = "sha256-oA+4Oidm4jYjlyvN6mS9l1r4L/2MmsW9/f2oZ2Y9k8U=";
+            hash = "sha256-6xmWBrPHghjok43eIDGeshpUEQTuwWLXNHg7CnBUt3Q=";
           };
         });
       };

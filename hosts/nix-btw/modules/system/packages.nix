@@ -66,10 +66,6 @@
         appId = "org.jellyfin.JellyfinDesktop";
         origin = "flathub";
       }
-      {
-        appId = "com.sejda.Sejda";
-        origin = "flathub";
-      }
     ];
   };
 
