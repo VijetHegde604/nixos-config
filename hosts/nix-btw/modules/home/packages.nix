@@ -28,7 +28,8 @@
     mpv
     freerdp
     vlc
-    antigravity-fhs
+    antigravity-ide-fhs
     code-cursor-fhs
+    inputs.helium.packages.${system}.default # helium browser from flake
   ];
 }
