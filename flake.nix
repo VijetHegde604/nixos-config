@@ -69,6 +69,18 @@
       nixBtwSettings = import ./hosts/nix-btw/settings.nix;
       nixServerSettings = import ./hosts/nix-server/settings.nix;
 
+      libdisplay-info-overlay = final: prev: {
+        libdisplay-info = prev.libdisplay-info.overrideAttrs (old: rec {
+          version = "0.2.0";
+          src = prev.fetchFromGitLab {
+            domain = "gitlab.freedesktop.org";
+            owner = "emersion";
+            repo = "libdisplay-info";
+            rev = "0.2.0";
+            hash = "sha256-oA+4Oidm4jYjlyvN6mS9l1r4L/2MmsW9/f2oZ2Y9k8U=";
+          };
+        });
+      };
     in
     {
       # -------------------------
@@ -83,6 +95,11 @@
         };
 
         modules = [
+          # Overlay for a niri window manager error
+          {
+            nixpkgs.overlays = [ libdisplay-info-overlay ];
+          }
+
           ./hosts/nix-btw/configuration.nix
 
           chaotic.nixosModules.default
