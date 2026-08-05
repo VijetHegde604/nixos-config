@@ -115,14 +115,16 @@ binds {
 
     // Spawn Commands
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "ghostty"; }
-    Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "noctalia msg panel-toggle launcher"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
-    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
+    Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "vicinae toggle"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia msg session lock"; }
+    Super+Alt+R hotkey-overlay-title="Reboot the System" { spawn-sh "noctalia msg session reboot"; }
+    Super+Alt+P allow-when-locked=true hotkey-overlay-title="Power Off" { spawn-sh "noctalia msg session shutdown"; }
     Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+Y { spawn-sh "noctalia msg panel-toggle wallpaper"; }
     Mod+Shift+V { spawn-sh "noctalia msg panel-toggle clipboard"; }
     Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
     Mod+P { spawn-sh "noctalia msg power-cycle"; }
+    Mod+X { spawn-sh "noctalia msg panel-toggle launcher"; }
 
     // Audio & Media Keys
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
