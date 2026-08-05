@@ -1,3 +1,8 @@
+config_version = 12
+
+[audio]
+enable_sounds = true
+
 [bar.default]
 center = [ "audio_visualizer", "media" ]
 end = [ "tray", "notifications", "clipboard", "control-center", "group:g2" ]
@@ -51,7 +56,6 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_password_hint = true
 
 [osd]
 background_opacity = 0.96999997831881046
@@ -63,23 +67,28 @@ niri_overview_type_to_launch_enabled = true
 polkit_agent = true
 
 [theme]
+builtin = "Noctalia"
+community_palette = "Oxocarbon"
+mode = "dark"
+pure_black_dark = true
 source = "wallpaper"
+wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = [ "cava", "gtk3", "ghostty", "niri" ]
 
 [wallpaper]
-directory = "~/Walls"
+directory = "/home/vijeth/Wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/vijeth/Walls/wallhaven-yqg6r7_1920x1200.png"
+    path = "/home/vijeth/Wallpapers/wallpaper-033.png"
 
     [wallpaper.last]
-    path = "/home/vijeth/Walls/wallhaven-yqg6r7_1920x1200.png"
+    path = "/home/vijeth/Wallpapers/wallpaper-033.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/vijeth/Walls/wallhaven-yqg6r7_1920x1200.png"
+    path = "/home/vijeth/Wallpapers/wallpaper-033.png"
 
 [widget.active_window]
 capsule = true
@@ -87,6 +96,9 @@ capsule = true
 [widget.battery]
 capsule = true
 display_mode = "graphic"
+
+[widget.cat]
+type = "noctalia/bongocat:cat"
 
 [widget.clipboard]
 capsule = true
@@ -115,4 +127,4 @@ capsule = true
 
 [widget.workspaces]
 capsule = true
-display = "name"
+label_source = "name"
