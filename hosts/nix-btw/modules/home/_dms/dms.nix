@@ -5,7 +5,6 @@
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
     inputs.niri-flake.homeModules.niri
-    inputs.danksearch.homeModules.dsearch
     inputs.vicinae.homeManagerModules.default
 
     # Required by DMS HM module:
@@ -28,10 +27,6 @@
     extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
       nix
     ];
-  };
-
-  programs.dsearch = {
-    enable = true;
   };
 
   programs.dank-material-shell = {
