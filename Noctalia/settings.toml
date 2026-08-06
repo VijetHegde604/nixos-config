@@ -90,6 +90,7 @@ transition_on_startup = true
 
 [widget.active_window]
 min_length = 260
+show_empty_label = true
 
 [widget.battery]
 capsule = true
