@@ -19,7 +19,7 @@
 
   gaming = false;
 
-  desktopShell = "dms"; # dms or noctalia
+  desktopShell = "dms"; # dms, noctalia, or cosmic
 
   systemVersion = "26.05";
 }

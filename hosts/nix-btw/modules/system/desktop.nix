@@ -1,22 +1,32 @@
-{ pkgs, ... }:
+{ lib, pkgs, settings, ... }:
 
+let
+  desktopShell = settings.desktopShell or "dms";
+  useCosmic = desktopShell == "cosmic";
+  useNiri = builtins.elem desktopShell [
+    "dms"
+    "noctalia"
+  ];
+in
 {
-
-  services.greetd = {
+  services.greetd = lib.mkIf useNiri {
     enable = true;
     settings = {
       initial_session = {
         command = "niri-session";
-        user = "vijeth";
+        user = settings.username;
       };
       default_session = {
         command = "${pkgs.bash}/bin/sh";
-        user = "vijeth";
+        user = settings.username;
       };
     };
   };
 
-  programs.niri = {
+  services.displayManager.cosmic-greeter.enable = lib.mkIf useCosmic true;
+  services.desktopManager.cosmic.enable = lib.mkIf useCosmic true;
+
+  programs.niri = lib.mkIf useNiri {
     enable = true;
     package = pkgs.niri;
   };
