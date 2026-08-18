@@ -68,11 +68,11 @@
   hardware.enableAllFirmware = true;
   networking.networkmanager.wifi.powersave = false;
 
-  services.ananicy = {
-    enable = true;
-    package = pkgs.ananicy-cpp;
-    rulesProvider = pkgs.ananicy-rules-cachyos;
-  };
+#  services.ananicy = {
+#    enable = true;
+#    package = pkgs.ananicy-cpp;
+#    rulesProvider = pkgs.ananicy-rules-cachyos;
+#  };
 
   # --- Required Packages for DMS Codecs ---
   environment.systemPackages = with pkgs; [
