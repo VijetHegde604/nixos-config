@@ -19,7 +19,7 @@
       options = [ "subvol=@" ];
     };
 
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/eec3c7d3-603f-414d-86ef-83a93b3d6fb8";
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/2b28c251-ef8b-4f19-ad36-d4014591e3fe";
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/12CE-A600";
