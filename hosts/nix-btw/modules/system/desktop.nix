@@ -42,7 +42,7 @@ in
     enable = true;
     extraPortals =
       with pkgs;
-      [ xdg-desktop-portal-gtk ] ++ lib.optionals usePlasma [ xdg-desktop-portal-kde ];
+      [ xdg-desktop-portal-gtk ];
     xdgOpenUsePortal = true;
   };
 }
