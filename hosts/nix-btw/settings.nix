@@ -19,7 +19,7 @@
 
   gaming = false;
 
-  desktopShell = "kde-plasma"; # dms, noctalia, or kde-plasma
+  desktopShell = "dms"; # dms, noctalia
 
   systemVersion = "26.05";
 }
