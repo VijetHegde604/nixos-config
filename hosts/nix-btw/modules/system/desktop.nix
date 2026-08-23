@@ -24,9 +24,10 @@ in
   };
 
   services.xserver.enable = lib.mkIf usePlasma true;
+  services.displayManager.plasma-login-manager.enable = lib.mkIf usePlasma true;
   services.displayManager = {
-    plasma-login-manager.enable = lib.mkIf usePlasma true;
-    autoLogin = true;
+    autoLogin.enable = true;
+    autoLogin.user = settings.username;
   };
   services.desktopManager.plasma6.enable = lib.mkIf usePlasma true;
 
