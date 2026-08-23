@@ -2,7 +2,7 @@
 
 let
   desktopShell = settings.desktopShell or "dms";
-  useCosmic = desktopShell == "cosmic";
+  usePlasma = desktopShell == "kde-plasma";
   useNiri = builtins.elem desktopShell [
     "dms"
     "noctalia"
@@ -23,8 +23,12 @@ in
     };
   };
 
-  services.displayManager.cosmic-greeter.enable = lib.mkIf useCosmic true;
-  services.desktopManager.cosmic.enable = lib.mkIf useCosmic true;
+  services.xserver.enable = lib.mkIf usePlasma true;
+  services.displayManager = {
+    plasma-login-manager.enable = lib.mkIf usePlasma true;
+    autoLogin = true;
+  };
+  services.desktopManager.plasma6.enable = lib.mkIf usePlasma true;
 
   programs.niri = lib.mkIf useNiri {
     enable = true;
@@ -35,7 +39,9 @@ in
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    extraPortals =
+      with pkgs;
+      [ xdg-desktop-portal-gtk ] ++ lib.optionals usePlasma [ xdg-desktop-portal-kde ];
     xdgOpenUsePortal = true;
   };
 }
