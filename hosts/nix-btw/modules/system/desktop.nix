@@ -36,7 +36,7 @@ in
     package = pkgs.niri;
   };
 
-  programs.seahorse.enable = true;
+  programs.seahorse.enable = lib.mkIf useNiri true;
 
   xdg.portal = {
     enable = true;
