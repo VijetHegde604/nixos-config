@@ -19,7 +19,7 @@
 
   gaming = false;
 
-  desktopShell = "dms"; # dms, noctalia
+  desktopShell = "noctalia"; # dms, noctalia
 
   systemVersion = "26.05";
 }
