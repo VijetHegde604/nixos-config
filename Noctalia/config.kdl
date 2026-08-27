@@ -108,7 +108,6 @@ binds {
     // Session / UI Utilities
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+O repeat=false { toggle-overview; }
-    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     Mod+Shift+E { quit; }
     Ctrl+Alt+Delete { quit; }
     Mod+Shift+P { power-off-monitors; }
@@ -125,6 +124,7 @@ binds {
     Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
     Mod+P { spawn-sh "noctalia msg power-cycle"; }
     Mod+X { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+Escape { spawn-sh "noctalia msg panel-toggle session"; }
 
     // Audio & Media Keys
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
