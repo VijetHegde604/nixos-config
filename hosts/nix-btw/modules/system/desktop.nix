@@ -6,6 +6,7 @@ let
     "dms"
     "noctalia"
   ];
+  usePlasma = desktopShell == "plasma";
 in
 {
   services.greetd = lib.mkIf useNiri {
@@ -28,6 +29,9 @@ in
   };
 
   programs.seahorse.enable = lib.mkIf useNiri true;
+
+  services.displayManager.sddm.enable = usePlasma;
+  services.desktopManager.plasma6.enable = usePlasma;
 
   xdg.portal = {
     enable = true;
