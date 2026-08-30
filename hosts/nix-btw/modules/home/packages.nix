@@ -20,8 +20,6 @@
     zellij
 
     # apps for this user
-    ghostty
-    zed-editor
     onlyoffice-desktopeditors
     evince
     bruno

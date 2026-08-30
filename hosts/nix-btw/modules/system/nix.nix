@@ -1,4 +1,4 @@
-{ ... }:
+{ settings, ... }:
 
 {
   nix = {
@@ -21,7 +21,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 7d --keep 3";
-    flake = "/home/vijeth/nixos-config";
+    flake = settings.configRepoPath;
   };
 
   system.autoUpgrade = {

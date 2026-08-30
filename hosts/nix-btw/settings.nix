@@ -2,6 +2,7 @@
   # User and Machine Identity
   username = "vijeth";
   hostname = "nix-btw";
+  configRepoPath = "/home/vijeth/nixos-config";
 
   # Localization Settings
   timezone = "Asia/Kolkata";

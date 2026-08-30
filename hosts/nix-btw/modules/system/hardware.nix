@@ -56,23 +56,13 @@
   };
 
   hardware.enableRedistributableFirmware = true;
-  boot.kernelParams = [ "i915.enable_guc=3" ];
-
-  # --- Power & Performance ---
+  # --- Power management ---
   services.libinput.enable = true;
   services.upower.enable = true;
   services.acpid.enable = true;
   services.thermald.enable = true;
   services.power-profiles-daemon.enable = true;
-  services.system76-scheduler.settings.cfsProfiles.enable = true;
   hardware.enableAllFirmware = true;
-  networking.networkmanager.wifi.powersave = false;
-
-#  services.ananicy = {
-#    enable = true;
-#    package = pkgs.ananicy-cpp;
-#    rulesProvider = pkgs.ananicy-rules-cachyos;
-#  };
 
   # --- Required Packages for DMS Codecs ---
   environment.systemPackages = with pkgs; [

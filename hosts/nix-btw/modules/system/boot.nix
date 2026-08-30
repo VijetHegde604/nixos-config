@@ -3,11 +3,10 @@
 {
   boot.loader = {
     limine.enable = true;
-    limine.secureBoot.enable = if settings.secureBoot then true else false;
+    limine.secureBoot.enable = settings.secureBoot;
     efi.canTouchEfiVariables = true;
   };
 
-  # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-x86_64-v3;
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
   # Enable systemd in initrd
   boot.initrd.systemd.enable = true;
@@ -37,17 +36,6 @@
     "rd.systemd.show_status=false"
     "rd.udev.log_level=3"
     "udev.log_priority=3"
-    "i915.enable_guc=3"
   ];
 
-  # 4. Ensure the display is initialized early
-  boot.initrd.systemd.extraBin = {
-    # Helpful for debugging, but not strictly required
-    # ls = "${pkgs.coreutils}/bin/ls";
-  };
-
-  #  system.activationScripts.postInstallConfig = {
-  #    text = builtins.readFile ./post-install.sh;
-  #    deps = [ ];
-  #  };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, settings, ... }:
 
 {
   programs.direnv = {
@@ -22,12 +22,12 @@
       lg = "lazygit";
 
       # nixos rebuild shortcuts (flake-based)
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw";
-      nrb = "sudo nixos-rebuild boot --flake ~/nixos-config#nix-btw";
-      nrt = "sudo nixos-rebuild test --flake ~/nixos-config#nix-btw";
+      nrs = "sudo nixos-rebuild switch --flake ${settings.configRepoPath}#nix-btw";
+      nrb = "sudo nixos-rebuild boot --flake ${settings.configRepoPath}#nix-btw";
+      nrt = "sudo nixos-rebuild test --flake ${settings.configRepoPath}#nix-btw";
 
       # update flake inputs then rebuild
-      nfu = "nix flake update --flake ~/nixos-config && sudo nixos-rebuild switch --flake ~/nixos-config#nix-btw";
+      nfu = "nix flake update --flake ${settings.configRepoPath} && sudo nixos-rebuild switch --flake ${settings.configRepoPath}#nix-btw";
 
       # nix store cleanup helpers
       nixgc = "sudo nix-collect-garbage -d";
@@ -41,7 +41,7 @@
       stop-docker = "sudo systemctl stop docker && sudo systemctl stop docker.socket";
 
       # Editing the config
-      edit-config = "zeditor ~/nixos-config";
+      edit-config = "zeditor ${settings.configRepoPath}";
     };
 
     initExtra = ''

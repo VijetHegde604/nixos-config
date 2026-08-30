@@ -41,7 +41,7 @@ The flake sets custom binary caches in `nixConfig` and pins these major inputs:
     │   ├── configuration.nix
     │   ├── disko-config.nix
     │   ├── hardware-configuration.nix
-    │   ├── home-nixos.nix
+    │   ├── home.nix
     │   ├── settings.nix
     │   ├── modules/system/
     │   ├── modules/home/
@@ -100,11 +100,11 @@ Main file: `hosts/nix-btw/configuration.nix`
   - PipeWire stack
   - Intel graphics/media runtime packages
   - Bluetooth with experimental features
-  - power/perf services (`thermald`, `upower`, `ananicy`, etc.)
+  - power-management services (`thermald`, `upower`, and power-profiles-daemon)
   - battery threshold oneshot service at 80%
 
 - **Packages (`modules/system/packages.nix`)**
-  - core system tools and development toolchain
+  - core system tools and a general-purpose development toolchain
   - Firefox, nix-ld, Podman with Docker compatibility, and fonts
 
 - **Nix behavior (`modules/system/nix.nix`)**
@@ -117,9 +117,9 @@ Main file: `hosts/nix-btw/configuration.nix`
 
 #### Home Manager for `vijeth`
 
-`home-nixos.nix` imports shell, starship, git, fastfetch, packages, Ghostty, XDG user directories, Zed, and webapp modules. It also imports the DMS/Niri module when `settings.desktopShell == "dms"`.
+`home.nix` imports shell, starship, git, fastfetch, packages, Ghostty, XDG user directories, Zed, and webapp modules. It also imports the DMS/Niri module when `settings.desktopShell == "dms"`.
 
-DMS module details (`modules/home/niri/dms.nix`):
+DMS module details (`modules/home/_dms/dms.nix`):
 
 - imports DMS, Niri, and dsearch modules from flake inputs
 - enables the DMS systemd user service
@@ -149,7 +149,7 @@ Highlights:
 
 Tracked canonical files are in `DMS/`.
 
-`hosts/nix-btw/modules/system/post-install.sh` is designed to:
+`hosts/nix-btw/post-install.sh` is designed to:
 
 1. Move the repo from `/etc/nixos/nixos-config` to `/home/<user>/nixos-config` when needed.
 2. Set ownership to the target user.
@@ -213,7 +213,7 @@ sudo nixos-install --flake .#nix-btw --accept-flake-config
 After first boot, optionally migrate the repo into the user's home directory and wire DMS/Niri symlinks:
 
 ```bash
-sudo /etc/nixos/nixos-config/hosts/nix-btw/modules/system/post-install.sh
+sudo /etc/nixos/nixos-config/hosts/nix-btw/post-install.sh
 ```
 
 ### Rebuild the desktop later
@@ -241,7 +241,7 @@ sudo nixos-rebuild switch --flake .#nix-server --accept-flake-config
 | Rebuild server | `sudo nixos-rebuild switch --flake ~/nixos-config#nix-server --accept-flake-config` |
 | Update lockfile | `nix flake update --flake ~/nixos-config --accept-flake-config` |
 | Run Disko format/mount for desktop | `sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ~/nixos-config/hosts/nix-btw/disko-config.nix` |
-| Run post-install linker | `sudo ~/nixos-config/hosts/nix-btw/modules/system/post-install.sh` |
+| Run post-install linker | `sudo ~/nixos-config/hosts/nix-btw/post-install.sh` |
 
 ---
 
