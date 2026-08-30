@@ -24,7 +24,8 @@
     nix-output-monitor
     nvd
 
-    # Development Tools
+    # Keep the general-purpose build and Python tooling available outside
+    # project-specific development shells.
     gcc
     gnumake
     binutils
@@ -32,8 +33,6 @@
     python3
     python3Packages.pip
     python3Packages.virtualenv
-
-    # common runtime deps mise builds need
     openssl
     zlib
     libffi
@@ -69,7 +68,6 @@
     ];
   };
 
-  # Adding podman for distrobox
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
