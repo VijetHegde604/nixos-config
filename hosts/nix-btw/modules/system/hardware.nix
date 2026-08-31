@@ -72,15 +72,22 @@
   ];
 
   # Battery threshold for BAT0
-  systemd.services.battery-threshold = {
-    description = "Set battery charge threshold";
-    wantedBy = [ "multi-user.target" ];
-    unitConfig.ConditionPathExists = "/sys/class/power_supply/BAT0/charge_control_end_threshold";
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'echo 80 > /sys/class/power_supply/BAT0/charge_control_end_threshold'";
-      RemainAfterExit = true;
-    };
+systemd.services.battery-threshold = {
+  description = "Set battery charge threshold";
+
+  wantedBy = [ "multi-user.target" ];
+
+  after = [
+    "sysinit.target"
+    "systemd-modules-load.service"
+  ];
+
+  serviceConfig = {
+    Type = "oneshot";
+
+    ExecStart = "${pkgs.bash}/bin/bash -c 'sleep 1 && echo 80 > /sys/class/power_supply/BAT0/charge_control_end_threshold'";
+
+    RemainAfterExit = true;
   };
+};
 }
