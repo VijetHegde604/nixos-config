@@ -58,15 +58,15 @@
     openFirewall = true;
   };
 
-  services.flatpak = {
-    enable = true;
-    packages = [
-      {
-        appId = "org.jellyfin.JellyfinDesktop";
-        origin = "flathub";
-      }
-    ];
-  };
+  # services.flatpak = {
+  #   enable = true;
+  #   packages = [
+  #     {
+  #       appId = "org.jellyfin.JellyfinDesktop";
+  #       origin = "flathub";
+  #     }
+  #   ];
+  # };
 
   virtualisation.podman = {
     enable = true;
