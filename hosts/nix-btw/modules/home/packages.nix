@@ -18,6 +18,7 @@
     wget
     ouch
     zellij
+    adw-gtk3
 
     # apps for this user
     onlyoffice-desktopeditors
