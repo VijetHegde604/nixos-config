@@ -54,6 +54,8 @@
       "width": 50
     }
   ],
+  "mediaUseAlbumArtAccent": true,
+  "appleMusicAnimatedArtEnabled": true,
   "appIdSubstitutions": [],
   "appDrawerSectionViewModes": {
     "apps": "list"
