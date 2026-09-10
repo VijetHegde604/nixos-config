@@ -41,4 +41,6 @@ in
     enable = true;
     package = unstable.tailscale;
   };
+
+  services.netbird.enable = true;
 }

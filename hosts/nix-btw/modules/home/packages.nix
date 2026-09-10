@@ -30,5 +30,6 @@
     antigravity-ide-fhs
     code-cursor-fhs
     inputs.helium.packages.${stdenv.hostPlatform.system}.default # helium browser from flake
+    netbird-ui
   ];
 }
