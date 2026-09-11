@@ -6,9 +6,22 @@
     nix-direnv.enable = true;
   };
 
-  programs.bash = {
+  programs.zsh = {
     enable = true;
     enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    # Sensible history defaults
+    history = {
+      size = 10000;
+      save = 10000;
+      ignoreDups = true;
+      ignoreAllDups = true;
+      ignoreSpace = true;
+      extended = true;       # Timestamps in history
+      share = true;          # Share history across sessions
+    };
 
     shellAliases = {
       # navigation / ls replacements
@@ -44,21 +57,32 @@
       edit-config = "zeditor ${settings.configRepoPath}";
     };
 
-    initExtra = ''
+    initContent = ''
       # Use a conservative TERM so remote/SSH environments behave consistently.
       export TERM=xterm-256color
 
-      # activate mise and zoxide
-      eval "$(${pkgs.zoxide}/bin/zoxide init bash)"
+      # activate zoxide
+      eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
 
-      # source optional local bash snippets
-      if [ -d ~/.bashrc.d ]; then
-        for rc in ~/.bashrc.d/*; do
+      # source optional local zsh snippets
+      if [ -d ~/.zshrc.d ]; then
+        for rc in ~/.zshrc.d/*; do
           [ -f "$rc" ] && . "$rc"
         done
       fi
 
       export TERMINAL=ghostty
+
+      # Better directory navigation
+      setopt AUTO_CD              # cd by just typing dir name
+      setopt AUTO_PUSHD           # push dirs onto stack automatically
+      setopt PUSHD_IGNORE_DUPS    # no duplicates in dir stack
+      setopt PUSHD_SILENT         # don't print stack after pushd/popd
+
+      # Case-insensitive and partial completion
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
     '';
   };
 }

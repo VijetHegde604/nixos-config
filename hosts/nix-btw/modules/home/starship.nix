@@ -12,7 +12,7 @@
         $character
       '';
 
-      right_format = "$time$battery";
+      right_format = "";
 
       custom.distrobox = {
         description = "Displays name of the activated distrobox container";
@@ -55,9 +55,11 @@
 
       nix_shell = {
         disabled = false;
-        symbol = " ";
-        format = " [$symbol$state]($style)"; # Added leading space for padding
-        style = "fg:accent_dim";
+        symbol = "❄ ";
+        impure_msg = "";
+        pure_msg = "pure";
+        format = " [$symbol$name$state]($style)";
+        style = "bold fg:accent";
       };
 
       git_branch = {
@@ -104,22 +106,7 @@
         style = "fg:accent_dim";
       };
 
-      battery.display = [
-        {
-          threshold = 20;
-          style = "fg:danger";
-        }
-        {
-          threshold = 100;
-          style = "fg:subtle";
-        }
-      ];
 
-      time = {
-        disabled = false;
-        format = "[$time]($style) ";
-        style = "fg:subtle";
-      };
     };
   };
 }
