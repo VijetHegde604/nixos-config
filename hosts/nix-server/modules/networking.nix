@@ -42,5 +42,8 @@ in
     package = unstable.tailscale;
   };
 
-  services.netbird.enable = true;
+  services.netbird = {
+    enable = true;
+    package = unstable.netbird;
+  };
 }
