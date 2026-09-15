@@ -10,12 +10,6 @@
       auto-optimise-store = true;
       trusted-users = [ "@wheel" ];
     };
-
-    # gc = {
-    #   automatic = true;
-    #   dates = "daily";
-    #   options = "--delete-older-than 14d";
-    # };
   };
 
   # Enable nh (Nix Helper)
@@ -29,7 +23,8 @@
   # # Keep upgrades automatic but deterministic through pinned flake.lock.
   system.autoUpgrade = {
     enable = true;
-    dates = "weekly";
+    dates = "Sun 03:00";
     flake = "github:VijetHegde604/nixos-config";
+    allowReboot = true;
   };
 }
