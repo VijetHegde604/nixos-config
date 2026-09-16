@@ -23,14 +23,4 @@
     clean.extraArgs = "--keep-since 7d --keep 3";
     flake = settings.configRepoPath;
   };
-
-  system.autoUpgrade = {
-    enable = true;
-    dates = "weekly";
-    flake = "github:VijetHegde604/nixos-config";
-    flags = [
-      "--update-input"
-      "nixpkgs"
-    ];
-  };
 }
