@@ -98,6 +98,7 @@
   "muxType": "zellij",
   "dockLauncherLogoMode": "os",
   "dockLauncherLogoColorOverride": "primary",
+  "enableFprint": true,
   "osdPowerProfileEnabled": true,
   "powerActionHoldDuration": 0.25,
   "barConfigs": [
