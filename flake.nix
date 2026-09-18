@@ -57,6 +57,11 @@
       url = "github:schembriaiden/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    focaltech-fingerprint = {
+      url = "github:leopalladium/focaltech-ft9366-arch-shim";
+      flake = false;
+    };
   };
 
   outputs =
@@ -82,6 +87,7 @@
         specialArgs = {
           inherit inputs;
           settings = nixBtwSettings;
+          focaltech-fingerprint = inputs.focaltech-fingerprint;
         };
 
         modules = [

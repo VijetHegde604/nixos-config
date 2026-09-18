@@ -106,6 +106,22 @@
         "url": "https://flakehub.com/f/DeterminateSystems/flake-schemas/%3D0.5.0.tar.gz"
       }
     },
+    "focaltech-fingerprint": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773764417,
+        "narHash": "sha256-J/aqyUYV5OSKNP21IHoJhmHtJR7w0/cfwTg6n5emdjA=",
+        "owner": "leopalladium",
+        "repo": "focaltech-ft9366-arch-shim",
+        "rev": "d2955645c2e4bcf10dacc213ef44ae45f35486b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leopalladium",
+        "repo": "focaltech-ft9366-arch-shim",
+        "type": "github"
+      }
+    },
     "helium": {
       "inputs": {
         "nixpkgs": [
@@ -455,6 +471,7 @@
       "inputs": {
         "chaotic": "chaotic",
         "dms": "dms",
+        "focaltech-fingerprint": "focaltech-fingerprint",
         "helium": "helium",
         "home-manager": "home-manager_2",
         "import-tree": "import-tree",
