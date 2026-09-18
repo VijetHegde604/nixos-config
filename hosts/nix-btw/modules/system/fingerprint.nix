@@ -38,14 +38,14 @@ let
 
       # Copy the shim
       cp focaltech-shim.so $out/lib/
-      
+
       # Copy headers and pkgconfig from the original libfprint
       cp -r ${pkgs.libfprint}/include/* $out/include/
       cp ${pkgs.libfprint}/lib/pkgconfig/libfprint-2.pc $out/lib/pkgconfig/
-      
+
       # Substitute the nix store path of libfprint with our shim's out path
       sed -i "s|${pkgs.libfprint}|$out|g" $out/lib/pkgconfig/libfprint-2.pc
-      
+
       # The autoPatchelfHook will run after installPhase
       # We manually add the dependency to our shim first
       patchelf --add-needed focaltech-shim.so $out/lib/libfprint-2.so.2.0.0
@@ -64,6 +64,7 @@ lib.mkIf (settings.fingerprint or false) {
     package = pkgs.fprintd.override {
       libfprint = focaltech-libfprint;
     };
+    hidePrompt = true;
   };
 
   # Prevent autosuspend which breaks the device
