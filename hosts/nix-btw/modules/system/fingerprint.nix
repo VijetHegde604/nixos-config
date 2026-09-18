@@ -1,4 +1,4 @@
-{ pkgs, lib, focaltech-fingerprint, ... }:
+{ pkgs, lib, focaltech-fingerprint, settings, ... }:
 
 let
   focaltech-libfprint = pkgs.stdenv.mkDerivation {
@@ -15,7 +15,7 @@ let
 
     buildInputs = [
       pkgs.glib
-      pkgs.libgusb
+      pkgs.gusb
       pkgs.nss
       pkgs.pixman
       pkgs.libgudev
@@ -29,13 +29,22 @@ let
 
     installPhase = ''
       # Create necessary directories
-      mkdir -p $out/lib
+      mkdir -p $out/lib $out/include $out/lib/pkgconfig
 
       # Copy the original proprietary driver
       cp libfprint-2.so.2.0.0 $out/lib/
+      ln -s libfprint-2.so.2.0.0 $out/lib/libfprint-2.so
+      ln -s libfprint-2.so.2.0.0 $out/lib/libfprint-2.so.2
 
       # Copy the shim
       cp focaltech-shim.so $out/lib/
+      
+      # Copy headers and pkgconfig from the original libfprint
+      cp -r ${pkgs.libfprint}/include/* $out/include/
+      cp ${pkgs.libfprint}/lib/pkgconfig/libfprint-2.pc $out/lib/pkgconfig/
+      
+      # Substitute the nix store path of libfprint with our shim's out path
+      sed -i "s|${pkgs.libfprint}|$out|g" $out/lib/pkgconfig/libfprint-2.pc
       
       # The autoPatchelfHook will run after installPhase
       # We manually add the dependency to our shim first
@@ -49,7 +58,7 @@ let
     '';
   };
 in
-{
+lib.mkIf (settings.fingerprint or false) {
   services.fprintd = {
     enable = true;
     package = pkgs.fprintd.override {
