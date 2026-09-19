@@ -64,7 +64,6 @@ lib.mkIf (settings.fingerprint or false) {
     package = pkgs.fprintd.override {
       libfprint = focaltech-libfprint;
     };
-    hidePrompt = true;
   };
 
   # Prevent autosuspend which breaks the device
