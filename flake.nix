@@ -120,7 +120,6 @@
         };
 
         modules = [
-          { nixpkgs.config.allowUnfree = true; }
           ./hosts/nix-server/configuration.nix
         ];
       };

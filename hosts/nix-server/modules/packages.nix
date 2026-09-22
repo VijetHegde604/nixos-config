@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, nixpkgs, ... }:
 
 {
 
@@ -19,7 +19,7 @@
     dua
     curl
     wget
-    netwatch
+    nixpkgs.netwatch
 
     # Development Tools
     gcc
