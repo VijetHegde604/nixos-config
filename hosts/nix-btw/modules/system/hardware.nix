@@ -64,6 +64,19 @@
   services.power-profiles-daemon.enable = true;
   hardware.enableAllFirmware = true;
 
+  # Zram Swap
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+    algorithm = "zstd";
+  };
+
+  # OOMD
+  systemd.oomd = {
+    enable = true;
+    enableUserSlices = true;
+  };
+
   # --- Required Packages for DMS Codecs ---
   environment.systemPackages = with pkgs; [
     ldacbt
