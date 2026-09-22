@@ -1,4 +1,4 @@
-{ pkgs, nixpkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
 
@@ -19,7 +19,7 @@
     dua
     curl
     wget
-    nixpkgs.netwatch
+    inputs.nixpkgs.legacyPackages.${pkgs.system}.netwatch
 
     # Development Tools
     gcc
