@@ -12,7 +12,7 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs-stable.config.allowUnfree = true;
 
   # Enable nh (Nix Helper)
   programs.nh = {
