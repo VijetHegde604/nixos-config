@@ -20,11 +20,11 @@
 
   gaming = false;
 
-  fingerprint = true;
+  fingerprint = false;
 
   # Select one of: dms, noctalia, plasma.
   # Plasma is configured declaratively through plasma-manager.
-  desktopShell = "dms";
+  desktopShell = "plasma";
 
   systemVersion = "26.05";
 }
