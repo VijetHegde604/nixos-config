@@ -6,12 +6,10 @@
     extra-substituters = [
       "https://vicinae.cachix.org"
       "https://nyx-cache.chaotic.cx/"
-      "https://noctalia.cachix.org"
     ];
     extra-trusted-public-keys = [
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
       "nyx-cache.chaotic.cx:dJxTrgMC3V3cFfyIiBQDQorG6k1LsqurH/srpMSq7qk="
-      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
     ];
   };
 
@@ -27,12 +25,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    plasma-manager = {
-      url = "github:pjones/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
     niri-flake.url = "github:sodiboo/niri-flake";
     niri-flake.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -41,11 +33,6 @@
 
     dms.url = "github:AvengeMedia/DankMaterialShell/stable";
     dms.inputs.nixpkgs.follows = "nixpkgs";
-
-    noctalia = {
-      url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     vicinae.url = "github:vicinaehq/vicinae";
     vicinae-extensions.url = "github:vicinaehq/extensions";

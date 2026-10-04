@@ -117,7 +117,7 @@ Main file: `hosts/nix-btw/configuration.nix`
 
 #### Home Manager for `vijeth`
 
-`home.nix` imports shell, starship, git, fastfetch, packages, Ghostty, XDG user directories, Zed, and webapp modules. It also imports the DMS/Niri module when `settings.desktopShell == "dms"`.
+`home.nix` imports shell, starship, git, fastfetch, packages, Ghostty, XDG user directories, Zed, webapp, and DMS/Niri modules.
 
 DMS module details (`modules/home/_dms/dms.nix`):
 

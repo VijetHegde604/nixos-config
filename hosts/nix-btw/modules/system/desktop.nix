@@ -1,15 +1,7 @@
-{ lib, pkgs, settings, ... }:
+{ pkgs, settings, ... }:
 
-let
-  desktopShell = settings.desktopShell or "dms";
-  useNiri = builtins.elem desktopShell [
-    "dms"
-    "noctalia"
-  ];
-  usePlasma = desktopShell == "plasma";
-in
 {
-  services.greetd = lib.mkIf useNiri {
+  services.greetd = {
     enable = true;
     settings = {
       initial_session = {
@@ -23,21 +15,16 @@ in
     };
   };
 
-  programs.niri = lib.mkIf useNiri {
+  programs.niri = {
     enable = true;
     package = pkgs.niri;
   };
 
-  programs.seahorse.enable = lib.mkIf useNiri true;
-
-  services.displayManager.sddm.enable = usePlasma;
-  services.desktopManager.plasma6.enable = usePlasma;
+  programs.seahorse.enable = true;
 
   xdg.portal = {
     enable = true;
-    extraPortals =
-      with pkgs;
-      [ xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
     xdgOpenUsePortal = true;
   };
 }

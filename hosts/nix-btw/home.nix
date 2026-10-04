@@ -1,6 +1,5 @@
 {
   settings,
-  lib,
   inputs,
   ...
 }:
@@ -8,16 +7,8 @@
 {
   imports = [
     (inputs.import-tree ./modules/home)
-  ]
-  ++ lib.optionals (settings.desktopShell == "dms") [
     ./modules/home/_dms/dms.nix
     ./modules/home/_dms/niri-binds.nix
-  ]
-  ++ lib.optionals (settings.desktopShell == "noctalia") [
-    ./modules/home/_noctalia/noctalia.nix
-  ]
-  ++ lib.optionals (settings.desktopShell == "plasma") [
-    ./modules/home/_plasma/plasma.nix
   ];
 
   home.username = settings.username;
