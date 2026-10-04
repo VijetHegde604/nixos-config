@@ -24,7 +24,7 @@
 
   # Select one of: dms, noctalia, plasma.
   # Plasma is configured declaratively through plasma-manager.
-  desktopShell = "dms";
+  desktopShell = "noctalia";
 
   systemVersion = "26.05";
 }
