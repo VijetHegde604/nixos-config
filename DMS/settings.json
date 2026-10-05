@@ -67,6 +67,7 @@
   },
   "useAutoLocation": true,
   "networkPreference": "wifi",
+  "iconThemeDark": "Adwaita",
   "cursorSettings": {
     "theme": "System Default",
     "size": 24,
