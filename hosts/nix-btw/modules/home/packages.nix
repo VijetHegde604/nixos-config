@@ -12,7 +12,6 @@
     duf
     nil
     nixd
-    neovim
     wtype
     fzf
     wget
