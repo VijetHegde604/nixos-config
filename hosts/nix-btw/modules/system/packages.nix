@@ -52,6 +52,7 @@
     merkuro
     qrca
     ktnef
+    kmail
   ];
 
   fonts.packages = with pkgs; [
