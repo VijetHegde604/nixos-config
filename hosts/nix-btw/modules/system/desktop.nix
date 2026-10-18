@@ -26,6 +26,11 @@
   services.desktopManager.plasma6.enable = settings.desktopEnvironment == "kde-plasma";
   services.displayManager.sddm.enable = settings.desktopEnvironment == "kde-plasma";
 
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = settings.username;
+  };
+
   programs.seahorse.enable = true;
 
   xdg.portal = {
