@@ -42,7 +42,7 @@
   ];
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    akonadi-console
+    akonadi
     discover
     elisa
     kate
