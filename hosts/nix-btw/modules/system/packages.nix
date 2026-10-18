@@ -48,7 +48,7 @@
     kate
     kiten
     kontact
-    kwrite
+    kwrited
     merkuro
     qrca
     ktnef
