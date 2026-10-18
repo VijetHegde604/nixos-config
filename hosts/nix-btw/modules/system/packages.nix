@@ -41,6 +41,19 @@
     cacert
   ];
 
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    akonadi-console
+    discover
+    elisa
+    kate
+    kiten
+    kontact
+    kwrite
+    merkuro
+    qrca
+    ktnef
+  ];
+
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans

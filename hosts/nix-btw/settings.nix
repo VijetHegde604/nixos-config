@@ -23,7 +23,7 @@
   fingerprint = false;
 
   # Desktop environment: "niri-dms", "cosmic", or "kde-plasma".
-  desktopEnvironment = "cosmic";
+  desktopEnvironment = "kde-plasma";
 
   systemVersion = "26.05";
 }
