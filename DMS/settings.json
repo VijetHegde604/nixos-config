@@ -52,11 +52,6 @@
       "id": "idleInhibitor",
       "enabled": true,
       "width": 50
-    },
-    {
-      "id": "builtin_tailscale",
-      "enabled": true,
-      "width": 50
     }
   ],
   "mediaUseAlbumArtAccent": true,
@@ -97,6 +92,7 @@
   "lockBeforeSuspend": true,
   "terminalsAlwaysDark": true,
   "muxType": "zellij",
+  "dockSmartAutoHide": true,
   "dockLauncherLogoMode": "os",
   "dockLauncherLogoColorOverride": "primary",
   "enableFprint": true,
@@ -115,7 +111,12 @@
       "leftWidgets": [
         "launcherButton",
         "workspaceSwitcher",
-        "focusedWindow"
+        {
+          "id": "focusedWindow",
+          "enabled": true,
+          "focusedWindowCompactMode": true,
+          "focusedWindowSize": 0
+        }
       ],
       "centerWidgets": [
         "music",
@@ -191,7 +192,20 @@
       "shadowOpacity": 60,
       "shadowColorMode": "text",
       "shadowCustomColor": "#000000",
-      "clickThrough": false
+      "clickThrough": false,
+      "island": true,
+      "islandFloating": false,
+      "islandReserveThickness": 40,
+      "islandCompactThickness": 38,
+      "islandOuterGap": 4,
+      "islandBatteryStyle": "solid",
+      "islandHomeCompactTight": true,
+      "islandCornerRadius": 34,
+      "islandInteractionMode": "hybrid",
+      "islandReducedMotion": false,
+      "islandSatelliteBackground": false,
+      "islandSatelliteGothCorners": true,
+      "islandSatellitesEnabled": true
     }
   ],
   "desktopClockCustomColor": {
