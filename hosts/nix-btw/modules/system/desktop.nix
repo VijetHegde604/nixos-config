@@ -1,7 +1,7 @@
-{ pkgs, settings, ... }:
+{ lib, pkgs, settings, ... }:
 
 {
-  services.greetd = {
+  services.greetd = lib.mkIf (settings.desktopEnvironment == "niri-dms") {
     enable = true;
     settings = {
       initial_session = {
@@ -15,10 +15,16 @@
     };
   };
 
-  programs.niri = {
+  programs.niri = lib.mkIf (settings.desktopEnvironment == "niri-dms") {
     enable = true;
     package = pkgs.niri;
   };
+
+  services.desktopManager.cosmic.enable = settings.desktopEnvironment == "cosmic";
+  services.displayManager.cosmic-greeter.enable = settings.desktopEnvironment == "cosmic";
+
+  services.desktopManager.plasma6.enable = settings.desktopEnvironment == "kde-plasma";
+  services.displayManager.sddm.enable = settings.desktopEnvironment == "kde-plasma";
 
   programs.seahorse.enable = true;
 
