@@ -20,6 +20,20 @@
       border_radius = 8;
       animations = 1;
 
+      # Enable cached blur for windows and layer surfaces (such as DMS).
+      blur = 1;
+      blur_layer = 1;
+      blur_optimized = 1;
+      blur_params_num_passes = 2;
+      blur_params_radius = 5;
+      blur_params_noise = 0.02;
+      blur_params_brightness = 0.9;
+      blur_params_contrast = 0.9;
+      blur_params_saturation = 1.2;
+
+      # Apply this mode and fractional scale to the connected output.
+      monitor_rule = "width:1920,height:1200,scale:1.25";
+
       bind = [
         # Applications and DMS shell controls
         "SUPER,Return,spawn,ghostty"
