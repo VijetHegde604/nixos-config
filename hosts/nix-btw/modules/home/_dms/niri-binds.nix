@@ -249,7 +249,7 @@
     };
 
     # === Window Management ===
-    "Mod+W" = {
+    "Mod+Q" = {
       action.close-window = [ ];
       repeat = false;
     };
