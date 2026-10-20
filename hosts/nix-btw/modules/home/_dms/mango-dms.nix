@@ -34,7 +34,7 @@
       blur_params_saturation = 1.2;
 
       # Apply this mode and fractional scale to the connected output.
-      monitor_rule = "name:eDP-1,width:1920,height:1200,scale:1.25";
+      monitor_rule = "name:eDP-1,width:1920,height:1200,refresh:60.003,scale:1.25";
 
       bind = [
         # Applications and DMS shell controls
