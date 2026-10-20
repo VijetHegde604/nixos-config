@@ -23,7 +23,7 @@
   fingerprint = false;
 
   # Desktop environment: "niri-dms", "mango-dms", "cosmic", or "kde-plasma".
-  desktopEnvironment = "mango-dms";
+  desktopEnvironment = "niri-dms";
 
   systemVersion = "26.05";
 }
