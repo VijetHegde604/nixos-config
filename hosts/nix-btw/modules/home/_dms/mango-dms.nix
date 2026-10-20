@@ -20,6 +20,8 @@
       border_radius = 8;
       animations = 1;
 
+      trackpad_natural_scrolling = 1;
+
       # Enable cached blur for windows and layer surfaces (such as DMS).
       blur = 1;
       blur_layer = 1;
@@ -32,7 +34,7 @@
       blur_params_saturation = 1.2;
 
       # Apply this mode and fractional scale to the connected output.
-      monitor_rule = "width:1920,height:1200,scale:1.25";
+      monitor_rule = "name:eDP-1,width:1920,height:1200,scale:1.25";
 
       bind = [
         # Applications and DMS shell controls
