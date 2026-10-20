@@ -12,11 +12,11 @@
     systemd.enable = true;
     settings = {
       # Keep Mango visually close to the compact Niri setup.
-      borderpx = 2;
-      gappih = 8;
-      gappiv = 8;
-      gappoh = 8;
-      gappov = 8;
+      border_px = 2;
+      gap_inner_horizontal = 8;
+      gap_inner_vertical = 8;
+      gap_outer_horizontal = 8;
+      gap_outer_vertical = 8;
       border_radius = 8;
       animations = 1;
 
@@ -119,7 +119,6 @@
         "NONE,XF86AudioMute,spawn,dms ipc call audio mute"
         "NONE,XF86AudioMicMute,spawn,dms ipc call audio micmute"
         "NONE,XF86AudioPlay,spawn,dms ipc call mpris playPause"
-        "NONE,XF86AudioPause,spawn,dms ipc call mpris playPause"
         "NONE,XF86AudioPrev,spawn,dms ipc call mpris previous"
         "NONE,XF86AudioNext,spawn,dms ipc call mpris next"
         "NONE,XF86MonBrightnessUp,spawn,dms ipc call brightness increment 5"
