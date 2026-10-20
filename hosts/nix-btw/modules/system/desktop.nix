@@ -1,11 +1,11 @@
 { lib, pkgs, settings, ... }:
 
 {
-  services.greetd = lib.mkIf (settings.desktopEnvironment == "niri-dms") {
+  services.greetd = lib.mkIf (builtins.elem settings.desktopEnvironment [ "niri-dms" "mango-dms" ]) {
     enable = true;
     settings = {
       initial_session = {
-        command = "niri-session";
+        command = if settings.desktopEnvironment == "mango-dms" then "mango" else "niri-session";
         user = settings.username;
       };
       default_session = {
@@ -19,6 +19,8 @@
     enable = true;
     package = pkgs.niri;
   };
+
+  programs.mango.enable = settings.desktopEnvironment == "mango-dms";
 
   services.desktopManager.cosmic.enable = settings.desktopEnvironment == "cosmic";
   services.displayManager.cosmic-greeter.enable = settings.desktopEnvironment == "cosmic";

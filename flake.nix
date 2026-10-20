@@ -28,6 +28,11 @@
     niri-flake.url = "github:sodiboo/niri-flake";
     niri-flake.inputs.nixpkgs.follows = "nixpkgs";
 
+    mangowm = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     quickshell.url = "git+https://git.outfoxxed.me/quickshell/quickshell";
     quickshell.inputs.nixpkgs.follows = "nixpkgs";
 

@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     (inputs.import-tree ./modules/system)
   ]
+  ++ lib.optional (settings.desktopEnvironment == "mango-dms") inputs.mangowm.nixosModules.mango
   ++ lib.optional settings.virtualization ./modules/_virtualization/virtualization.nix
   ++ lib.optional settings.gaming ./modules/_gaming/steam.nix;
 
