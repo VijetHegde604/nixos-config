@@ -20,7 +20,7 @@
 
   gaming = false;
 
-  fingerprint = false;
+  fingerprint = true;
 
   # Desktop environment: "niri-dms", "mango-dms", "cosmic", or "kde-plasma".
   desktopEnvironment = "niri-dms";
