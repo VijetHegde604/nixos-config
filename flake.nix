@@ -36,7 +36,7 @@
     quickshell.url = "git+https://git.outfoxxed.me/quickshell/quickshell";
     quickshell.inputs.nixpkgs.follows = "nixpkgs";
 
-    dms.url = "github:AvengeMedia/DankMaterialShell/stable";
+    dms.url = "github:duxlabs-dev/dux-shell/stable";
     dms.inputs.nixpkgs.follows = "nixpkgs";
 
     vicinae.url = "github:vicinaehq/vicinae";
