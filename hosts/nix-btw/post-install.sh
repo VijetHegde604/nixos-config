@@ -7,7 +7,7 @@ SOURCE_DIR="${SOURCE_DIR:-/etc/nixos/nixos-config}"
 HOME_DIR="${HOME_DIR:-$(getent passwd "$TARGET_USER" | cut -d: -f6 || true)}"
 REPO_NAME="${REPO_NAME:-nixos-config}"
 REPO_DIR="${REPO_DIR:-${HOME_DIR:+$HOME_DIR/$REPO_NAME}}"
-DMS_CONFIG="${DMS_CONFIG:-${HOME_DIR:+$HOME_DIR/.config/DankMaterialShell}}"
+DMS_CONFIG="${DMS_CONFIG:-${HOME_DIR:+$HOME_DIR/.config/dms}}"
 NIRI_CONFIG_DIR="${NIRI_CONFIG_DIR:-${HOME_DIR:+$HOME_DIR/.config/niri}}"
 
 log() {
@@ -29,7 +29,7 @@ link_config() {
   local dest="$2"
 
   [ -e "$src" ] || fail "source file/dir not found: $src"
-  
+
   # Ensure the parent directory of the destination exists
   mkdir -p "$(dirname "$dest")"
 
@@ -41,7 +41,7 @@ link_config() {
 
   # Remove existing file/symlink if it exists to avoid 'File exists' errors
   rm -rf "$dest"
-  
+
   ln -s "$src" "$dest"
   log "Symlinked: $dest -> $src"
 }
