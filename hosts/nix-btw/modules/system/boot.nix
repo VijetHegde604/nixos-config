@@ -7,9 +7,8 @@
     efi.canTouchEfiVariables = true;
   };
 
+  # CachyOS Kernel from chaotic nyx
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  # Enable systemd in initrd
-  boot.initrd.systemd.enable = true;
 
   # Force Graphics Drivers into initrd
   boot.initrd.kernelModules = [ "i915" ];
@@ -26,7 +25,6 @@
 
   # Enhanced Silent Boot & Logistics
   boot.consoleLogLevel = 0;
-  boot.initrd.verbose = false;
 
   boot.kernelParams = [
     "quiet"
