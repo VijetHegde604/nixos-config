@@ -136,7 +136,13 @@
       "island": true,
       "dot": false,
       "islandRouteLauncher": "follow",
-      "islandSystemOsd": false
+      "islandSystemOsd": false,
+      "islandNotificationExpand": false,
+      "islandMediaAutoSwitch": true,
+      "islandRoutePowerMenu": "island",
+      "islandNotch": false,
+      "islandReserveThickness": 40,
+      "islandAlongOffset": 0
     }
   ],
   "configVersion": 42,
@@ -228,5 +234,8 @@
       "row": 3
     }
   ],
-  "desktopWidgetInstances": []
+  "desktopWidgetInstances": [],
+  "osdPowerProfileEnabled": true,
+  "osdAlwaysShowValue": false,
+  "useAutoLocation": true
 }
