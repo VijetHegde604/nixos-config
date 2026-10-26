@@ -17,6 +17,7 @@
     wget
     ouch
     zellij
+    helix
     adw-gtk3
 
     # apps for this user
