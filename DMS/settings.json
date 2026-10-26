@@ -388,5 +388,8 @@
       "row": 6
     }
   ],
-  "terminalPalette": "default"
+  "terminalPalette": "default",
+  "blurWallpaperOnOverview": true,
+  "lockPamExternallyManaged": false,
+  "enableFprint": true
 }
