@@ -391,5 +391,10 @@
   "terminalPalette": "default",
   "blurWallpaperOnOverview": true,
   "lockPamExternallyManaged": false,
-  "enableFprint": true
+  "enableFprint": true,
+  "acProfileName": "2",
+  "batteryProfileName": "1",
+  "batteryAutoPowerSaver": true,
+  "batteryLowThreshold": 40,
+  "batteryCriticalThreshold": 20
 }
