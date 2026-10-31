@@ -403,5 +403,12 @@
       "titleFont": "display"
     }
   },
-  "bluetoothMprisEnabled": true
+  "bluetoothMprisEnabled": true,
+  "powerMenuGridLayout": false,
+  "powerActionHoldDuration": 0.25,
+  "lockBeforeSuspend": true,
+  "batteryLockTimeout": 300,
+  "batteryMonitorTimeout": 300,
+  "batteryPostLockMonitorTimeout": 300,
+  "batterySuspendTimeout": 900
 }
