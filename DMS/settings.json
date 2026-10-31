@@ -396,5 +396,12 @@
   "batteryProfileName": "1",
   "batteryAutoPowerSaver": true,
   "batteryLowThreshold": 40,
-  "batteryCriticalThreshold": 20
+  "batteryCriticalThreshold": 20,
+  "dashOptions": {
+    "media": {
+      "playerStyle": "material",
+      "titleFont": "display"
+    }
+  },
+  "bluetoothMprisEnabled": true
 }
