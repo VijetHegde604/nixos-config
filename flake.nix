@@ -54,6 +54,11 @@
       url = "github:leopalladium/focaltech-ft9366-arch-shim";
       flake = false;
     };
+
+    forgejo-mirror = {
+      url = "github:VijetHegde604/forgejo-mirror";
+    };
+
   };
 
   outputs =
@@ -61,6 +66,7 @@
       nixpkgs,
       home-manager,
       chaotic,
+      forgejo-mirror,
       ...
     }:
     let
@@ -113,6 +119,8 @@
 
         modules = [
           ./hosts/nix-server/configuration.nix
+
+          forgejo-mirror.nixosModules.default
         ];
       };
     };
