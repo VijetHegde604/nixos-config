@@ -1,6 +1,4 @@
-{ pkgs, ...}:
+{ settings, ... }:
 {
- services.ollama = {
-   enable = true;
- };
+  services.ollama.enable = settings.ollama;
 }

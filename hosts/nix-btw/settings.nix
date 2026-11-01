@@ -20,6 +20,8 @@
 
   gaming = false;
 
+  ollama = true;
+
   fingerprint = true;
 
   # Desktop environment: "niri-dms", "mango-dms", "cosmic", or "kde-plasma".
