@@ -410,5 +410,6 @@
   "batteryLockTimeout": 300,
   "batteryMonitorTimeout": 300,
   "batteryPostLockMonitorTimeout": 300,
-  "batterySuspendTimeout": 900
+  "batterySuspendTimeout": 900,
+  "audioShowStreamDevices": false
 }
