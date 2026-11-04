@@ -10,6 +10,7 @@
       "showOnLastDisplay": true,
       "position": 1,
       "mode": "compact",
+      "middleClickAction": "close",
       "taskbarAlign": "center",
       "widgetExpansion": "popout",
       "iconSize": 40,
@@ -399,7 +400,6 @@
   "batteryCriticalThreshold": 20,
   "dashOptions": {
     "media": {
-      "playerStyle": "material",
       "titleFont": "display"
     }
   },
