@@ -398,11 +398,7 @@
   "batteryAutoPowerSaver": true,
   "batteryLowThreshold": 40,
   "batteryCriticalThreshold": 20,
-  "dashOptions": {
-    "media": {
-      "titleFont": "display"
-    }
-  },
+  "dashOptions": {},
   "bluetoothMprisEnabled": true,
   "powerMenuGridLayout": false,
   "powerActionHoldDuration": 0.25,
