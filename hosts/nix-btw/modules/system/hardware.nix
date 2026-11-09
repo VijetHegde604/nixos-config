@@ -77,6 +77,9 @@
     enableUserSlices = true;
   };
 
+  # Intel-LPMD
+  services.intel-lpmd.enable = true;
+
   # --- Required Packages for DMS Codecs ---
   environment.systemPackages = with pkgs; [
     ldacbt
