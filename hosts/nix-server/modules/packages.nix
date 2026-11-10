@@ -19,7 +19,6 @@
     dua
     curl
     wget
-    inputs.nixpkgs.legacyPackages.${stdenv.hostPlatform.system}.netwatch
 
     # Development Tools
     gcc
