@@ -80,6 +80,9 @@
   # Intel-LPMD
   services.intel-lpmd.enable = true;
 
+  # asusd service for asusctl
+  services.asusd.enable = true;
+
   # --- Required Packages for DMS Codecs ---
   environment.systemPackages = with pkgs; [
     ldacbt
