@@ -23,7 +23,6 @@
     distrobox
     nix-output-monitor
     nvd
-    asusctl
 
     # Keep the general-purpose build and Python tooling available outside
     # project-specific development shells.
