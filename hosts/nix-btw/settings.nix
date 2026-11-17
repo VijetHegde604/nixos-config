@@ -26,7 +26,7 @@
 
   # Desktop environment: "niri-dms", "niri-noctalia", "umbriel-noctalia",
   # "mango-dms", "cosmic", or "kde-plasma".
-  desktopEnvironment = "umbriel-noctalia";
+  desktopEnvironment = "niri-dms";
 
   systemVersion = "26.05";
 }
