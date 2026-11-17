@@ -6,10 +6,12 @@
     extra-substituters = [
       "https://vicinae.cachix.org"
       "https://nyx-cache.chaotic.cx/"
+      "https://noctalia.cachix.org"
     ];
     extra-trusted-public-keys = [
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
       "nyx-cache.chaotic.cx:dJxTrgMC3V3cFfyIiBQDQorG6k1LsqurH/srpMSq7qk="
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
     ];
   };
 
@@ -27,6 +29,11 @@
 
     niri-flake.url = "github:sodiboo/niri-flake";
     niri-flake.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Use the cachix branch so the package revision is available in Noctalia's cache.
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+
+    umbriel.url = "github:noctalia-dev/umbriel";
 
     mangowm = {
       url = "github:mangowm/mango";

@@ -1,4 +1,4 @@
-{ ... }:
+{ settings, ... }:
 
 {
   programs.niri.settings.binds = {
@@ -44,7 +44,7 @@
       hotkey-overlay.title = "Application Launcher";
     };
     "Mod+Shift+V" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "panel-toggle" "clipboard" ] else [
         "dms"
         "ipc"
         "call"
@@ -54,7 +54,7 @@
       hotkey-overlay.title = "Clipboard Manager";
     };
     "Mod+M" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "panel-toggle" "session" ] else [
         "dms"
         "ipc"
         "call"
@@ -64,7 +64,7 @@
       hotkey-overlay.title = "Task Manager";
     };
     "Super+X" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "panel-toggle" "session" ] else [
         "dms"
         "ipc"
         "call"
@@ -74,7 +74,7 @@
       hotkey-overlay.title = "Power Menu: Toggle";
     };
     "Mod+Comma" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "settings-toggle" ] else [
         "dms"
         "ipc"
         "call"
@@ -84,7 +84,7 @@
       hotkey-overlay.title = "Settings";
     };
     "Mod+Y" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "panel-toggle" "wallpaper" ] else [
         "dms"
         "ipc"
         "call"
@@ -94,7 +94,7 @@
       hotkey-overlay.title = "Browse Wallpapers";
     };
     "Mod+N" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "notification-invoke-latest" ] else [
         "dms"
         "ipc"
         "call"
@@ -104,7 +104,7 @@
       hotkey-overlay.title = "Notification Center";
     };
     "Mod+Shift+N" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "notification-dnd-toggle" ] else [
         "dms"
         "ipc"
         "call"
@@ -116,7 +116,7 @@
 
     # === Security ===
     "Mod+Alt+L" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "session" "lock" ] else [
         "dms"
         "ipc"
         "call"
@@ -128,7 +128,7 @@
     };
     "Mod+Shift+E".action.quit = [ ];
     "Ctrl+Alt+Delete" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "panel-toggle" "session" ] else [
         "dms"
         "ipc"
         "call"
@@ -140,7 +140,7 @@
 
     # === Audio Controls ===
     "XF86AudioRaiseVolume" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "volume-up" ] else [
         "dms"
         "ipc"
         "call"
@@ -151,7 +151,7 @@
       allow-when-locked = true;
     };
     "XF86AudioLowerVolume" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "volume-down" ] else [
         "dms"
         "ipc"
         "call"
@@ -162,7 +162,7 @@
       allow-when-locked = true;
     };
     "XF86AudioMute" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "volume-mute" ] else [
         "dms"
         "ipc"
         "call"
@@ -172,7 +172,7 @@
       allow-when-locked = true;
     };
     "XF86AudioMicMute" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "mic-mute" ] else [
         "dms"
         "ipc"
         "call"
@@ -182,7 +182,7 @@
       allow-when-locked = true;
     };
     "XF86AudioPause" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "media" "toggle" ] else [
         "dms"
         "ipc"
         "call"
@@ -192,7 +192,7 @@
       allow-when-locked = true;
     };
     "XF86AudioPlay" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "media" "toggle" ] else [
         "dms"
         "ipc"
         "call"
@@ -202,7 +202,7 @@
       allow-when-locked = true;
     };
     "XF86AudioPrev" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "media" "previous" ] else [
         "dms"
         "ipc"
         "call"
@@ -212,7 +212,7 @@
       allow-when-locked = true;
     };
     "XF86AudioNext" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "media" "next" ] else [
         "dms"
         "ipc"
         "call"
@@ -224,7 +224,7 @@
 
     # === Brightness Controls ===
     "XF86MonBrightnessUp" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "brightness-up" ] else [
         "dms"
         "ipc"
         "call"
@@ -236,7 +236,7 @@
       allow-when-locked = true;
     };
     "XF86MonBrightnessDown" = {
-      action.spawn = [
+      action.spawn = if settings.desktopEnvironment == "niri-noctalia" then [ "noctalia" "msg" "brightness-down" ] else [
         "dms"
         "ipc"
         "call"

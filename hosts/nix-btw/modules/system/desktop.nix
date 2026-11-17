@@ -1,11 +1,13 @@
 { lib, pkgs, settings, ... }:
 
 {
-  services.greetd = lib.mkIf (builtins.elem settings.desktopEnvironment [ "niri-dms" "mango-dms" ]) {
+  services.greetd = lib.mkIf (builtins.elem settings.desktopEnvironment [ "niri-dms" "niri-noctalia" "umbriel-noctalia" "mango-dms" ]) {
     enable = true;
     settings = {
       initial_session = {
-        command = if settings.desktopEnvironment == "mango-dms" then "mango" else "niri-session";
+        command = if settings.desktopEnvironment == "mango-dms" then "mango"
+          else if settings.desktopEnvironment == "umbriel-noctalia" then "start-umbriel"
+          else "niri-session";
         user = settings.username;
       };
       default_session = {
@@ -15,12 +17,24 @@
     };
   };
 
-  programs.niri = lib.mkIf (settings.desktopEnvironment == "niri-dms") {
+  programs.niri = lib.mkIf (builtins.elem settings.desktopEnvironment [ "niri-dms" "niri-noctalia" ]) {
     enable = true;
     package = pkgs.niri;
   };
 
   programs.mango.enable = settings.desktopEnvironment == "mango-dms";
+
+  programs.noctalia = lib.mkIf (builtins.elem settings.desktopEnvironment [ "niri-noctalia" "umbriel-noctalia" ]) {
+    enable = true;
+    systemd.enable = true;
+  };
+
+  nix.settings = lib.mkIf (builtins.elem settings.desktopEnvironment [ "niri-noctalia" "umbriel-noctalia" ]) {
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
+  };
 
   services.desktopManager.cosmic.enable = settings.desktopEnvironment == "cosmic";
   services.displayManager.cosmic-greeter.enable = settings.desktopEnvironment == "cosmic";
