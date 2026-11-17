@@ -53,5 +53,12 @@
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
     xdgOpenUsePortal = true;
+    config = lib.mkIf (settings.desktopEnvironment == "umbriel-noctalia") {
+      common = {
+        default = "gtk";
+        "org.freedesktop.impl.portal.ScreenCast" = "umbriel";
+        "org.freedesktop.impl.portal.Screenshot" = "umbriel";
+      };
+    };
   };
 }
