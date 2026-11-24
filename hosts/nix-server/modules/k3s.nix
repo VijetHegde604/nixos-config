@@ -6,7 +6,7 @@
   services.k3s = {
     enable = true;
     role = "server";
-    services.k3s.extraFlags = toString [
+    extraFlags = toString [
       "--debug"
     ];
   };
