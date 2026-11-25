@@ -5,6 +5,6 @@
     environmentFile = "/etc/github-forgejo-mirror.env";
 
     # How often this program discovers repos and reconciles their settings.
-    interval = "15m";
+    interval = "180m";
   };
 }
