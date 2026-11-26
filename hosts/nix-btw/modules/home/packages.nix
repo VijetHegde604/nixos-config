@@ -23,13 +23,11 @@
     onlyoffice-desktopeditors
     evince
     bruno
-    mpv
-    freerdp
     vlc
     antigravity-ide-fhs
     code-cursor-fhs
     inputs.helium.packages.${stdenv.hostPlatform.system}.default # helium browser from flake
     netbird-ui
-    feishin
+    telegram-desktop
   ];
 }
